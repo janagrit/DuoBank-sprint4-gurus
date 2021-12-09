@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.ConfigReader;
 import utilities.Driver;
 
 import java.util.List;
@@ -23,6 +24,12 @@ public class LoginPage {
     @FindBy(xpath = "//div[@class='card-header pb-1']")
     public WebElement textRegistration;
 
+    @FindBy(id = "exampleInputEmail1")
+    public WebElement emailInput;
+
+
+    @FindBy(id = "exampleInputPassword1")
+    public WebElement passwordlInput;
 
     public void setSignUp(String firstName, String lastName, String email, String password ){
 
@@ -46,6 +53,12 @@ public class LoginPage {
 
     }
 
+    public void LoginMethod( ) throws InterruptedException {
+        emailInput.sendKeys(ConfigReader.getProperty("email"));
+        passwordlInput.sendKeys(ConfigReader.getProperty("password"));
+//        BrowserUtilities.jsClick(keepMeLogInButton);
+//        BrowserUtilities.jsClick(loginButton);
 
+    }
 
 }

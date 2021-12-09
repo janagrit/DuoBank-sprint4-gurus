@@ -46,7 +46,6 @@ public class LoginStepDefs {
     @Then("filling the email {string} and password {string} and click Login button")
     public void fillingTheEmailAndPasswordAndClickLoginButton(String email, String pass) throws InterruptedException {
         new LoginPage().setLoginButton(email, pass);
-
         System.out.println(Driver.getDriver().getTitle());
     }
 
