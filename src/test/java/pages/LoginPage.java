@@ -20,16 +20,16 @@ public class LoginPage {
     @FindBy(xpath = "//a[.='Sign up']")
     public WebElement signUp;
 
-
     @FindBy(xpath = "//div[@class='card-header pb-1']")
     public WebElement textRegistration;
 
     @FindBy(id = "exampleInputEmail1")
     public WebElement emailInput;
 
-
     @FindBy(id = "exampleInputPassword1")
     public WebElement passwordlInput;
+
+
 
     public void setSignUp(String firstName, String lastName, String email, String password ){
 
@@ -53,12 +53,6 @@ public class LoginPage {
 
     }
 
-    public void LoginMethod( ) throws InterruptedException {
-        emailInput.sendKeys(ConfigReader.getProperty("email"));
-        passwordlInput.sendKeys(ConfigReader.getProperty("password"));
-//        BrowserUtilities.jsClick(keepMeLogInButton);
-//        BrowserUtilities.jsClick(loginButton);
 
-    }
 
 }
