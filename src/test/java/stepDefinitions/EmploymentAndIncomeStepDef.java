@@ -14,16 +14,12 @@ public class EmploymentAndIncomeStepDef {
 
         Assert.assertEquals("Loan Application", Driver.getDriver().getTitle());
 
-
-
     }
-
-
 
 
     @Given("Go to Employment and Income Page")
     public void goToEmploymentAndIncomePage() {
-        EmploymentAndIncomePage employmentAndIncomePage=new EmploymentAndIncomePage();
+        EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
         employmentAndIncomePage.getToEmploymentAndIncome();
     }
 
@@ -32,4 +28,6 @@ public class EmploymentAndIncomeStepDef {
         String title = "Borrower Employment Information";
         Assert.assertEquals(title,Driver.getDriver().getTitle());
     }
+
+
 }

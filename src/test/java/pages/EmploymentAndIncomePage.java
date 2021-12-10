@@ -37,7 +37,7 @@ public class EmploymentAndIncomePage {
 
 
 
-public void getToEmploymentAndIncome(){
+public void getToEmploymentAndIncome()  {
    Preapproval_Details_Page preapproval_details_page=new Preapproval_Details_Page();
     PersonalInformationPage personalInformationPage=new PersonalInformationPage();
     ExpensesPage expensesPage=new ExpensesPage();

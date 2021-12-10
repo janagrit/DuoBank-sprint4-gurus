@@ -1,7 +1,5 @@
 Feature:  As a user I should be able to sign up and use my credentials later on
 
-
-
   Scenario Outline: Verify sign up feature using different sets of data
     Given on login page
     Then I click on sign up page
@@ -11,21 +9,25 @@ Feature:  As a user I should be able to sign up and use my credentials later on
       | FIRST NAME   | LAST NAME   | EMAIL ADDRESS   | PASSWORD
       | <FIRST NAME> | <LAST NAME> | <EMAIL ADDRESS> | <PASSWORD>
     Examples:
-      | FIRST NAME  | LAST NAME   | EMAIL ADDRESS      | PASSWORD
-      | Olya       | Karenina  | Anna@gmail.com     | 111111
-      | Magda      | Magdovna  | pep@gmail.com      | 9930303
-#      | Таня       | Алегрова  | Алегрова@gmail.com | 99
-#      | java       | gurus     | gurus@gmail.com    | debunk
-#      | 雅哪        | 女        | gurus@gmail.com    | i8i8i
+      | FIRST NAME | LAST NAME | EMAIL ADDRESS            | PASSWORD
+      | Olya       | Karenina  | Anna@gmail.com           | 111111
+      | Magda      | Magdovna  | pep@gmail.com            | 9930303
+#      | Таня       | Алегрова  | Алегрова@gmail.com       | 99
+      | java       | gurus     | gurus@gmail.com          | debunk
+#      | 雅哪        | 女        | gurus@gmail.com          | i8i8i
+      | Felisha    | Widmore   | fwidmore0@shareasale.com | TwBcPP
+      | Annabel    | Haccleton | ahaccleton1@va.gov       | w1POixUgM
 
 
 
-#  Scenario : Verify login feature
+
+
+
+#
+#  Scenario: Verify products details that are on sale
 #    Given on login page
-#    Then filling the email "EMAIL ADDRESS" and password "PASSWORD" and click Login button
-
-
-
-
+#    When I click on on products that are on sale their expected values should be correct according to the given excel file
+#
+#
 
 
