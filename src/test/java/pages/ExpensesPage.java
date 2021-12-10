@@ -15,14 +15,36 @@ public class ExpensesPage {
     @FindBy (xpath = "//h6[.='Current Monthly Housing Expenses']")
     public WebElement textonthepage;
 
-    @FindBy (xpath = "// //input[@value='Rent']")
+    @FindBy (xpath = "//input[@value='Rent']")
     public WebElement checkBoxRent;
+
+    @FindBy (css = "//input[@value='Rent']")
+    public WebElement checkBoxR;
+
+    // driver.findElement(By.cssSelector("input[type='checkbox']")).click();
 
     @FindBy (xpath = "// //input[@value='Own']")
     public WebElement checkBoxOwn;
 
+    @FindBy (id = "expense2")
+    public WebElement clickOwn;
+
+
+
     @FindBy(id="monthlyrentalpayment")
     public WebElement monthlyrentalpayment;
+
+    @FindBy(xpath="//a[@href='#next']")
+    public WebElement buttonNext;
+
+
+
+    public void passExpensesPage(){
+        checkBoxRent.click();
+        monthlyrentalpayment.sendKeys("2000");
+        buttonNext.click();
+
+    }
 
 
 

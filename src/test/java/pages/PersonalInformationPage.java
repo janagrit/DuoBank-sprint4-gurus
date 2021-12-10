@@ -1,11 +1,10 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
@@ -44,9 +43,17 @@ public class PersonalInformationPage {
         b_email.sendKeys(email);
         b_ssn.sendKeys(Integer.toString(soc));
         b_cell.sendKeys(Integer.toString(phone));
-        SeleniumUtils.jsClick(b_marital);
+       //SeleniumUtils.jsClick(b_marital);
+     // b_marital.click();
+     // b_marital.sendKeys(Keys.DOWN,Keys.DOWN,Keys.ENTER);
+        //new Actions((WebDriver) b_marital).sendKeys("married").perform();
 
-      //  new Actions((WebDriver) b_marital).sendKeys("married").perform();
+        Actions actions = new Actions(Driver.getDriver());
+
+        actions.click(b_marital).sendKeys("Married"+Keys.ARROW_DOWN,Keys.ARROW_DOWN,Keys.ENTER).perform();
+
+
+
         buttonnext.click();
     }
 

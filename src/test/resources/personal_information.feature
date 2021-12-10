@@ -9,6 +9,6 @@ Feature: Personal Details Page verification
   @run
   Scenario: filling personal details
     Then I am on on the preapproval page filling a name "Vasia", purchase price 10000, down payment 1000 and click next button
-    Then I am on the personal information page put name "Alice", surname "Abe", email "email", social 1111111111, phone 111111111
+    Then I am on the personal information page put name "Alice", surname "Abe", email "email@gmail.com", social 1111111111, phone 111111111
 
 
