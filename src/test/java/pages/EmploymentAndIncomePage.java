@@ -16,6 +16,7 @@ public class EmploymentAndIncomePage {
     }
 
 
+<<<<<<< HEAD
     @FindBy (id="employername1")
     public WebElement employer;
 
@@ -86,12 +87,34 @@ public class EmploymentAndIncomePage {
     public WebElement passwordlInput;
 
 
+=======
+
+
+
+
+    @FindBy(linkText = "Employment and Income")
+    public WebElement Employment_and_Income;
+
+    @FindBy(xpath = "//div[@class='card-header pb-1']")
+    public WebElement textRegistration;
+
+    @FindBy(id = "exampleInputEmail1")
+    public WebElement emailInput;
+
+    @FindBy(id = "exampleInputPassword1")
+    public WebElement passwordlInput;
+
+>>>>>>> origin/master
     @FindBy(xpath = "//button[@type='submit']" )
     public WebElement login;
 
 
 
+<<<<<<< HEAD
 public void getToEmploymentAndIncome(){
+=======
+public void getToEmploymentAndIncome()  {
+>>>>>>> origin/master
    Preapproval_Details_Page preapproval_details_page=new Preapproval_Details_Page();
     PersonalInformationPage personalInformationPage=new PersonalInformationPage();
     ExpensesPage expensesPage=new ExpensesPage();
@@ -101,6 +124,7 @@ public void getToEmploymentAndIncome(){
 
     }
 
+<<<<<<< HEAD
     public void getToCreditReport() {
         getToEmploymentAndIncome();
         employer.sendKeys("White House");
@@ -109,4 +133,34 @@ public void getToEmploymentAndIncome(){
 
     }
 
+=======
+
+
+
+    public void setSignUp(String firstName, String lastName, String email, String password ){
+
+        Driver.getDriver().findElement(By.name("first_name")).sendKeys(firstName);
+        Driver.getDriver().findElement(By.name("last_name")).sendKeys(lastName);
+        Driver.getDriver().findElement(By.name("email")).sendKeys(email);
+        Driver.getDriver().findElement(By.name("password")).sendKeys(password);
+        Driver.getDriver().findElement(By.name("register")).click();
+
+        // String.valueOf(
+    }
+
+    public void GurusLoginMethod()   {
+        emailInput.sendKeys(ConfigReader.getProperty("email"));
+        passwordlInput.sendKeys(ConfigReader.getProperty("password"));
+        SeleniumUtils.jsClick(login);
+    }
+
+    public void LoginMethod(String email, String password)   {
+        emailInput.sendKeys(email);
+        passwordlInput.sendKeys(password);
+        login.click();
+    }
+
+
+
+>>>>>>> origin/master
 }
