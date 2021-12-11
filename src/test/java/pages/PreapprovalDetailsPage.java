@@ -11,6 +11,9 @@ public class PreapprovalDetailsPage {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    @FindBy(xpath = "//span[@data-i18n='eCommerce']")
+    public WebElement mortgageLink;
+
     @FindBy(id="steps-uid-0-t-0")
     public WebElement preapprovalDetails;
 
@@ -41,6 +44,9 @@ public class PreapprovalDetailsPage {
     @FindBy(id="downpaymentpercentage")
     public WebElement downPaymentPercentage;
 
+    @FindBy(id="loanamount")
+    public WebElement loanAmount;
+
     @FindBy(id="select2-src_down_payment-x9-container")
     public WebElement sourceOfDownPayment;
 
@@ -50,18 +56,15 @@ public class PreapprovalDetailsPage {
     @FindBy(id="additionalfunds")
     public WebElement additionalFunds;
 
+    @FindBy(xpath=" //a[@href='#next'] ")
+    public WebElement buttonNext;
 
-
-
-
-
-
-
-
-
-
-
-
+//    public void setPreapproval_method(String realtor, int num, int dpayment){
+//        realtorinfo.sendKeys(realtor);
+//        estimatedprice.sendKeys(Integer.toString(num));
+//        downpayment.sendKeys(Integer.toString(dpayment));
+//        buttonnext.click();
+//    }
 
 
 }
