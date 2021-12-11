@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -38,7 +39,9 @@ public class ExpensesPage {
 
 
     public void clickRent(){
-        Driver.getDriver().findElement(By.xpath("//label[.='Rent']")).click();
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].click()",checkBoxRent);
+
     }
 
 
