@@ -156,4 +156,21 @@ public class PreapprovalDetailsStepDef {
 
     }
 
+
+
+    @When("I am on on the preapproval page filling a name {string}, purchase price {int}, down payment {int} and click next button")
+    public void iAmOnOnThePreapprovalPageFillingANamePurchasePriceDownPaymentAndClickNextButton(String name, int num1, int num2) {
+
+        new PreapprovalDetailsPage().setPreapproval_method(name, num1, num2);
+
+    }
+
+    @Then("I land on the Personal information page")
+    public void i_land_on_the_personal_information_page(){
+
+        Assert.assertTrue(Driver.getDriver().getPageSource().contains("Borrower's Information"));
+
+
+    }
+
 }

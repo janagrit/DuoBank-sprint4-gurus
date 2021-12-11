@@ -59,12 +59,12 @@ public class PreapprovalDetailsPage {
     @FindBy(xpath=" //a[@href='#next'] ")
     public WebElement buttonNext;
 
-//    public void setPreapproval_method(String realtor, int num, int dpayment){
-//        realtorinfo.sendKeys(realtor);
-//        estimatedprice.sendKeys(Integer.toString(num));
-//        downpayment.sendKeys(Integer.toString(dpayment));
-//        buttonnext.click();
-//    }
+    public void setPreapproval_method(String realtor, int num, int dpayment){
+        realtorInfo.sendKeys(realtor);
+        estimatedPrice.sendKeys(Integer.toString(num));
+        downPaymentAmount.sendKeys(Integer.toString(dpayment));
+        buttonNext.click();
+    }
 
 
 }
