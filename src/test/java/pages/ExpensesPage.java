@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,14 +16,40 @@ public class ExpensesPage {
     @FindBy (xpath = "//h6[.='Current Monthly Housing Expenses']")
     public WebElement textonthepage;
 
-    @FindBy (xpath = "// //input[@value='Rent']")
+    @FindBy (xpath = "//input[@value='Rent']")
     public WebElement checkBoxRent;
+
+
+
 
     @FindBy (xpath = "// //input[@value='Own']")
     public WebElement checkBoxOwn;
 
+    @FindBy (id = "expense2")
+    public WebElement clickOwn;
+
+
+
     @FindBy(id="monthlyrentalpayment")
     public WebElement monthlyrentalpayment;
+
+    @FindBy(xpath="//a[@href='#next']")
+    public WebElement buttonNext;
+
+
+    public void clickRent(){
+        Driver.getDriver().findElement(By.xpath("//label[.='Rent']")).click();
+    }
+
+
+
+    public void passExpensesPage(){
+        clickRent();
+       // checkBoxRent.click();
+        monthlyrentalpayment.sendKeys("2000");
+        buttonNext.click();
+
+    }
 
 
 
