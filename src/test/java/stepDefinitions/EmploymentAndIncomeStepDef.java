@@ -7,7 +7,6 @@ import org.junit.Assert;
 import pages.EmploymentAndIncomePage;
 import pages.LoginPage;
 import pages.PreapprovalDetailsPage;
-import pages.Preapproval_Details_Page;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;

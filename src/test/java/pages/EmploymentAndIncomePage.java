@@ -75,7 +75,7 @@ public class EmploymentAndIncomePage {
 
 
     public void getToEmploymentAndIncome() {
-        Preapproval_Details_Page preapproval_details_page = new Preapproval_Details_Page();
+        PreapprovalDetailsPage preapproval_details_page = new PreapprovalDetailsPage();
         PersonalInformationPage personalInformationPage = new PersonalInformationPage();
         ExpensesPage expensesPage = new ExpensesPage();
         preapproval_details_page.setPreapproval_method("Mark", 500000, 100000);
