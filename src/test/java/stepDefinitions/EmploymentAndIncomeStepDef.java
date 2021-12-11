@@ -29,7 +29,7 @@ public class EmploymentAndIncomeStepDef {
     @And("Verify that I am on Mortgage Application Page")
     public void verifyThatIAmOnMortgageApplicationPage() {
 
-        Assert.assertEquals("Loan Application", Driver.getDriver().getTitle());
+        Assert.assertEquals("Loan Application", Driver.getDriver().getCurrentUrl());
 
     }
 
