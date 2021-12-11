@@ -6,7 +6,7 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import pages.EmploymentAndIncomePage;
 import pages.LoginPage;
-import pages.Preapproval_Details_Page;
+import pages.PreapprovalDetailsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;
@@ -22,7 +22,7 @@ public class EmploymentAndIncomeStepDef {
 
     @Then("Click on Mortgage Application link")
     public void clickOnMortgageApplicationLink() {
-        SeleniumUtils.jsClick(new Preapproval_Details_Page().Mortgage_link);
+        SeleniumUtils.jsClick(new PreapprovalDetailsPage().mortgageLink);
     }
 
 
