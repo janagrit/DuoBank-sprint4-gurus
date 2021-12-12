@@ -39,7 +39,7 @@ public class PreapprovalDetailsStepDef {
     @When("I click on the realtor check box")
     public void i_click_on_the_realtor_check_box(){
 
-    new PreapprovalDetailsPage().realtorNo.click();
+    new PreapprovalDetailsPage().realtorCheckBox();
     }
 
     @Then ("Realtor box is checked")
@@ -64,7 +64,7 @@ public class PreapprovalDetailsStepDef {
     @When ("I click on the loan officer check box")
     public void i_click_on_the_loan_officer_check_box(){
 
-        new PreapprovalDetailsPage().loanOfficerNo.click();
+        new PreapprovalDetailsPage().loanOfficerCheckBox();
     }
 
     @Then ("Loan officer box is checked")
@@ -90,17 +90,17 @@ public class PreapprovalDetailsStepDef {
 //    }
 
     @When ("I enter estimated purchase {string}")
-    public void i_enter_estimated_purchase_price(String price) throws InterruptedException {
+    public void i_enter_estimated_purchase_price(String priceEntered) throws InterruptedException {
 
         SeleniumUtils.scroll(0, 500);
-        new PreapprovalDetailsPage().estimatedPrice.sendKeys(price);
+        new PreapprovalDetailsPage().estimatedPrice.sendKeys(priceEntered);
         Thread.sleep(2000);
     }
 
     @Then ("Purchase {string} is displayed")
-    public  void purchase_price_is_displayed(String price){
+    public  void purchase_price_is_displayed(String priceExpected){
 
-        Assert.assertEquals(price, new PreapprovalDetailsPage().estimatedPrice.getAttribute("value"));
+        Assert.assertEquals(priceExpected, new PreapprovalDetailsPage().estimatedPrice.getAttribute("value"));
 
     }
 
@@ -144,15 +144,14 @@ public class PreapprovalDetailsStepDef {
     public void i_choose_the_source_of_down_payment(){
 
         SeleniumUtils.scroll(0, 500);
-        new PreapprovalDetailsPage().sourceOfDownPayment.click();
-        new PreapprovalDetailsPage().checkingSavings.click();
+        new PreapprovalDetailsPage().sourceOfDownPaymentDropdown();
 
     }
 
     @Then ("Source of down payment is displayed")
     public  void source_of_down_payment_is_displayed(){
 
-        Assert.assertEquals("Checking/Savings(most recent bank statement)", new PreapprovalDetailsPage().sourceOfDownPayment.getText());
+        Assert.assertEquals("Other type of Down Payment", new PreapprovalDetailsPage().sourceOfDownPayment.getAttribute("value"));
 
     }
 
