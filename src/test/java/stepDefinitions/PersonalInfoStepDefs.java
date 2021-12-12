@@ -120,16 +120,20 @@ public class PersonalInfoStepDefs{
     }
 
     @When("I check {string} box")
-    public void iCheckBox(String checkBox) {
+    public void iCheckBox(String checkBox) throws InterruptedException {
         //Actions actions = new Actions(Driver.getDriver());
         checkBoxYes = checkBox;
         SeleniumUtils.jsClick(new PersonalInformationPage().yesCheckBox);
+        Thread.sleep(5000);
     }
 
 
     @Then("The Co-Borrower's Information should be displayed")
     public void theCoBorrowerSInformationShouldBeDisplayed() {
 
+        String expected ="Co-Borrower's Information";
+        String actual  = new PersonalInformationPage().coBorrowerInfo.getText();
+        Assert.assertEquals(expected,actual);
     }
 
 

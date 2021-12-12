@@ -45,11 +45,16 @@ public class PersonalInformationPage {
     @FindBy(xpath="//fieldset[@id='steps-uid-0-p-2']//h6")
     public WebElement expensesTitle;
 
-    @FindBy(xpath="//input[@id=\\\"coborrower1\\\"]")
+    //@FindBy(xpath="//input[@id=\\\"coborrower1\\\"]")
+    @FindBy(xpath="//label [@for='coborrower1']")
     public WebElement yesCheckBox;
 
     @FindBy(xpath="//ul[@role=\"tablist\"]//li")
     public List<WebElement> stepsApp;
+
+    @FindBy(xpath="//div[@class='co-borrower']//h6[@class='py-50']")
+    public WebElement coBorrowerInfo;
+
 
 
 //    public void clickOnProductLink(String product){
