@@ -29,7 +29,7 @@ Scenario: Go to the mortgage application page
   #   Then  Loan purpose is displayed
 
 @Preapproval
-  Scenario: Enter estimated purchase <price>
+  Scenario Outline: Enter estimated purchase <price>
      When  I enter estimated purchase <price>
      Then  Purchase <price> is displayed
 
@@ -54,6 +54,6 @@ Scenario: Go to the mortgage application page
        When  I choose the source of down payment
        Then  Source of down payment is displayed
 
-  Scenario: Filling preapproval details
-  When I am on on the preapproval page filling a name {string}, purchase price {int}, down payment {int} and click next button
-  Then I land on the Personal information page
+#  Scenario: Filling preapproval details
+#  When I am on on the preapproval page filling a name {string}, purchase price {int}, down payment {int} and click next button
+#  Then I land on the Personal information page

@@ -15,6 +15,9 @@ public class PersonalInformationPage {
     }
 
 
+    @FindBy(xpath = "//fieldset[@id='steps-uid-0-p-1']//h6[.='Personal Information']")
+    public WebElement title;
+
     @FindBy(id="b_firstName")
     public WebElement b_firstName;
 
@@ -33,8 +36,22 @@ public class PersonalInformationPage {
     @FindBy(id="select2-b_marital-container")
     public WebElement b_marital;
 
-    @FindBy(xpath=" //a[@href='#next'] ")
+
+    @FindBy(xpath="//a[@href=\"#next\"]")
     public WebElement buttonnext;
+
+    @FindBy(xpath="//fieldset[@id='steps-uid-0-p-2']//h6")
+    public WebElement expensesTitle;
+
+    @FindBy(xpath="//input[@id=\\\"coborrower1\\\"]")
+    public WebElement yesCheckBox;
+
+//    public void clickOnProductLink(String product){
+//        String xpath = "//input[@id=\"coborrower1\"]";
+//        Driver.getDriver().findElement(By.xpath(xpath)).click();
+//}
+
+
 
 
     public void Personal_Info_method(String name, String last, String email, int soc, int phone){

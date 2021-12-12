@@ -89,7 +89,7 @@ public class PreapprovalDetailsStepDef {
 //
 //    }
 
-    @When ("I enter estimated purchase {String}")
+    @When ("I enter estimated purchase {string}")
     public void i_enter_estimated_purchase_price(String price) throws InterruptedException {
 
         SeleniumUtils.scroll(0, 500);
@@ -97,7 +97,7 @@ public class PreapprovalDetailsStepDef {
         Thread.sleep(2000);
     }
 
-    @Then ("Purchase {String} is displayed")
+    @Then ("Purchase {string} is displayed")
     public  void purchase_price_is_displayed(String price){
 
         Assert.assertEquals(price, new PreapprovalDetailsPage().estimatedPrice.getAttribute("value"));
