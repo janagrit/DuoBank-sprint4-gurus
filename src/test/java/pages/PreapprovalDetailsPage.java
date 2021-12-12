@@ -1,8 +1,10 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 import utilities.Driver;
 
 public class PreapprovalDetailsPage {
@@ -47,11 +49,12 @@ public class PreapprovalDetailsPage {
     @FindBy(id="loanamount")
     public WebElement loanAmount;
 
-    @FindBy(id="select2-src_down_payment-x9-container")
+    @FindBy(name="src_down_payment")
     public WebElement sourceOfDownPayment;
 
-    @FindBy(id="select2-src_down_payment-x9-result-tq80-Checking/Savings (most recent bank statement)")
-    public WebElement checkingSavings;
+    @FindBy(id="select2-src_down_payment-r2-result-tosd-Other type of Down Payment")
+    public WebElement otherTypeOfDownPayment;
+
 
     @FindBy(id="additionalfunds")
     public WebElement additionalFunds;
@@ -64,6 +67,25 @@ public class PreapprovalDetailsPage {
         estimatedPrice.sendKeys(Integer.toString(num));
         downPaymentAmount.sendKeys(Integer.toString(dpayment));
         buttonNext.click();
+    }
+
+    public void realtorCheckBox(){
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].click()",realtorNo);
+
+    }
+
+    public void loanOfficerCheckBox(){
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].click()",loanOfficerNo);
+
+    }
+
+    public void sourceOfDownPaymentDropdown(){
+        Select select = new Select(sourceOfDownPayment);
+
+        select.selectByIndex(2);
+
     }
 
 
