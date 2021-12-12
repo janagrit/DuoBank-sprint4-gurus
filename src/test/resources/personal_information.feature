@@ -40,5 +40,13 @@ Feature: Personal Details Page verification
       | ECONSENT                                       |
       | SUMMARY                                        |
 
+  Scenario Outline: Verify that even though borrower and co-borrower provide incorrect information,they are still able to move to the next page
+    When I check "Yes" box
+    Then I put the info for co-borrower "<bFirstName>", "<bLastName>", "<bEmail>","<bSSN>","<bMaterialStatus>","<bCellPhone>"
+   Examples:
+      | bFirstName | bLastName | bEmail       | bSSN | bMaterialStatus | bCellPhone  |
+      | 7          | 8         | MS@gmail.com | 0    | Married         | 000-00-0000 |
+      | K          | M         | BC@gmail.com | 00   | Separated       | 100-00-0000 |
+      | 77@        | Bob       | BC@gmail.com | 9    | Divorced        | 000-00-0001 |
 
-
+#   Then I still should be able move to the next page

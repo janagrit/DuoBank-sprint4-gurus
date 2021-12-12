@@ -145,4 +145,19 @@ public class PersonalInfoStepDefs{
         Assert.assertEquals(expectedOption, actualOption);
 
     }
+
+    @Then("I put the info for co-borrower {string}, {string}, {string},{string},{string},{string}")
+    public void iPutTheInfoForCoBorrower(String bFirstName, String bLastName, String bEmail, String bSSN, String bMaterialStatus, String bCellPhone) {
+
+        Actions actions = new Actions(Driver.getDriver());
+        new PersonalInformationPage().c_firstName.sendKeys(bFirstName);
+        new PersonalInformationPage().c_lastName.sendKeys(bLastName);
+        new PersonalInformationPage().c_email.sendKeys(bEmail);
+        new PersonalInformationPage().c_ssn.sendKeys(bSSN);
+        actions.click(new PersonalInformationPage().c_marital).sendKeys(Keys.ARROW_UP,(bMaterialStatus)).perform();
+        new PersonalInformationPage().c_cell.sendKeys(bCellPhone);
+        SeleniumUtils.jsClick(new PersonalInformationPage().buttonnext);
+        //Assert.assertEquals(expected,personalInfo.expensesTitle.getText());
+        System.out.println(new PersonalInformationPage().expensesTitle.getText());
+    }
 }
