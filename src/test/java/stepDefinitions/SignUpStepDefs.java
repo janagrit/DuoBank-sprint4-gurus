@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.logging.Log;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
@@ -13,8 +14,6 @@ public class SignUpStepDefs {
 
     @Given("on login page")
     public void onLoginPage() {   Driver.getDriver().get(ConfigReader.getProperty("url"));   }
-
-
 
     @Then("I click on sign up page")
     public void iClickOnSignUpPage() {
@@ -27,24 +26,25 @@ public class SignUpStepDefs {
     public void onSignUpPageIFillOutTheFieldsNameSurnameAndEmailAndPasswordClickSignUpButton(String name, String lastName, String email, String password) {
 
         new LoginPage().setSignUp(name, lastName, email, password);
-        System.out.println(new LoginPage().textRegistration.getText());
+
+        Assert.assertTrue(new LoginPage().emailerror.isDisplayed());
     }
 
 
 
-    @Then("I verify confirmation msg {string}")
-    public void iVerifyConfirmationMsg(String confirmationMsg) {
+
+
+    @Then("I verify msg {string} or {string}")
+    public void iVerifyMsgOr(String confmsg, String errormsg) {
+
         SoftAssertions softAssert = new SoftAssertions();
-        softAssert.assertThat(confirmationMsg).isEqualTo(new LoginPage().textRegistration.getText());
+        if(new LoginPage().emailerror.isDisplayed()){
+            softAssert.assertThat(errormsg).isEqualTo(new LoginPage().emailerror.getText());
+        }else
+        softAssert.assertThat(confmsg).isEqualTo(new LoginPage().textRegistration.getText());
+
+
+
+
     }
-
-
-
-    @Then("filling the email {string} and password {string} and click Login button")
-    public void fillingTheEmailAndPasswordAndClickLoginButton(String email, String pass) throws InterruptedException {
-        new LoginPage().LoginMethod(email, pass);
-        System.out.println(Driver.getDriver().getTitle());
-    }
-
-
 }

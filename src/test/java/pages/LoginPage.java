@@ -1,5 +1,6 @@
 package pages;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,8 +35,33 @@ public class LoginPage {
     public WebElement passwordlInput;
 
     @FindBy(xpath = "//button[@type='submit']" )
-    public WebElement login;
+    public WebElement loginButton;
 
+    @FindBy(id="emailerror")
+    public WebElement emailerror;
+
+
+    @FindBy(xpath = "//div[@class='user-nav d-sm-flex d-none']" )
+    public WebElement logInIcon;
+
+    @FindBy(xpath = "//a[@class='dropdown-item']" )
+    public WebElement logOut;
+
+    @FindBy(xpath = "// //div[@class='card-title']" )
+    public WebElement LoginFailedMsg;
+
+
+    @FindBy(name="first_name")
+    public WebElement signUPname;
+
+    @FindBy(name="last_name")
+    public WebElement signUPsurname;
+
+    @FindBy(name="email")
+    public WebElement signUpEmail;
+
+    @FindBy(name="password")
+    public WebElement signUPass;
 
 
 
@@ -45,21 +71,29 @@ public class LoginPage {
         Driver.getDriver().findElement(By.name("last_name")).sendKeys(lastName);
         Driver.getDriver().findElement(By.name("email")).sendKeys(email);
         Driver.getDriver().findElement(By.name("password")).sendKeys(password);
-        Driver.getDriver().findElement(By.name("register")).click();
 
-        // String.valueOf(
+        if(emailerror.isDisplayed()){
+            System.out.println(email + " -> " + emailerror.getText());
+
+        }else{
+            Driver.getDriver().findElement(By.name("register")).click();
+            System.out.println(email + " -> " + textRegistration.getText());
+
+        }
+
+
     }
 
     public void GurusLoginMethod()   {
         emailInput.sendKeys(ConfigReader.getProperty("email"));
         passwordlInput.sendKeys(ConfigReader.getProperty("password"));
-        SeleniumUtils.jsClick(login);
+        SeleniumUtils.jsClick(loginButton);
     }
 
     public void LoginMethod(String email, String password)   {
         emailInput.sendKeys(email);
         passwordlInput.sendKeys(password);
-        login.click();
+        loginButton.click();
     }
 
 
