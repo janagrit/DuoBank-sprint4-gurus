@@ -1,7 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -20,8 +18,10 @@ public class ExpensesPage {
     @FindBy (xpath = "//input[@value='Rent']")
     public WebElement checkBoxRent;
 
+    @FindBy (css = "//input[@value='Rent']")
+    public WebElement checkBoxR;
 
-
+    // driver.findElement(By.cssSelector("input[type='checkbox']")).click();
 
     @FindBy (xpath = "// //input[@value='Own']")
     public WebElement checkBoxOwn;
@@ -37,18 +37,15 @@ public class ExpensesPage {
     @FindBy(xpath="//a[@href='#next']")
     public WebElement buttonNext;
 
-    public void clickRent(){
-        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-        js.executeScript("arguments[0].click()",checkBoxRent);
 
-    }
 
     public void passExpensesPage(){
-        clickRent();
-        // checkBoxRent.click();
+        checkBoxRent.click();
         monthlyrentalpayment.sendKeys("2000");
         buttonNext.click();
 
     }
+
+
 
 }

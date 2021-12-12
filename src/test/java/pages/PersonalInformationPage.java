@@ -36,12 +36,12 @@ public class PersonalInformationPage {
     @FindBy(xpath=" //a[@href='#next'] ")
     public WebElement buttonnext;
 
-    public void Personal_Info_method(String name, String last, String email, int soc, int phone)   {
+
+    public void Personal_Info_method(String name, String last, String email, int soc, int phone){
 
         b_firstName.sendKeys(name);
         b_lastName.sendKeys(last);
-
-     //   b_email.sendKeys(email);
+        b_email.sendKeys(email);
         b_ssn.sendKeys(Integer.toString(soc));
         b_cell.sendKeys(Integer.toString(phone));
        //SeleniumUtils.jsClick(b_marital);
@@ -53,7 +53,6 @@ public class PersonalInformationPage {
 
         actions.click(b_marital).sendKeys("Married"+Keys.ARROW_DOWN,Keys.ARROW_DOWN,Keys.ENTER).perform();
 
-        actions.click(b_email).sendKeys("bab@gmail.com"+Keys.ENTER).perform();
 
 
         buttonnext.click();

@@ -11,68 +11,84 @@ import utilities.SeleniumUtils;
 public class EmploymentAndIncomePage {
 
 
-    public EmploymentAndIncomePage(){
+    public EmploymentAndIncomePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    @FindBy(id = "employername1")
+    public WebElement employer;
 
+    @FindBy(id = "position1")
+    public WebElement position;
 
+    @FindBy(id = "city")
+    public WebElement city;
 
+    @FindBy(id = "state1")
+    public WebElement state;
 
+    @FindBy(id = " start_date1")
+    public WebElement startDate;
+
+    @FindBy(id = "end_date1")
+    public WebElement endDate;
+
+    @FindBy(id = "addemployer")
+    public WebElement addEmployer;
+
+    @FindBy(id = "grossmonthlyincome")
+    public WebElement grossMonthlyIncome;
+
+    @FindBy(id = "monthlyovertime")
+    public WebElement monthlyOverTime;
+
+    @FindBy(id = "monthlybonuses")
+    public WebElement monthlyBonuses;
+
+    @FindBy(id = "monthlycommission")
+    public WebElement monthlyCommission;
+
+    @FindBy(id = "monthlydividents")
+    public WebElement monthlyDividents;
+
+    @FindBy(xpath = "//div[@class='borrowertotalmonthlyincome']")
+    public WebElement totalMonthlyIncome;
+
+    @FindBy(id = "incomesource1")
+    public WebElement incomesource1;
+
+    @FindBy(id = "incomesource2")
+    public WebElement incomesource2;
 
     @FindBy(linkText = "Employment and Income")
     public WebElement Employment_and_Income;
 
-    @FindBy(xpath = "//div[@class='card-header pb-1']")
-    public WebElement textRegistration;
-
-    @FindBy(id = "exampleInputEmail1")
-    public WebElement emailInput;
-
-    @FindBy(id = "exampleInputPassword1")
-    public WebElement passwordlInput;
-
-    @FindBy(xpath = "//button[@type='submit']" )
-    public WebElement login;
+    @FindBy(id = "incomesource3")
+    public WebElement incomesource3;
 
 
+    @FindBy(id = "amount1")
+    public WebElement amount1;
 
-public void getToEmploymentAndIncome()  {
-   Preapproval_Details_Page preapproval_details_page=new Preapproval_Details_Page();
-    PersonalInformationPage personalInformationPage=new PersonalInformationPage();
-    ExpensesPage expensesPage=new ExpensesPage();
-    preapproval_details_page.setPreapproval_method("Mark",500000,100000);
-    personalInformationPage.Personal_Info_method("Mira","Mar","miramar@gmail.com",123456789,897543443);
-    expensesPage.passExpensesPage();
+    @FindBy(id = "amount2")
+    public WebElement amount2;
+
+
+    public void getToEmploymentAndIncome() {
+        PreapprovalDetailsPage preapproval_details_page = new PreapprovalDetailsPage();
+        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
+        ExpensesPage expensesPage = new ExpensesPage();
+        preapproval_details_page.setPreapproval_method("Mark", 500000, 100000);
+        personalInformationPage.Personal_Info_method("Mira", "Mar", "miramar@gmail.com", 123456789, 897543443);
+        expensesPage.passExpensesPage();
 
     }
 
+    public void getToCreditReport() {
+        getToEmploymentAndIncome();
+        employer.sendKeys("White House");
+        grossMonthlyIncome.sendKeys("1");
 
 
-
-    public void setSignUp(String firstName, String lastName, String email, String password ){
-
-        Driver.getDriver().findElement(By.name("first_name")).sendKeys(firstName);
-        Driver.getDriver().findElement(By.name("last_name")).sendKeys(lastName);
-        Driver.getDriver().findElement(By.name("email")).sendKeys(email);
-        Driver.getDriver().findElement(By.name("password")).sendKeys(password);
-        Driver.getDriver().findElement(By.name("register")).click();
-
-        // String.valueOf(
     }
-
-    public void GurusLoginMethod()   {
-        emailInput.sendKeys(ConfigReader.getProperty("email"));
-        passwordlInput.sendKeys(ConfigReader.getProperty("password"));
-        SeleniumUtils.jsClick(login);
-    }
-
-    public void LoginMethod(String email, String password)   {
-        emailInput.sendKeys(email);
-        passwordlInput.sendKeys(password);
-        login.click();
-    }
-
-
-
 }
