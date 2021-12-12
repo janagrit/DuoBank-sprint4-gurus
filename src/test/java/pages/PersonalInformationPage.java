@@ -57,9 +57,6 @@ public class PersonalInformationPage {
 //        Driver.getDriver().findElement(By.xpath(xpath)).click();
 //}
 
-
-
-
     public void Personal_Info_method(String name, String last, String email, int soc, int phone){
 
         b_firstName.sendKeys(name);

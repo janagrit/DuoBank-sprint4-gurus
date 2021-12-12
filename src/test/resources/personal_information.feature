@@ -8,6 +8,7 @@ Feature: Personal Details Page verification
     Then After I complete the Preapproval Details page I should land on Personal Information Page
 
 
+
   Scenario: Verify that even though a customer don't enter their Bday (required filed), she/he is still able to move to the next page
    Given The customers is able to move to the next page without providing Bday information
 
