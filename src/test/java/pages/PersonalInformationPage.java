@@ -8,6 +8,8 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
+import java.util.List;
+
 public class PersonalInformationPage {
 
     public  PersonalInformationPage(){
@@ -45,6 +47,10 @@ public class PersonalInformationPage {
 
     @FindBy(xpath="//input[@id=\\\"coborrower1\\\"]")
     public WebElement yesCheckBox;
+
+    @FindBy(xpath="//ul[@role=\"tablist\"]//li")
+    public List<WebElement> stepsApp;
+
 
 //    public void clickOnProductLink(String product){
 //        String xpath = "//input[@id=\"coborrower1\"]";

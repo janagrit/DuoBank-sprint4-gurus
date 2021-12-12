@@ -27,3 +27,17 @@ Feature: Personal Details Page verification
     When I check "Yes" box
     Then The Co-Borrower's Information should be displayed
 
+  Scenario: Verify Application Wizard option list
+
+    Then The Application Wizard option category should include
+
+      | PREAPPROVAL DETAILS                            |
+      | PERSONAL INFORMATION                           |
+      | EXPENSES                                       |
+      | EMPLOYMENT AND INCOME                          |
+      | CREDIT REPORT SETUP YOUR ACCOUNT DETAILS HERE. |
+      | ECONSENT                                       |
+      | SUMMARY                                        |
+
+
+

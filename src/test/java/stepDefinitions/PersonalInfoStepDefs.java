@@ -132,4 +132,12 @@ public class PersonalInfoStepDefs{
     }
 
 
+    @Then("The Application Wizard option category should include")
+    public void theApplicationWizardOptionCategoryShouldInclude(List<String> expectedOption) {
+
+        List<String> actualOption = SeleniumUtils.getElementsText(new PersonalInformationPage().stepsApp);
+
+        Assert.assertEquals(expectedOption, actualOption);
+
+    }
 }
