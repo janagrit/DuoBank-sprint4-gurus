@@ -73,6 +73,9 @@ public class PersonalInformationPage {
     @FindBy(id="select2-c_marital-container")
     public WebElement c_marital;
 
+    @FindBy(id="b_cell-error")
+    public WebElement errorMessage;
+
 
 
 //    public void clickOnProductLink(String product){
@@ -100,9 +103,5 @@ public class PersonalInformationPage {
 
         buttonnext.click();
     }
-
-
-
-
 
 }
