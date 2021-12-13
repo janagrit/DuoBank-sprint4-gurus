@@ -3,17 +3,26 @@ package stepDefinitions;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import pages.LoginPage;
 import utilities.Driver;
 import utilities.ExcelUtils;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 
-public class LoginStepDefs {
+public class LoginStepDefs  {
 
 
     @Then("filling the email {string} and password {string} and click Login button")
@@ -30,110 +39,101 @@ public class LoginStepDefs {
     }
 
 
+    @When("I login with invalid email {string} and password {string} and click login button")
+    public void iLoginWithInvalidEmailAndPasswordAndClickLoginButton(String email, String pass) {
+        new LoginPage().LoginMethod(email, pass);
+        System.out.println("Your email " + email + " has result as " + new LoginPage().textLoginFailed.getText());
+    }
+
+    @Then("I should not be able to login and an error message should be displayed")
+    public void iShouldNotBeAbleToLoginAndAnErrorMessageShouldBeDisplayed() {
+        System.out.println("Result of entry: " + new LoginPage().textLoginFailed.getText());
+        Assert.assertTrue(new LoginPage().textLoginFailed.isDisplayed());
+    }
+
+
     @When("I am on login page using the given excel file")
-    public void iAmOnLoginPageUsingTheGivenExcelFile() throws InterruptedException {
+    public void iAmOnLoginPageUsingTheGivenExcelFile() throws InterruptedException, IOException {
+
+        LoginPage log = new LoginPage();
+
+        FileInputStream fis = new FileInputStream("SignUp_Data.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet sheet = workbook.getSheet("Sheet1");
+        XSSFRow row = sheet.getRow(1);  // Apache POI method indexes are zero-based
+        XSSFCell cell = row.getCell(0);
+        System.out.println("cell " + cell);
+
+        int physicalNumberOfRows = sheet.getPhysicalNumberOfRows();
+        int lastRowNum = sheet.getLastRowNum();
+        System.out.println("physicalNumberOfRows " + physicalNumberOfRows);
+        System.out.println("lastRowNum" + lastRowNum);
+        XSSFRow columnRow = sheet.getRow(0);
+        int physicalNumberOfCells = columnRow.getPhysicalNumberOfCells();
+        System.out.println("physicalNumberOfCells " + physicalNumberOfCells);
+
+//        for (int i = 0; i < physicalNumberOfRows; i++) {
+//            for (int j = 0; j < physicalNumberOfCells; j++) {
+//                System.out.print(sheet.getRow(i).getCell(j) + "\t");
+//            }  System.out.println();
+//        }
+
+        // grab the cell that need to be
+     //   XSSFCell cellStatus = sheet.getRow(1).getCell(2);
+       // cellStatus.setCellValue("Pass");
+
+//        FileOutputStream fos = new FileOutputStream("SignUp_Data.xlsx");
+//        workbook.write(fos);
+
+        // in order to use xml file we are creating the class ExcelUtils
 
         ExcelUtils excelUtils = new ExcelUtils("SignUp_Data.xlsx", "Sheet1");
+
+      //  System.out.println(excelUtils.getCellData(2, 1));
+
+
+        String[][] dataAs2DArray = excelUtils.getDataAs2DArray();
+
+      //  System.out.println(Arrays.deepToString(dataAs2DArray));
+
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
-        System.out.println(dataAsListOfMaps);
+
+        for (Map<String, String> dataAsListOfMap : dataAsListOfMaps) {
+            System.out.println(dataAsListOfMap);
+        }
+
+        while(excelUtils.rowCount() < excelUtils.rowCount()+1){
+        String email = excelUtils.getCellData(1,1);
+            log.LoginMethod(email, );
+            excelUtils.setCellData("test", "Status", 1);
+
+        for (int i = 0; i < physicalNumberOfRows; i++) {
+            for (int j = 0; j < physicalNumberOfCells; j++) {
+                System.out.print(sheet.getRow(i).getCell(j) + "\t");
+                excelUtils.getCellData(i, j);
+            }  System.out.println();
+        }
+
+        }
 
 
-        LoginPage login = new LoginPage();
-
-        Throwable ex = null;
-
-        for (int i = 0; i < dataAsListOfMaps.size(); i++) {
-            Map<String, String> row = dataAsListOfMaps.get(i);
-
-         //   login.LoginMethod(row.get("email"), row.get("name"));
-            System.out.println(dataAsListOfMaps.get(i).hashCode());
-      //  XSSFRow row=null;
-       // XSSFCell cell=null;
-//            String email=null;
-//            String password=null;
-//
-//
-//            for (int i=1; i < dataAsListOfMaps.size(); i++)
-//            {
-//                Map<String, String> row = dataAsListOfMaps.get(i);
-//                System.out.println(row);
-//
-//                for ( int j = 0; j < row.size();j++)
-//                {
-//                    Map<String, String> cell = dataAsListOfMaps.get(j);
-//
-//                    if(j==0) // We can use Column Name as well, will see in upcoming sessions
-//                    {
-//                        email= cell.toString();
-//                    }
-//                    if(j==1) // We can use Column Name as well, will see in upcoming sessions
-//                    {
-//                        password = cell.toString();
-//                    }
-//                }
-//
-//                login.LoginMethod(email, password);
-//
-//                String result = null;
-//                try
-//                {
-//                    Boolean isLoggedIn = login.logOut.isDisplayed();
-//                    if(isLoggedIn==true)
-//                    {
-//                        result="PASS";
-//                        // Writing to an excel
-//
-//
-//                    }
-//                    System.out.println("email : " + email + " ---- > " + "Password : "  + password + "-----> Login success ? ------> " + result);
-//                    //System.out.println("Login successfull : " + isLoggedIn);
-//                    login.logOut.click();
-//                }
-//                catch(Exception e)
-//                {
-//
-//                    Boolean isError = login.LoginFailedMsg.isDisplayed();
-//                    if(isError == true)
-//                    {
-//                        result="FAIL";
-//
-//                    }
-//                    System.out.println("Email : " + email + " ---- > " + "Password : "  + password + "-----> Login success ? ------> " + result);
-//                }
-//                Thread.sleep(2000);
-//                login.loginButton.click();
-//            }
+    }
 
 
-            // We can pass this values in to web application for testing Test user Accounts.
-//            }
-//
-//            if(row.get("first_name").equalsIgnoreCase("y")){
-//                login.clickOnProductLink(row.get("Product"));
-//
-//                try {
-//                    Assert.assertEquals(row.get("Product"), productDetailsPage.productName.getText());
-//                    Assert.assertEquals(row.get("Price"), productDetailsPage.price.getText());
-//                    Assert.assertEquals(row.get("Model"), productDetailsPage.model.getText());
-//                    Assert.assertEquals(row.get("Composition"), productDetailsPage.composition.getText());
-//                    Assert.assertEquals(row.get("Styles"), productDetailsPage.style.getText());
-//                    excelUtils.setCellData("PASS", "Status", i + 1);
-//                }catch(Throwable e){
-//                    ex = e;
-//                    excelUtils.setCellData("FAIL", "Status", i + 1);
-//                }
-//
-//                Driver.getDriver().navigate().back();
-//            }else{
-//                excelUtils.setCellData("SKIPPED", "Status", i + 1);
-//            }
-//
-//
-//        }
-//
-//        throw ex;
 
-        }}}
+
+    @When("I login with the correct email {string} and invalid password {string} and click login button")
+    public void iLoginWithTheCorrectEmailAndInvalidPasswordAndClickLoginButton(String email, String pass) {
+        new LoginPage().LoginMethod(email, pass);
+        System.out.println("your password is incorrect: " + new LoginPage().textLoginFailed.getText());
+    }
+
+    @When("I login with no email {string} and no password {string} and click login button")
+    public void iLoginWithNoEmailAndNoPasswordAndClickLoginButton(String email, String pass) {
+        new LoginPage().LoginMethod(email, pass);
+        System.out.println(Driver.getDriver().getTitle());
+    }
+}
 
 
 

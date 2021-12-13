@@ -40,6 +40,9 @@ public class LoginPage {
     @FindBy(id="emailerror")
     public WebElement emailerror;
 
+    @FindBy(xpath= "//div[@class='card-title']")
+    public WebElement textLoginFailed;
+
 
     @FindBy(xpath = "//div[@class='user-nav d-sm-flex d-none']" )
     public WebElement logInIcon;
@@ -65,7 +68,7 @@ public class LoginPage {
 
 
 
-    public void setSignUp(String firstName, String lastName, String email, String password ){
+    public void signUpMethod(String firstName, String lastName, String email, String password ){
 
         Driver.getDriver().findElement(By.name("first_name")).sendKeys(firstName);
         Driver.getDriver().findElement(By.name("last_name")).sendKeys(lastName);
