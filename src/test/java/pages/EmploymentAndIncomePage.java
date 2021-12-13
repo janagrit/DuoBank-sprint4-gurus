@@ -10,10 +10,12 @@ import utilities.SeleniumUtils;
 
 public class EmploymentAndIncomePage {
 
-
     public EmploymentAndIncomePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
+
+    @FindBy(id = "currentjobsls")
+    public WebElement currentJob;
 
     @FindBy(id = "employername1")
     public WebElement employer;
@@ -27,7 +29,7 @@ public class EmploymentAndIncomePage {
     @FindBy(id = "state1")
     public WebElement state;
 
-    @FindBy(id = " start_date1")
+    @FindBy(id = "start_date1")
     public WebElement startDate;
 
     @FindBy(id = "end_date1")
@@ -73,12 +75,22 @@ public class EmploymentAndIncomePage {
     @FindBy(id = "amount2")
     public WebElement amount2;
 
+    @FindBy(id = "amount3")
+    public WebElement amount3;
+
+    @FindBy(id ="grossmonthlyincome-error")
+    public WebElement error;
+
+
+    @FindBy(xpath="//a[@href=\"#next\"]")
+    public WebElement buttonnext;
+
 
     public void getToEmploymentAndIncome() {
         PreapprovalDetailsPage preapproval_details_page = new PreapprovalDetailsPage();
         PersonalInformationPage personalInformationPage = new PersonalInformationPage();
         ExpensesPage expensesPage = new ExpensesPage();
-        preapproval_details_page.setPreapproval_method("Mark", 500000, 100000);
+        preapproval_details_page.setPreapproval_method("Jack Smith", 500000, 100000);
         personalInformationPage.Personal_Info_method("Mira", "Mar", "miramar@gmail.com", 123456789, 897543443);
         expensesPage.passExpensesPage();
 
@@ -88,6 +100,7 @@ public class EmploymentAndIncomePage {
         getToEmploymentAndIncome();
         employer.sendKeys("White House");
         grossMonthlyIncome.sendKeys("1");
+        buttonnext.click();
 
 
     }
