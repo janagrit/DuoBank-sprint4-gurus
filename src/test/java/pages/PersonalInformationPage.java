@@ -40,7 +40,7 @@ public class PersonalInformationPage {
 
 
     @FindBy(xpath="//a[@href=\"#next\"]")
-    public WebElement buttonnext;
+    public WebElement buttonNext;
 
     @FindBy(xpath="//fieldset[@id='steps-uid-0-p-2']//h6")
     public WebElement expensesTitle;
