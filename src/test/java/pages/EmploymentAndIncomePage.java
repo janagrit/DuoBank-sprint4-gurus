@@ -78,6 +78,10 @@ public class EmploymentAndIncomePage {
     @FindBy(id = "amount3")
     public WebElement amount3;
 
+    @FindBy(id ="grossmonthlyincome-error")
+    public WebElement error;
+
+
     @FindBy(xpath="//a[@href=\"#next\"]")
     public WebElement buttonnext;
 
@@ -86,7 +90,7 @@ public class EmploymentAndIncomePage {
         PreapprovalDetailsPage preapproval_details_page = new PreapprovalDetailsPage();
         PersonalInformationPage personalInformationPage = new PersonalInformationPage();
         ExpensesPage expensesPage = new ExpensesPage();
-        preapproval_details_page.setPreapproval_method("Mark", 500000, 100000);
+        preapproval_details_page.setPreapproval_method("Jack Smith", 500000, 100000);
         personalInformationPage.Personal_Info_method("Mira", "Mar", "miramar@gmail.com", 123456789, 897543443);
         expensesPage.passExpensesPage();
 
