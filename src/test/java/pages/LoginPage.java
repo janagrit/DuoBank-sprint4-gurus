@@ -8,6 +8,8 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
+import java.time.Duration;
+
 public class LoginPage {
 
 
@@ -95,14 +97,6 @@ public class LoginPage {
         emailInput.sendKeys(email);
         passwordlInput.sendKeys(password);
         loginButton.click();
-//
-//        if(welcomeLoginText_Msg.isDisplayed()){
-//            System.out.println("Login Failed = user is not registered");
-//        }else if(logoSign_DuoBank.isDisplayed()){
-//            System.out.println("User with email "+email+ " login successfully");
-//        }
-    }
-
-
-
-}
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        }
+            }
