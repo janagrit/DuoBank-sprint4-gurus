@@ -45,7 +45,7 @@ public class EmploymentAndIncomeStepDef {
 
     @Given("Click on  Employment and Income Page")
     public void clickOnEmploymentAndIncomePage() {
-        EmploymentAndIncomePage employmentAndIncomePage=new EmploymentAndIncomePage();
+        EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
         employmentAndIncomePage.getToEmploymentAndIncome();
     }
 
@@ -74,6 +74,7 @@ public class EmploymentAndIncomeStepDef {
 
     @Given("I enter information from Excel File named {string} for required fields")
     public void iEnterInformationFromExcelFileNamedForRequiredFields(String file) throws Throwable {
+
         ExcelUtils excelUtils = new ExcelUtils("Employer1.xlsx","Sheet1");
 
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();

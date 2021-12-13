@@ -52,69 +52,22 @@ public class LoginStepDefs  {
     }
 
 
-    @When("I am on login page using the given excel file")
-    public void iAmOnLoginPageUsingTheGivenExcelFile() throws InterruptedException, IOException {
+    @When("I am on login page using data from the Excel file {string}")
+    public void iAmOnLoginPageUsingDataFromTheExcelFile(String ExcelFile) throws InterruptedException, IOException {
+
+
+        ExcelUtils excelUtils = new ExcelUtils(ExcelFile,"Sheet1");
+        List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
 
         LoginPage log = new LoginPage();
 
-        FileInputStream fis = new FileInputStream("SignUp_Data.xlsx");
-        XSSFWorkbook workbook = new XSSFWorkbook(fis);
-        XSSFSheet sheet = workbook.getSheet("Sheet1");
-        XSSFRow row = sheet.getRow(1);  // Apache POI method indexes are zero-based
-        XSSFCell cell = row.getCell(0);
-        System.out.println("cell " + cell);
 
-        int physicalNumberOfRows = sheet.getPhysicalNumberOfRows();
-        int lastRowNum = sheet.getLastRowNum();
-        System.out.println("physicalNumberOfRows " + physicalNumberOfRows);
-        System.out.println("lastRowNum" + lastRowNum);
-        XSSFRow columnRow = sheet.getRow(0);
-        int physicalNumberOfCells = columnRow.getPhysicalNumberOfCells();
-        System.out.println("physicalNumberOfCells " + physicalNumberOfCells);
-
-//        for (int i = 0; i < physicalNumberOfRows; i++) {
-//            for (int j = 0; j < physicalNumberOfCells; j++) {
-//                System.out.print(sheet.getRow(i).getCell(j) + "\t");
-//            }  System.out.println();
-//        }
-
-        // grab the cell that need to be
-     //   XSSFCell cellStatus = sheet.getRow(1).getCell(2);
-       // cellStatus.setCellValue("Pass");
-
-//        FileOutputStream fos = new FileOutputStream("SignUp_Data.xlsx");
-//        workbook.write(fos);
-
-        // in order to use xml file we are creating the class ExcelUtils
-
-        ExcelUtils excelUtils = new ExcelUtils("SignUp_Data.xlsx", "Sheet1");
-
-      //  System.out.println(excelUtils.getCellData(2, 1));
-
-
-        String[][] dataAs2DArray = excelUtils.getDataAs2DArray();
-
-      //  System.out.println(Arrays.deepToString(dataAs2DArray));
-
-        List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
-
-        for (Map<String, String> dataAsListOfMap : dataAsListOfMaps) {
-            System.out.println(dataAsListOfMap);
+        for (int i = 1; i < dataAsListOfMaps.size(); i++) {
+            String cellEmail = excelUtils.getCellData(i,0);
+            String cellPass = excelUtils.getCellData(i,1);
+            log.LoginMethod(cellEmail, cellPass);
         }
 
-        while(excelUtils.rowCount() < excelUtils.rowCount()+1){
-        String email = excelUtils.getCellData(1,1);
-            log.LoginMethod(email, );
-            excelUtils.setCellData("test", "Status", 1);
-
-        for (int i = 0; i < physicalNumberOfRows; i++) {
-            for (int j = 0; j < physicalNumberOfCells; j++) {
-                System.out.print(sheet.getRow(i).getCell(j) + "\t");
-                excelUtils.getCellData(i, j);
-            }  System.out.println();
-        }
-
-        }
 
 
     }
@@ -133,6 +86,16 @@ public class LoginStepDefs  {
         new LoginPage().LoginMethod(email, pass);
         System.out.println(Driver.getDriver().getTitle());
     }
+
+
+    @When("Login a user with {string}, {string}")
+    public void loginAUserWith(String email, String password) {
+        new LoginPage().LoginMethod(email, password);
+
+    }
+
+
+
 }
 
 

@@ -44,14 +44,13 @@ public class LoginPage {
     public WebElement textLoginFailed;
 
 
-    @FindBy(xpath = "//div[@class='user-nav d-sm-flex d-none']" )
-    public WebElement logInIcon;
+
 
     @FindBy(xpath = "//a[@class='dropdown-item']" )
     public WebElement logOut;
 
-    @FindBy(xpath = "// //div[@class='card-title']" )
-    public WebElement LoginFailedMsg;
+    @FindBy(xpath = "//h4[@class='text-center mb-2']" )
+    public WebElement welcomeLoginText_Msg;
 
 
     @FindBy(name="first_name")
@@ -66,26 +65,31 @@ public class LoginPage {
     @FindBy(name="password")
     public WebElement signUPass;
 
+    @FindBy(xpath = "//div[@class='brand-logo']")
+    public WebElement logoSign_DuoBank;
 
+
+
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement registerButton;
 
     public void signUpMethod(String firstName, String lastName, String email, String password ){
 
-        Driver.getDriver().findElement(By.name("first_name")).sendKeys(firstName);
-        Driver.getDriver().findElement(By.name("last_name")).sendKeys(lastName);
-        Driver.getDriver().findElement(By.name("email")).sendKeys(email);
-        Driver.getDriver().findElement(By.name("password")).sendKeys(password);
+        signUPname.sendKeys(firstName);
+        signUPsurname.sendKeys(lastName);
+        signUpEmail.sendKeys(email);
+        signUPass.sendKeys(password);
 
         if(emailerror.isDisplayed()){
             System.out.println(email + " -> " + emailerror.getText());
 
-        }else{
-            Driver.getDriver().findElement(By.name("register")).click();
+        }else
+            registerButton.click();
             System.out.println(email + " -> " + textRegistration.getText());
-
-        }
-
-
     }
+
+
+
 
     public void GurusLoginMethod()   {
         emailInput.sendKeys(ConfigReader.getProperty("email"));
@@ -97,6 +101,12 @@ public class LoginPage {
         emailInput.sendKeys(email);
         passwordlInput.sendKeys(password);
         loginButton.click();
+//
+//        if(welcomeLoginText_Msg.isDisplayed()){
+//            System.out.println("Login Failed = user is not registered");
+//        }else if(logoSign_DuoBank.isDisplayed()){
+//            System.out.println("User with email "+email+ " login successfully");
+//        }
     }
 
 

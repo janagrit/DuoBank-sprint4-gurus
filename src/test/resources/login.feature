@@ -24,8 +24,22 @@ Background:
     Then I should not be able to login and an error message should be displayed
 
 
-  @5
-  Scenario: Verify credentials with the excel file Sheet1
-    When I am on login page using the given excel file
+  @excel
+  Scenario: Login with data from the Excel file
+    When I am on login page using data from the Excel file "SignUp_Data.xlsx"
+
+
+
+  Scenario Outline: Verify login feature with Outline
+    When Login a user with "<Email>", "<Password>"
+      |  Email   | Password   |
+      | <Email>  | <Password> |
+
+    Examples:
+      | Email                     | Password  |
+      | fwidmeore0@shareasale.com | TwBqcPP    |
+      | ahacecleton1@va.gov       | w1POixUgM |
+
+
 
 

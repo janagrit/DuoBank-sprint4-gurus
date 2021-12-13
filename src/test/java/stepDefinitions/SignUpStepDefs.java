@@ -31,29 +31,12 @@ public class SignUpStepDefs {
 
 
 
-    @When("on sign up page I fill out the fields: name {string}, surname {string} and email {string} and password {string} click sign up button")
-    public void onSignUpPageIFillOutTheFieldsNameSurnameAndEmailAndPasswordClickSignUpButton(String name, String lastName, String email, String password) throws IOException {
+    @When("Register a new user: {string}, {string}, {string}, {string} click sign up button")
+    public void registerANewUserClickSignUpButton(String name, String lastName, String email, String password) throws IOException {
 
         LoginPage log =  new LoginPage();
-//        log.signUPname.sendKeys(name);
-//        log.signUPsurname.sendKeys(lastName);
-//        log.signUpEmail.sendKeys(email);
-//
-//        if(log.emailerror.isDisplayed()){
-//            System.out.println(log.emailerror.getText());
-//            System.exit(1);
-//        }
-//
-//        else log.signUPass.sendKeys(password);
-//        log.loginButton.click();
-
-    log.signUpMethod(name, lastName, email, password);
-
-
+        log.signUpMethod(name, lastName, email, password);
     }
-
-
-
 
 
     @Then("I verify msg {string} or {string}")
@@ -109,4 +92,6 @@ public class SignUpStepDefs {
         FileOutputStream fos = new FileOutputStream("SignUp_Data.xlsx");
         workbook.write(fos);
     }
+
+
 }
