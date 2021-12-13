@@ -40,7 +40,7 @@ public class PersonalInformationPage {
 
 
     @FindBy(xpath="//a[@href=\"#next\"]")
-    public WebElement buttonnext;
+    public WebElement buttonNext;
 
     @FindBy(xpath="//fieldset[@id='steps-uid-0-p-2']//h6")
     public WebElement expensesTitle;
@@ -54,6 +54,27 @@ public class PersonalInformationPage {
 
     @FindBy(xpath="//div[@class='co-borrower']//h6[@class='py-50']")
     public WebElement coBorrowerInfo;
+
+    @FindBy(id="c_firstName")
+    public WebElement c_firstName;
+
+    @FindBy(id="c_lastName")
+    public WebElement c_lastName;
+
+    @FindBy(id="c_email")
+    public WebElement c_email;
+
+    @FindBy(id="c_ssn")
+    public WebElement c_ssn;
+
+    @FindBy(id="c_cell")
+    public WebElement c_cell;
+
+    @FindBy(id="select2-c_marital-container")
+    public WebElement c_marital;
+
+    @FindBy(id="b_cell-error")
+    public WebElement errorMessage;
 
 
 
@@ -82,9 +103,5 @@ public class PersonalInformationPage {
 
         buttonnext.click();
     }
-
-
-
-
 
 }
