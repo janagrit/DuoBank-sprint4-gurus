@@ -1,4 +1,4 @@
-
+@employment
 Feature: Employment and Income Related feature
 
   Background:
@@ -15,7 +15,7 @@ Feature: Employment and Income Related feature
 
         Scenario: On "Employer 1" section  "This is my current job" checkBox is selected by default.
         Given  Verify that checkbox is selected
-  @employment
+
         Scenario:I enter information from Excel File named "Employer1" for required fields with different sets of data
         Given I enter information from Excel File named "Employer1" for required fields
 
