@@ -78,6 +78,9 @@ public class EmploymentAndIncomePage {
     @FindBy(id = "amount3")
     public WebElement amount3;
 
+    @FindBy(xpath="//a[@href=\"#next\"]")
+    public WebElement buttonnext;
+
 
     public void getToEmploymentAndIncome() {
         PreapprovalDetailsPage preapproval_details_page = new PreapprovalDetailsPage();
@@ -93,6 +96,7 @@ public class EmploymentAndIncomePage {
         getToEmploymentAndIncome();
         employer.sendKeys("White House");
         grossMonthlyIncome.sendKeys("1");
+        buttonnext.click();
 
 
     }
