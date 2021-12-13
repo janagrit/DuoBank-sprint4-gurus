@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -39,8 +40,14 @@ public class ExpensesPage {
 
 
 
+    public void clickRent( ){
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].click()",checkBoxRent);
+    }
+
+
     public void passExpensesPage(){
-        checkBoxRent.click();
+        clickRent();
         monthlyrentalpayment.sendKeys("2000");
         buttonNext.click();
 

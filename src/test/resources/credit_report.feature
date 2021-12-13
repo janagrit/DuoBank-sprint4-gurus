@@ -17,4 +17,7 @@ Feature: Credit Report Related Features
     Scenario:Choice "Yes" to Order credit report should be selected by default
       Then Verify if Yes is selected
 
+    Scenario: Click next to go to the next page
+      When I click next , I should be able to go to the next page
+
 

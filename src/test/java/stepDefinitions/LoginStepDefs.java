@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class LoginStepDefs  {
+public class LoginStepDefs<Srting> {
 
 
     @Then("filling the email {string} and password {string} and click Login button")
@@ -104,7 +104,8 @@ public class LoginStepDefs  {
 
         while(excelUtils.rowCount() < excelUtils.rowCount()+1){
         String email = excelUtils.getCellData(1,1);
-            log.LoginMethod(email, );
+
+           // log.LoginMethod(email,password);
             excelUtils.setCellData("test", "Status", 1);
 
         for (int i = 0; i < physicalNumberOfRows; i++) {
