@@ -18,7 +18,8 @@ import org.junit.runner.RunWith;
         ,plugin = {
                 "pretty",  // displays more detailed output on the console
                  "html:target/cucumber-built-in-report.html", // generates built in html report at the given the path
-                 "json:target/cucumber.json"
+                 "json:target/cucumber.json",
+                 "rerun:target/failed.txt"
         }
 )
 

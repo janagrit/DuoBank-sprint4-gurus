@@ -55,7 +55,7 @@ Feature: Personal Details Page verification
 
     Scenario: Verify the customer cannot skip the personal information page
 
-      When I do not enter only some information
+      When If I enter only some information
         | firstName | lastName | email | SSN |
         | 0         | 0        | 0     | 0   |
       Then I should receive an error message
