@@ -10,10 +10,12 @@ import utilities.SeleniumUtils;
 
 public class EmploymentAndIncomePage {
 
-
     public EmploymentAndIncomePage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
+
+    @FindBy(id = "currentjobsls")
+    public WebElement currentJob;
 
     @FindBy(id = "employername1")
     public WebElement employer;
@@ -27,7 +29,7 @@ public class EmploymentAndIncomePage {
     @FindBy(id = "state1")
     public WebElement state;
 
-    @FindBy(id = " start_date1")
+    @FindBy(id = "start_date1")
     public WebElement startDate;
 
     @FindBy(id = "end_date1")
@@ -72,6 +74,9 @@ public class EmploymentAndIncomePage {
 
     @FindBy(id = "amount2")
     public WebElement amount2;
+
+    @FindBy(id = "amount3")
+    public WebElement amount3;
 
 
     public void getToEmploymentAndIncome() {

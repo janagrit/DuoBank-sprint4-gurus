@@ -3,13 +3,21 @@ package stepDefinitions;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import pages.EmploymentAndIncomePage;
 import pages.LoginPage;
+import pages.PersonalInformationPage;
 import pages.PreapprovalDetailsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ExcelUtils;
 import utilities.SeleniumUtils;
+
+import java.util.List;
+import java.util.Map;
 
 public class EmploymentAndIncomeStepDef {
 
@@ -29,7 +37,7 @@ public class EmploymentAndIncomeStepDef {
     @And("Verify that I am on Mortgage Application Page")
     public void verifyThatIAmOnMortgageApplicationPage() {
 
-        Assert.assertEquals("Loan Application", Driver.getDriver().getCurrentUrl());
+        Assert.assertEquals("Loan Application", Driver.getDriver().getTitle());
 
     }
 
@@ -46,5 +54,91 @@ public class EmploymentAndIncomeStepDef {
     }
 
 
+    @Given("Select {string} checkbox.")
+    public void selectCheckbox(String CurerntJob) throws InterruptedException {
 
+            String curerntJob = CurerntJob;
+            SeleniumUtils.jsClick(new EmploymentAndIncomePage().currentJob);
+            Thread.sleep(5000);
+    }
+
+    @Then("Verify that checkbox is selected")
+    public void verifyThatCheckboxIsSelected() {
+        Assert.assertTrue(new EmploymentAndIncomePage().currentJob.isEnabled());
+    }
+
+
+
+    @Given("I enter information from Excel File named {string} for required fields")
+    public void iEnterInformationFromExcelFileNamedForRequiredFields(String file) throws Throwable {
+        ExcelUtils excelUtils = new ExcelUtils("Employer1.xlsx","Sheet1");
+
+        List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
+
+        EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
+        Throwable ex = null;
+        Actions actions = new Actions(Driver.getDriver());
+        for (int i = 0; i < dataAsListOfMaps.size(); i++) {
+
+            Map<String, String> row = dataAsListOfMaps.get(i);
+
+            if(row.get("Execute").equalsIgnoreCase("y")){
+
+                try {
+                    employmentAndIncomePage.employer.sendKeys(row.get("Employer Name"));
+                    employmentAndIncomePage.position.sendKeys(row.get("Position"));
+                    employmentAndIncomePage.city.sendKeys(row.get("City"));
+                    employmentAndIncomePage.state.sendKeys(row.get("State"));
+                    employmentAndIncomePage.startDate.sendKeys(row.get("Start Date"));
+                    excelUtils.setCellData("PASS", "Status", i + 1);
+                }catch(Throwable e){
+                    ex = e;
+                    excelUtils.setCellData("FAIL", "Status", i + 1);
+                }
+                Driver.getDriver().navigate().back();
+            }else{
+                excelUtils.setCellData("SKIPPED", "Status", i + 1);
+            }
+        }throw ex;
+
+
+    }
+
+    @When("I click and enter gross monthly income{string},monthly overtime {string},monthly bonuses{string},monthly commissions{string}, monthly dividents{string}")
+    public void iClickAndEnterGrossMonthlyIncomeMonthlyOvertimeMonthlyBonusesMonthlyCommissionsMonthlyDividents(String income, String overtime, String bonuses, String commissions, String devidents) {
+
+        new EmploymentAndIncomePage().grossMonthlyIncome.sendKeys(income);
+        new EmploymentAndIncomePage().monthlyOverTime.sendKeys(overtime);
+        new EmploymentAndIncomePage().monthlyBonuses.sendKeys(bonuses);
+        new EmploymentAndIncomePage().monthlyCommission.sendKeys(commissions);
+        new EmploymentAndIncomePage().monthlyDividents.sendKeys(devidents);
+
+
+
+    }
+
+
+    @When("I fill out income source{string},amount<AMOUNT>")
+    public void iFillOutIncomeSourceAmountAMOUNT(String arg0) {
+
+    }
+
+    @When("I fill out income source{string},amount{string}")
+    public void iFillOutIncomeSourceAmount(String source, String amount) {
+
+    }
+
+    @When("I fill out {string},{string},{string},{string},{string},{string}")
+    public void iFillOut(String source1 ,String amount1, String source2, String amount2, String source3, String amount3) {
+
+        EmploymentAndIncomePage employmentAndIncomePage=new EmploymentAndIncomePage();
+        employmentAndIncomePage.incomesource1.sendKeys(source1);
+        employmentAndIncomePage.amount1.sendKeys(amount1);
+
+        employmentAndIncomePage.incomesource2.sendKeys(source2);
+        employmentAndIncomePage.amount2.sendKeys(amount2);
+
+        employmentAndIncomePage.incomesource3.sendKeys(source3);
+        employmentAndIncomePage.amount3.sendKeys(amount3);
+    }
 }
