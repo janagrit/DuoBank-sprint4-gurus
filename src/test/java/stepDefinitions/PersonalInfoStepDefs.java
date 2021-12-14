@@ -166,8 +166,8 @@ public class PersonalInfoStepDefs {
         System.out.println(new PersonalInformationPage().expensesTitle.getText());
     }
 
-    @When("I do not enter only some information")
-    public void iDoNotEnterOnlySomeInformation(List<Map<String, String>> dataTable) {
+    @When("If I enter only some information")
+    public void ifIEnterOnlySomeInformation(List<Map<String, String>> dataTable) {
 
         new PersonalInformationPage().b_firstName.sendKeys(dataTable.get(0).get("firstName"));
         new PersonalInformationPage().b_lastName.sendKeys(dataTable.get(0).get("lastName"));

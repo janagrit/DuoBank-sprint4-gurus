@@ -101,7 +101,7 @@ public class PersonalInformationPage {
 
 
 
-        buttonnext.click();
+        buttonNext.click();
     }
 
 }

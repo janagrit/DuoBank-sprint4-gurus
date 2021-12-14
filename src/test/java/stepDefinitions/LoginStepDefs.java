@@ -68,6 +68,7 @@ public class LoginStepDefs  {
                 if(log.text_notification.isDisplayed()){
                     System.out.println("Sign up with  " +cellEmail+  " Failed");
                     excelUtils.setCellData("Fail", "Status", i);
+
                  }
 
             } catch (Exception e) {
