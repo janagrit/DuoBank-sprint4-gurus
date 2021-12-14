@@ -1,4 +1,4 @@
-@t
+
 Feature: Current Monthly Housing Expenses
 
   Background: common steps
