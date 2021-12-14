@@ -21,19 +21,19 @@ Feature: Current Monthly Housing Expenses
 #    Then I enter random digits in the Monthly Rental Payment field
 #    Then I go to next page
 #
-#  @smoke @regression
+
 #  Scenario: Verify validation of Own Check Box
 #    When I selecting the Own checkbox
 #    Then I enter random digits in the First Mortagage Payment field
 #    Then I go to next page
 #
-#  @smoke @regression #bug
+
 #  Scenario: Verify validation of First Mortagage Payment field
 #    When I selecting the Own checkbox
 #    Then I enter random, trillion value, digits in the First Mortgage Payment field
 #    Then I go to next page
 #
-#  @smoke @regression #bug
+
 #  Scenario: Verify validation of Rental Payment field
 #    When I selecting the Rent checkbox
 #    Then I enter random, trillion value, digits in the Monthly Rental Payment field
