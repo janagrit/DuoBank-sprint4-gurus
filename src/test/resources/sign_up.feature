@@ -1,33 +1,43 @@
-Feature:  As a user I should be able to sign up and use my credentials later on
+Feature:  As a user I sign Up
 
-  Scenario Outline: Verify sign up feature using different sets of data
+  Background: common steps
     Given on login page
     Then I click on sign up page
-    When on sign up page I fill out the fields: name "<FIRST NAME>", surname "<LAST NAME>" and email "<EMAIL ADDRESS>" and password "<PASSWORD>" click sign up button
-    Then I verify confirmation msg "Registration Successfull"
 
-      | FIRST NAME   | LAST NAME   | EMAIL ADDRESS   | PASSWORD
-      | <FIRST NAME> | <LAST NAME> | <EMAIL ADDRESS> | <PASSWORD>
+
+  Scenario Outline: Verify sign up feature with Outline
+    When Register a new user: "<FIRST NAME>", "<LAST NAME>", "<EMAIL ADDRESS>", "<PASS>" click sign up button
+      | FIRST NAME   | LAST NAME   | EMAIL ADDRESS   | PASS   |
+      | <FIRST NAME> | <LAST NAME> | <EMAIL ADDRESS> | <PASS> |
+
     Examples:
-      | FIRST NAME | LAST NAME | EMAIL ADDRESS            | PASSWORD
-      | Olya       | Karenina  | Anna@gmail.com           | 111111
-      | Magda      | Magdovna  | pep@gmail.com            | 9930303
-#      | Таня       | Алегрова  | Алегрова@gmail.com       | 99
-      | java       | gurus     | gurus@gmail.com          | debunk
-#      | 雅哪        | 女        | gurus@gmail.com          | i8i8i
-      | Felisha    | Widmore   | fwidmore0@shareasale.com | TwBcPP
-      | Annabel    | Haccleton | ahaccleton1@va.gov       | w1POixUgM
+      | FIRST NAME | LAST NAME | EMAIL ADDRESS             | PASS      |
+      | Olyea      | eKarenina | Anena@gmail.com           | hghgh     |
+      | Meagda     | Magedovna | peep@gmail.com            | sdsll     |
+      | jaeva      | geurus    | gureus@gmail.com          | debeunk   |
+      | Feliseha   | Widmoere  | fwidmeore0@shareasale.com | TwBcPP    |
+      | Anneabel   | Haccleton | ahacecleton1@va.gov       | w1POixUgM |
 
 
 
 
 
 
-#
-#  Scenario: Verify products details that are on sale
-#    Given on login page
-#    When I click on on products that are on sale their expected values should be correct according to the given excel file
-#
-#
+
+  Scenario Outline: Verify sign up russian and chinese names but english email
+    When Register a new user: "<FIRST NAME>", "<LAST NAME>", "<EMAIL ADDRESS>", "<PASSWORD>" click sign up button
+      | FIRST NAME   | LAST NAME   | EMAIL ADDRESS   | PASSWORD |
+      | <FIRST NAME> | <LAST NAME> | <EMAIL ADDRESS> | <PASSWORD>|
+    Examples:
+      | FIRST NAME | LAST NAME | EMAIL ADDRESS            | PASSWORD|
+      | Таня       | Алегрова  | ttania@gmail.com          | 1234599|
+      | 雅哪        | 女        | gturus@gmail.com          | i8i8i    |
+
+
+
+
+
+
+
 
 

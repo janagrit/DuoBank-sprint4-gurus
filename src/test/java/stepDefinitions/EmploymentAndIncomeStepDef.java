@@ -4,6 +4,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.eo.Se;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -43,7 +45,7 @@ public class EmploymentAndIncomeStepDef {
 
     @Given("Click on  Employment and Income Page")
     public void clickOnEmploymentAndIncomePage() {
-        EmploymentAndIncomePage employmentAndIncomePage=new EmploymentAndIncomePage();
+        EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
         employmentAndIncomePage.getToEmploymentAndIncome();
     }
 
@@ -60,6 +62,7 @@ public class EmploymentAndIncomeStepDef {
             String curerntJob = CurerntJob;
             SeleniumUtils.jsClick(new EmploymentAndIncomePage().currentJob);
             Thread.sleep(5000);
+
     }
 
     @Then("Verify that checkbox is selected")
@@ -71,6 +74,7 @@ public class EmploymentAndIncomeStepDef {
 
     @Given("I enter information from Excel File named {string} for required fields")
     public void iEnterInformationFromExcelFileNamedForRequiredFields(String file) throws Throwable {
+
         ExcelUtils excelUtils = new ExcelUtils("Employer1.xlsx","Sheet1");
 
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
@@ -78,6 +82,7 @@ public class EmploymentAndIncomeStepDef {
         EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
         Throwable ex = null;
         Actions actions = new Actions(Driver.getDriver());
+
         for (int i = 0; i < dataAsListOfMaps.size(); i++) {
 
             Map<String, String> row = dataAsListOfMaps.get(i);
@@ -85,11 +90,18 @@ public class EmploymentAndIncomeStepDef {
             if(row.get("Execute").equalsIgnoreCase("y")){
 
                 try {
+                    SeleniumUtils.scroll(0,-300);
+                    Thread.sleep(3000);
+                    //SeleniumUtils.waitForVisibility(employmentAndIncomePage.employer,5);
+
                     employmentAndIncomePage.employer.sendKeys(row.get("Employer Name"));
+
                     employmentAndIncomePage.position.sendKeys(row.get("Position"));
                     employmentAndIncomePage.city.sendKeys(row.get("City"));
                     employmentAndIncomePage.state.sendKeys(row.get("State"));
                     employmentAndIncomePage.startDate.sendKeys(row.get("Start Date"));
+
+
                     excelUtils.setCellData("PASS", "Status", i + 1);
                 }catch(Throwable e){
                     ex = e;
@@ -118,16 +130,6 @@ public class EmploymentAndIncomeStepDef {
     }
 
 
-    @When("I fill out income source{string},amount<AMOUNT>")
-    public void iFillOutIncomeSourceAmountAMOUNT(String arg0) {
-
-    }
-
-    @When("I fill out income source{string},amount{string}")
-    public void iFillOutIncomeSourceAmount(String source, String amount) {
-
-    }
-
     @When("I fill out {string},{string},{string},{string},{string},{string}")
     public void iFillOut(String source1 ,String amount1, String source2, String amount2, String source3, String amount3) {
 
@@ -140,6 +142,22 @@ public class EmploymentAndIncomeStepDef {
 
         employmentAndIncomePage.incomesource3.sendKeys(source3);
         employmentAndIncomePage.amount3.sendKeys(amount3);
+    }
+
+    @When("I will leave required fields empty and go to next page")
+    public void iWillLeaveRequiredFieldsEmptyAndGoToNextPage() {
+        EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
+
+        employmentAndIncomePage.employer.sendKeys("");
+        employmentAndIncomePage.grossMonthlyIncome.sendKeys("");
+        employmentAndIncomePage.buttonnext.click();
+
+    }
+
+    @Then("message {string} should be displayed")
+    public void messageShouldBeDisplayed(String msg) {
+
+        Assert.assertEquals(msg, new EmploymentAndIncomePage().error.getText());
     }
 
 

@@ -26,7 +26,7 @@ public class TestApachePOI {
 //        XSSFCell cell;
 
 
-        FileInputStream fis = new FileInputStream("testDataEcommerce.xlsx");
+        FileInputStream fis = new FileInputStream("SignUp_Data.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
         XSSFSheet sheet = workbook.getSheet("Sheet1");
         XSSFRow row = sheet.getRow(1);  // Apache POI method indexes are zero-based

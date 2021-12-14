@@ -1,17 +1,14 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.ConfigReader;
 import utilities.Driver;
-import utilities.ExcelUtils;
 import utilities.SeleniumUtils;
 
-import java.util.List;
-import java.util.Map;
+import java.time.Duration;
 
 public class LoginPage {
 
@@ -34,34 +31,72 @@ public class LoginPage {
     public WebElement passwordlInput;
 
     @FindBy(xpath = "//button[@type='submit']" )
-    public WebElement login;
+    public WebElement loginButton;
+
+    @FindBy(id="emailerror")
+    public WebElement emailerror;
+
+    @FindBy(xpath= "//div[@class='card-title']")
+    public WebElement textLoginFailed;
 
 
 
 
-    public void setSignUp(String firstName, String lastName, String email, String password ){
+    @FindBy(xpath = "//a[@class='dropdown-item']" )
+    public WebElement logOut;
 
-        Driver.getDriver().findElement(By.name("first_name")).sendKeys(firstName);
-        Driver.getDriver().findElement(By.name("last_name")).sendKeys(lastName);
-        Driver.getDriver().findElement(By.name("email")).sendKeys(email);
-        Driver.getDriver().findElement(By.name("password")).sendKeys(password);
-        Driver.getDriver().findElement(By.name("register")).click();
+    @FindBy(xpath = "//h4[@class='text-center mb-2']" )
+    public WebElement welcomeLoginText_Msg;
 
-        // String.valueOf(
+
+    @FindBy(name="first_name")
+    public WebElement signUPname;
+
+    @FindBy(name="last_name")
+    public WebElement signUPsurname;
+
+    @FindBy(name="email")
+    public WebElement signUpEmail;
+
+    @FindBy(name="password")
+    public WebElement signUPass;
+
+    @FindBy(xpath = "//div[@class='brand-logo']")
+    public WebElement logoSign_DuoBank;
+
+
+
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement registerButton;
+
+    public void signUpMethod(String firstName, String lastName, String email, String password ){
+
+        signUPname.sendKeys(firstName);
+        signUPsurname.sendKeys(lastName);
+        signUpEmail.sendKeys(email);
+        signUPass.sendKeys(password);
+
+        if(emailerror.isDisplayed()){
+            System.out.println(email + " -> " + emailerror.getText());
+
+        }else
+            registerButton.click();
+            System.out.println(email + " -> " + textRegistration.getText());
     }
+
+
+
 
     public void GurusLoginMethod()   {
         emailInput.sendKeys(ConfigReader.getProperty("email"));
         passwordlInput.sendKeys(ConfigReader.getProperty("password"));
-        SeleniumUtils.jsClick(login);
+        SeleniumUtils.jsClick(loginButton);
     }
 
     public void LoginMethod(String email, String password)   {
         emailInput.sendKeys(email);
         passwordlInput.sendKeys(password);
-        login.click();
-    }
-
-
-
-}
+        loginButton.click();
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        }
+            }

@@ -76,6 +76,9 @@ public class PersonalInformationPage {
     @FindBy(id="b_cell-error")
     public WebElement errorMessage;
 
+    @FindBy(xpath="//a[@href=\"#next\"]")
+    public WebElement buttonnext;
+
 
 
 //    public void clickOnProductLink(String product){
@@ -90,10 +93,7 @@ public class PersonalInformationPage {
         b_email.sendKeys(email);
         b_ssn.sendKeys(Integer.toString(soc));
         b_cell.sendKeys(Integer.toString(phone));
-       //SeleniumUtils.jsClick(b_marital);
-     // b_marital.click();
-     // b_marital.sendKeys(Keys.DOWN,Keys.DOWN,Keys.ENTER);
-        //new Actions((WebDriver) b_marital).sendKeys("married").perform();
+
 
         Actions actions = new Actions(Driver.getDriver());
 

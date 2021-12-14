@@ -3,18 +3,33 @@ package stepDefinitions;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import pages.LoginPage;
-import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ExcelUtils;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 
-public class LoginStepDefs {
+public class LoginStepDefs  {
 
+
+    @Then("filling the email {string} and password {string} and click Login button")
+    public void fillingTheEmailAndPasswordAndClickLoginButton(String email, String pass) throws InterruptedException {
+        new LoginPage().LoginMethod(email, pass);
+        System.out.println(Driver.getDriver().getTitle());
+    }
 
     @When("I am on login page I filling out email and password and click login button")
     public void iAmOnLoginPageIFillingOutEmailAndPasswordAndClickLoginButton() {
@@ -24,48 +39,72 @@ public class LoginStepDefs {
     }
 
 
-    @When("I am on login page using the given excel file")
-    public void iAmOnLoginPageUsingTheGivenExcelFile() {
+    @When("I login with invalid email {string} and password {string} and click login button")
+    public void iLoginWithInvalidEmailAndPasswordAndClickLoginButton(String email, String pass) {
+        new LoginPage().LoginMethod(email, pass);
+        System.out.println("Your email " + email + " has result as " + new LoginPage().textLoginFailed.getText());
+    }
 
-        ExcelUtils excelUtils = new ExcelUtils("SignUp_Data.xlsx", "Sheet1");
+    @Then("I should not be able to login and an error message should be displayed")
+    public void iShouldNotBeAbleToLoginAndAnErrorMessageShouldBeDisplayed() {
+        System.out.println("Result of entry: " + new LoginPage().textLoginFailed.getText());
+        Assert.assertTrue(new LoginPage().textLoginFailed.isDisplayed());
+    }
+
+
+    @When("I am on login page using data from the Excel file {string}")
+    public void iAmOnLoginPageUsingDataFromTheExcelFile(String ExcelFile) throws InterruptedException, IOException {
+
+
+        ExcelUtils excelUtils = new ExcelUtils(ExcelFile,"Sheet1");
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
-        System.out.println(excelUtils);
 
-        LoginPage login = new LoginPage();
+        LoginPage log = new LoginPage();
+        for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
+            String cellEmail = excelUtils.getCellData(i, 0);
+            String cellPass = excelUtils.getCellData(i, 1);
+            log.LoginMethod(cellEmail, cellPass);
 
-        Throwable ex = null;
+            try {
+                if(log.welcomeLoginText_Msg.isDisplayed()){
+                    System.out.println("Login with  " +cellEmail+  " Failed");
+                    excelUtils.setCellData("Fail", "Status", i);
+                 }
 
-        for (int i = 0; i < dataAsListOfMaps.size(); i++) {
-            Map<String, String> row = dataAsListOfMaps.get(i);
-//
-//            if(row.get("first_name").equalsIgnoreCase("y")){
-//                homePage.clickOnProductLink(row.get("Product"));
-//
-//                try {
-//                    Assert.assertEquals(row.get("Product"), productDetailsPage.productName.getText());
-//                    Assert.assertEquals(row.get("Price"), productDetailsPage.price.getText());
-//                    Assert.assertEquals(row.get("Model"), productDetailsPage.model.getText());
-//                    Assert.assertEquals(row.get("Composition"), productDetailsPage.composition.getText());
-//                    Assert.assertEquals(row.get("Styles"), productDetailsPage.style.getText());
-//                    excelUtils.setCellData("PASS", "Status", i + 1);
-//                }catch(Throwable e){
-//                    ex = e;
-//                    excelUtils.setCellData("FAIL", "Status", i + 1);
-//                }
-//
-//                Driver.getDriver().navigate().back();
-//            }else{
-//                excelUtils.setCellData("SKIPPED", "Status", i + 1);
-//            }
-//
-//
-//        }
-//
-//        throw ex;
+            } catch (Exception e) {
+                excelUtils.setCellData("Pass", "Status", i);
 
-        } }
+            }
+        }
+        }
+
+
+
+
+    @When("I login with the correct email {string} and invalid password {string} and click login button")
+    public void iLoginWithTheCorrectEmailAndInvalidPasswordAndClickLoginButton(String email, String pass) {
+        new LoginPage().LoginMethod(email, pass);
+        System.out.println("your password is incorrect: " + new LoginPage().textLoginFailed.getText());
+    }
+
+    @When("I login with no email {string} and no password {string} and click login button")
+    public void iLoginWithNoEmailAndNoPasswordAndClickLoginButton(String email, String pass) {
+        new LoginPage().LoginMethod(email, pass);
+        System.out.println(Driver.getDriver().getTitle());
+    }
+
+
+    @When("Login a user with {string}, {string}")
+    public void loginAUserWith(String email, String password) {
+        new LoginPage().LoginMethod(email, password);
+
+    }
+
 
 
 }
+
+
+
 
 

@@ -45,4 +45,10 @@ public class CreditReportStepDef {
     public void verifyIfYesIsSelected() {
         Assert.assertTrue(new CreditReportPage().clickYes.isSelected());
     }
+
+    @When("I click next , I should be able to go to the next page")
+    public void iClickNextIShouldBeAbleToGoToTheNextPage() {
+        CreditReportPage creditReportPage=new CreditReportPage();
+        creditReportPage.buttonnext.click();
+    }
 }

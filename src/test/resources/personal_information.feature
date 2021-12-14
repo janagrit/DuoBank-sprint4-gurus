@@ -12,19 +12,19 @@ Feature: Personal Details Page verification
 #  Scenario: Verify that even though a customer don't enter their Bday (required filed), she/he is still able to move to the next page
 #   Given The customers is able to move to the next page without providing Bday information
 
- Scenario Outline: Verify that even though customer provide incorrect information, she/he is still able to move to the next page
-   When I click and put first name "<FirstName>",last name "<LastName>",email "<Email>","<SSN>","<MaterialStatus>","<CellPhone>"
-   Then I still should be able move to the next page
+  Scenario Outline: Verify that even though customer provide incorrect information, she/he is still able to move to the next page
+    When I click and put first name "<FirstName>",last name "<LastName>",email "<Email>","<SSN>","<MaterialStatus>","<CellPhone>"
+    Then I still should be able move to the next page
 
-   Examples:
+    Examples:
 
-     | FirstName | LastName | Email        | SSN | MaterialStatus | CellPhone   |
-     | 7         | 8        | MS@gmail.com | 0   | Married        | 000-00-0000 |
-     | K         | M        | BC@gmail.com | 00  | Separated      | 100-00-0000 |
-     | 77@       | Bob      | BC@gmail.com | 9   | Divorced       | 000-00-0001 |
+      | FirstName | LastName | Email        | SSN | MaterialStatus | CellPhone   |
+      | 7         | 8        | MS@gmail.com | 0   | Married        | 000-00-0000 |
+      | K         | M        | BC@gmail.com | 00  | Separated      | 100-00-0000 |
+      | 77@       | Bob      | BC@gmail.com | 9   | Divorced       | 000-00-0001 |
+
 
   Scenario: When I am applying with the co-borrower and check YES box, the Co-Borrower's Information should be displayed
-
     When I check "Yes" box
     Then The Co-Borrower's Information should be displayed
 
@@ -46,16 +46,16 @@ Feature: Personal Details Page verification
     Then I put the info for co-borrower "<bFirstName>", "<bLastName>", "<bEmail>","<bSSN>","<bMaterialStatus>","<bCellPhone>"
     Then I still should be able move to the next page
 
-   Examples:
-     | bFirstName | bLastName | bEmail         | bSSN | bMaterialStatus | bCellPhone  |
-     | !bb        | 8         | 567@gmail.com  | 0    | Married         | 000-00-0000 |
-     | K          | Lolo      | Lolo@gmail.com | 00   | Separated       | 100-00-0000 |
-     | 77@        | Bob       | BC@gmail.com   | 9    | Divorced        | 000-00-0001 |
+    Examples:
+      | bFirstName | bLastName | bEmail         | bSSN | bMaterialStatus | bCellPhone  |
+      | !bb        | 8         | 567@gmail.com  | 0    | Married         | 000-00-0000 |
+      | K          | Lolo      | Lolo@gmail.com | 00   | Separated       | 100-00-0000 |
+      | 77@        | Bob       | BC@gmail.com   | 9    | Divorced        | 000-00-0001 |
 
 
-    Scenario: Verify the customer cannot skip the personal information page
+  Scenario: Verify the customer cannot skip the personal information page
 
-      When If I enter only some information
-        | firstName | lastName | email | SSN |
-        | 0         | 0        | 0     | 0   |
-      Then I should receive an error message
+    When I do not enter only some information
+      | firstName | lastName | email | SSN |
+      | 0         | 0        | 0     | 0   |
+    Then I should receive an error message
