@@ -46,7 +46,7 @@ public class LoginPage {
     public WebElement logOut;
 
     @FindBy(xpath = "//h4[@class='text-center mb-2']" )
-    public WebElement welcomeLoginText_Msg;
+    public WebElement text_notification;
 
 
     @FindBy(name="first_name")
@@ -76,12 +76,12 @@ public class LoginPage {
         signUpEmail.sendKeys(email);
         signUPass.sendKeys(password);
 
-        if(emailerror.isDisplayed()){
-            System.out.println(email + " -> " + emailerror.getText());
-
-        }else
-            registerButton.click();
-            System.out.println(email + " -> " + textRegistration.getText());
+//        if(emailerror.isDisplayed()){
+//            System.out.println(email + " -> " + emailerror.getText());
+//
+//        }else
+//            registerButton.click();
+//            System.out.println(email + " -> " + textRegistration.getText());
     }
 
 
