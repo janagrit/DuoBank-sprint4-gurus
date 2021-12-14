@@ -60,15 +60,16 @@ public class LoginStepDefs  {
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
 
         LoginPage log = new LoginPage();
-        for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
+        for (int i = 1; i <= dataAsListOfMaps.size()+1; i++) {
             String cellEmail = excelUtils.getCellData(i, 0);
             String cellPass = excelUtils.getCellData(i, 1);
             log.LoginMethod(cellEmail, cellPass);
 
             try {
-                if(log.welcomeLoginText_Msg.isDisplayed()){
-                    System.out.println("Login with  " +cellEmail+  " Failed");
+                if(log.text_notification.isDisplayed()){
+                    System.out.println("Sign up with  " +cellEmail+  " Failed");
                     excelUtils.setCellData("Fail", "Status", i);
+
                  }
 
             } catch (Exception e) {
