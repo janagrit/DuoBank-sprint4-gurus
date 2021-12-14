@@ -8,9 +8,10 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-        tags = "@employment",//"@temp",
+       // tags = //"@tempC",//"@employment",,
         features = "src/test/resources",  // the relative path of the folder where the feature files are located
         glue = "stepDefinitions", // the relative path of the folder where step definition methods are located
+
         stepNotifications = true  // shows the detailed step results
       //,dryRun = true   // dryRun scans the resources folder and generates step definition snippets
         // used for generating snippets quickly
