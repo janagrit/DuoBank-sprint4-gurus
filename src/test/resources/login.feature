@@ -32,9 +32,8 @@ Background:
 
   Scenario Outline: Verify login feature with Outline
     When Login a user with "<Email>", "<Password>"
-      |  Email   | Password   |
-      | <Email>  | <Password> |
-
+#      |  Email   | Password   |
+#      | <Email>  | <Password> |
     Examples:
       | Email                     | Password  |
       | fwidmeore0@shareasale.com | TwBqcPP    |

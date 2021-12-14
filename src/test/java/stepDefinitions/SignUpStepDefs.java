@@ -58,32 +58,32 @@ public class SignUpStepDefs {
     }
 
 
-    @When("I register a new user using data from the Excel file {string}")
-    public void iRegisterANewUserUsingDataFromTheExcelFile(String file) {
-
-        ExcelUtils excelUtils = new ExcelUtils(file, "Sheet2");
-        List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
-
-        LoginPage log = new LoginPage();
-        for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
-
-            String cellName = excelUtils.getCellData(i, 0);
-            String cellLastName = excelUtils.getCellData(i, 1);
-            String cellEmail = excelUtils.getCellData(i, 2);
-            String cellPass = excelUtils.getCellData(i, 3);
-
-            log.signUpMethod(cellName, cellLastName, cellEmail, cellPass);
-
-            try {
-                if (log.text_notification.isDisplayed()) {
-                    System.out.println("Sign Up with  " + cellEmail + " Failed");
-                    excelUtils.setCellData("Fail", "Status", i);
-                }
-
-            } catch (Exception e) {
-                excelUtils.setCellData("Pass", "Status", i);
-
-            }
-        }
-    }
+//    @When("I register a new user using data from the Excel file {string}")
+//    public void iRegisterANewUserUsingDataFromTheExcelFile(String file) {
+//
+//        ExcelUtils excelUtils = new ExcelUtils(file, "Sheet2");
+//        List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
+//
+//        LoginPage log = new LoginPage();
+//        for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
+//
+//            String cellName = excelUtils.getCellData(i, 0);
+//            String cellLastName = excelUtils.getCellData(i, 1);
+//            String cellEmail = excelUtils.getCellData(i, 2);
+//            String cellPass = excelUtils.getCellData(i, 3);
+//
+//            log.signUpMethod(cellName, cellLastName, cellEmail, cellPass);
+//
+//            try {
+//                if (log.text_notification.isDisplayed()) {
+//                    System.out.println("Sign Up with  " + cellEmail + " Failed");
+//                    excelUtils.setCellData("Fail", "Status", i);
+//                }
+//
+//            } catch (Exception e) {
+//                excelUtils.setCellData("Pass", "Status", i);
+//
+//            }
+//        }
+//    }
 }
