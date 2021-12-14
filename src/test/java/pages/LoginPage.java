@@ -22,7 +22,7 @@ public class LoginPage {
     public WebElement signUp;
 
     @FindBy(xpath = "//div[@class='card-header pb-1']")
-    public WebElement textRegistration;
+    public WebElement textRegistrationSuccessfull;
 
     @FindBy(id = "exampleInputEmail1")
     public WebElement emailInput;
@@ -33,8 +33,11 @@ public class LoginPage {
     @FindBy(xpath = "//button[@type='submit']" )
     public WebElement loginButton;
 
-    @FindBy(id="emailerror")
-    public WebElement emailerror;
+    @FindBy(xpath = "//span[.='This email already used']")
+    public WebElement emailUsedError;
+
+    @FindBy(xpath = " //div[@class='divider-text text-uppercase text-muted']")
+    public WebElement welcomeLoginWithEmail;
 
     @FindBy(xpath= "//div[@class='card-title']")
     public WebElement textLoginFailed;
@@ -46,7 +49,7 @@ public class LoginPage {
     public WebElement logOut;
 
     @FindBy(xpath = "//h4[@class='text-center mb-2']" )
-    public WebElement welcomeLoginText_Msg;
+    public WebElement text_notification;
 
 
     @FindBy(name="first_name")
@@ -76,12 +79,6 @@ public class LoginPage {
         signUpEmail.sendKeys(email);
         signUPass.sendKeys(password);
 
-        if(emailerror.isDisplayed()){
-            System.out.println(email + " -> " + emailerror.getText());
-
-        }else
-            registerButton.click();
-            System.out.println(email + " -> " + textRegistration.getText());
     }
 
 

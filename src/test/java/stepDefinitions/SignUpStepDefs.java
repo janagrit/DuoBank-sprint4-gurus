@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -10,19 +11,26 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ExcelUtils;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 public class SignUpStepDefs {
 
     @Given("on login page")
-    public void onLoginPage() {   Driver.getDriver().get(ConfigReader.getProperty("url"));   }
+    public void onLoginPage() {
+        Driver.getDriver().get(ConfigReader.getProperty("url"));
+    }
 
     @Then("I click on sign up page")
     public void iClickOnSignUpPage() {
@@ -30,68 +38,97 @@ public class SignUpStepDefs {
     }
 
 
-
     @When("Register a new user: {string}, {string}, {string}, {string} click sign up button")
     public void registerANewUserClickSignUpButton(String name, String lastName, String email, String password) throws IOException {
 
-        LoginPage log =  new LoginPage();
-        log.signUpMethod(name, lastName, email, password);
-    }
-
-
-    @Then("I verify msg {string} or {string}")
-    public void iVerifyMsgOr(String confmsg, String errormsg) {
-
-        SoftAssertions softAssert = new SoftAssertions();
-        if(new LoginPage().emailerror.isDisplayed()){
-            softAssert.assertThat(errormsg).isEqualTo(new LoginPage().emailerror.getText());
-        }else
-        softAssert.assertThat(confmsg).isEqualTo(new LoginPage().textRegistration.getText());
+        LoginPage signUpPage = new LoginPage();
+        signUpPage.signUpMethod(name, lastName, email, password);
+        signUpPage.registerButton.click();
 
     }
 
-    @Then("The new user data should be stored in database file")
-    public void theNewUserDataShouldBeStoredInDatabaseFile() throws IOException {
+
+    @Then("The msg: {string} should appear on the sign up page")
+    public void theMsgShouldAppearOnTheSignUpPage(String emailIsAlreadyUsed)  {
+
+        LoginPage signUpPage = new LoginPage();
+
+        Assert.assertTrue(signUpPage.emailUsedError.isDisplayed());
+        Assert.assertTrue(emailIsAlreadyUsed, equals(signUpPage.emailUsedError.getText()));
+
+        System.out.println(signUpPage.emailUsedError.getText());
 
 
-        FileInputStream fis = new FileInputStream("SignUp_Data.xlsx");
-        XSSFWorkbook workbook = new XSSFWorkbook(fis);
-        XSSFSheet sheet = workbook.getSheet("Sheet3");
-        XSSFRow row = sheet.getRow(1);  // Apache POI method indexes are zero-based
-        XSSFCell cell = row.getCell(0);
-       // System.out.println("cell " + cell);
 
-        int physicalNumberOfRows = sheet.getPhysicalNumberOfRows();
-        int lastRowNum = sheet.getLastRowNum();
-
-      //  System.out.println("physicalNumberOfRows " + physicalNumberOfRows);
-      //  System.out.println("lastRowNum" + lastRowNum);
+//        @Then("I should not be able to sign up and I should get an error message")
+//        public void iShouldNotBeAbleToSignUpAndIShouldGetAnErrorMessage() {
+//            SignUpPage signUpPage = new SignUpPage();
+//            WebElement inputEmail = signUpPage.email;
+//
+//            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+//            boolean requiredEmailAddressErrorMessage = (Boolean) js.executeScript("return arguments[0].required;", inputEmail);
+//            Assert.assertTrue(requiredEmailAddressErrorMessage);
 
 
-        XSSFRow columnRow = sheet.getRow(0);
-        int physicalNumberOfCells = columnRow.getPhysicalNumberOfCells();
-
-       //System.out.println("physicalNumberOfCells " + physicalNumberOfCells);
+    }
 
 
-        for (int i = 0; i < physicalNumberOfRows; i++) {
+    @When("I register a new user with Faker class")
+    public void iRegisterANewUserWithFakerClass() {
+        LoginPage signUpPage = new LoginPage();
+        Faker fake = new Faker();
+        signUpPage.signUpMethod (
 
-            for (int j = 0; j < physicalNumberOfCells; j++) {
-                System.out.print(sheet.getRow(i).getCell(j) + "\t");
+                fake.name().firstName(),
+                fake.name().lastName(),
+                fake.internet().emailAddress(),
+                fake.internet().password()      );
+
+        signUpPage.registerButton.click();
+
+    }
+
+    @Then("The msg: {string} should appear and user is redirected on Login page")
+    public void theMsgShouldAppearAndUserIsRedirectedOnLoginPage(String msg) {
+        LoginPage signUpPage = new LoginPage();
+
+        Assert.assertTrue(signUpPage.textRegistrationSuccessfull.isDisplayed());
+        Assert.assertTrue(signUpPage.welcomeLoginWithEmail.isDisplayed());
+        System.out.println(signUpPage.welcomeLoginWithEmail.getText());
+    }
+
+
+
+    @When("I register a new user using data from the Excel file {string}")
+    public void iRegisterANewUserUsingDataFromTheExcelFile(String file) {
+
+        ExcelUtils excelUtils = new ExcelUtils(file, "Sheet2");
+        List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
+
+        LoginPage log = new LoginPage();
+        for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
+
+            String cellName = excelUtils.getCellData(i, 0);
+            String cellLastName = excelUtils.getCellData(i, 1);
+            String cellEmail = excelUtils.getCellData(i, 2);
+            String cellPass = excelUtils.getCellData(i, 3);
+
+            log.signUpMethod(cellName, cellLastName, cellEmail, cellPass);
+
+            try {
+                if (log.emailUsedError.isDisplayed()) {
+
+                    System.out.println("Sign Up with  " + cellEmail + " Failed");
+                    excelUtils.setCellData("Fail", "Status", i);
+                    Driver.getDriver().navigate().refresh();
+                }
+
+            } catch (Exception e) {
+                excelUtils.setCellData("Pass", "Status", i);
             }
-            System.out.println();
-
         }
-
-        // grab the cell that need to be stored
-
-
-        XSSFCell cellStatus = sheet.getRow(0).getCell(0);
-        cellStatus.setCellValue("Email");
-
-        FileOutputStream fos = new FileOutputStream("SignUp_Data.xlsx");
-        workbook.write(fos);
     }
+
 
 
 }

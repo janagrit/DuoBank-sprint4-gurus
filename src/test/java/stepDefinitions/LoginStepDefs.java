@@ -35,7 +35,7 @@ public class LoginStepDefs  {
     public void iAmOnLoginPageIFillingOutEmailAndPasswordAndClickLoginButton() {
         new LoginPage().GurusLoginMethod();
         System.out.println(Driver.getDriver().getTitle());
-        Assert.assertTrue(Driver.getDriver().getTitle().equals("Loan Application"));
+
     }
 
 
@@ -55,19 +55,18 @@ public class LoginStepDefs  {
     @When("I am on login page using data from the Excel file {string}")
     public void iAmOnLoginPageUsingDataFromTheExcelFile(String ExcelFile) throws InterruptedException, IOException {
 
-
         ExcelUtils excelUtils = new ExcelUtils(ExcelFile,"Sheet1");
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
 
         LoginPage log = new LoginPage();
-        for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
+        for (int i = 1; i <= dataAsListOfMaps.size()+1; i++) {
             String cellEmail = excelUtils.getCellData(i, 0);
             String cellPass = excelUtils.getCellData(i, 1);
             log.LoginMethod(cellEmail, cellPass);
 
             try {
-                if(log.welcomeLoginText_Msg.isDisplayed()){
-                    System.out.println("Login with  " +cellEmail+  " Failed");
+                if(log.text_notification.isDisplayed()){
+                    System.out.println("Sign up with  " +cellEmail+  " Failed");
                     excelUtils.setCellData("Fail", "Status", i);
                  }
 
@@ -98,6 +97,18 @@ public class LoginStepDefs  {
     public void loginAUserWith(String email, String password) {
         new LoginPage().LoginMethod(email, password);
 
+    }
+
+
+    @When("The user enters the valid credentials as {string} for username and {string} for password")
+    public void theUserEntersTheValidCredentialsAsForUsernameAndForPassword(String email, String password) {
+        new LoginPage().LoginMethod(email, password);
+    }
+
+    @Then("The user should be able to login and land on the homepage")
+    public void theUserShouldBeAbleToLoginAndLandOnTheHomepage() {
+        Assert.assertTrue(Driver.getDriver().getTitle().equals("Loan Application"));
+        Assert.assertTrue(Driver.getDriver().getCurrentUrl().equals("http://qa-duobank.us-east-2.elasticbeanstalk.com/dashboard.php"));
     }
 
 
