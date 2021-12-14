@@ -7,7 +7,7 @@ Feature:  As a user I sign Up
   @8
   Scenario: Verify registration by using the Excel File
     When I register a new user using data from the Excel file "SignUp_Data.xlsx"
-    Then The msg: "This email already used" should appear on the sign up page
+#    Then The msg: "This email already used" should appear on the sign up page
 
 
   Scenario: Verify registration with the Faker class

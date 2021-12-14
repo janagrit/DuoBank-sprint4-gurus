@@ -105,7 +105,7 @@ public class SignUpStepDefs {
         ExcelUtils excelUtils = new ExcelUtils(file, "Sheet2");
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
 
-        LoginPage log = new LoginPage();
+        LoginPage signuppage = new LoginPage();
         for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
 
             String cellName = excelUtils.getCellData(i, 0);
@@ -113,19 +113,21 @@ public class SignUpStepDefs {
             String cellEmail = excelUtils.getCellData(i, 2);
             String cellPass = excelUtils.getCellData(i, 3);
 
-            log.signUpMethod(cellName, cellLastName, cellEmail, cellPass);
+            signuppage.signUpMethod(cellName, cellLastName, cellEmail, cellPass);
+            signuppage.registerButton.click();
 
             try {
-                if (log.emailUsedError.isDisplayed()) {
-
-                    System.out.println("Sign Up with  " + cellEmail + " Failed");
+                if (signuppage.emailUsedError.isDisplayed()) {
+                    System.out.println("This email  " + cellEmail + " is already used");
                     excelUtils.setCellData("Fail", "Status", i);
-                    Driver.getDriver().navigate().refresh();
                 }
 
             } catch (Exception e) {
                 excelUtils.setCellData("Pass", "Status", i);
+                Driver.getDriver().navigate().back();
+                Driver.getDriver().navigate().refresh();
             }
+
         }
     }
 

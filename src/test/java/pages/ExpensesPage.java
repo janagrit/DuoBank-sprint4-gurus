@@ -16,28 +16,24 @@ public class ExpensesPage {
     @FindBy (xpath = "//h6[.='Current Monthly Housing Expenses']")
     public WebElement textonthepage;
 
-    @FindBy (xpath = "//input[@value='Rent']")
+    @FindBy (xpath = "//*[@for='expense1']")
     public WebElement checkBoxRent;
+
+    @FindBy(xpath = "//*[@for='expense2']")
+    public WebElement checkBoxOwn;
 
     @FindBy (css = "//input[@value='Rent']")
     public WebElement checkBoxR;
 
     // driver.findElement(By.cssSelector("input[type='checkbox']")).click();
+    @FindBy(xpath = "//input[@id='firtmortagagetotalpayment']")
+    public WebElement firstMortgageTotalPayment;
 
-    @FindBy (xpath = "// //input[@value='Own']")
-    public WebElement checkBoxOwn;
-
-    @FindBy (id = "expense2")
-    public WebElement clickOwn;
-
-
-
-    @FindBy(id="monthlyrentalpayment")
-    public WebElement monthlyrentalpayment;
+    @FindBy(xpath="//input[@name='monthly_rental_payment']")
+    public WebElement monthlyRentalPayment;
 
     @FindBy(xpath="//a[@href='#next']")
     public WebElement buttonNext;
-
 
 
     public void clickRent( ){
@@ -45,10 +41,15 @@ public class ExpensesPage {
         js.executeScript("arguments[0].click()",checkBoxRent);
     }
 
+    public void clickOwn( ){
+        JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
+        js.executeScript("arguments[0].click()",checkBoxOwn);
+    }
+
 
     public void passExpensesPage(){
         clickRent();
-        monthlyrentalpayment.sendKeys("2000");
+        monthlyRentalPayment.sendKeys("2000");
         buttonNext.click();
 
     }

@@ -44,7 +44,6 @@ public class LoginPage {
 
 
 
-
     @FindBy(xpath = "//a[@class='dropdown-item']" )
     public WebElement logOut;
 
