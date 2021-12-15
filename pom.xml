@@ -118,7 +118,7 @@
                         </goals>
 
                         <configuration>
-                            <projectName>Ecommerce App Automation Tests</projectName>
+                            <projectName>DuoBank Web Automation Tests</projectName>
 
                             <!-- output directory for the generated report -->
                             <outputDirectory>${project.build.directory}/pretty-html-report</outputDirectory>
