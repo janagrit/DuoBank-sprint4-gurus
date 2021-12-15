@@ -97,7 +97,8 @@
                         <!--                        <include>${runnerClass}</include>&ndash;&gt;-->
 
                         <include>**/*CucumberRunner.java</include>
-                        <!--                        <include>**/*ParallelRunner.java</include>&ndash;&gt;-->
+                        <include>**/*FailedScenarioRunner.java</include>
+                        <include>**/*ParallelRunner.java</include>
                         <!--                        <include>**/*FailedScenariosRunner.java</include>&ndash;&gt;-->
 
                     </includes>

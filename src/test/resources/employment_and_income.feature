@@ -8,16 +8,11 @@ Feature: Employment and Income Related feature
     Then Click on  Employment and Income Page
 
 
-    Scenario: Lend on Employment and Income Page
-      Given Click on  Employment and Income Page
-      And Verify that I am on Employment and Income Page
-
-
         Scenario: On "Employer 1" section  "This is my current job" checkBox is selected by default.
         Given  Verify that checkbox is selected
 
         Scenario:I enter information from Excel File named "Employer1" for required fields with different sets of data
-        Given I enter information from Excel File named "Employer1" for required fields
+        Given I enter information from Excel File named "Employer1.xlsx" for required fields
 
         Scenario Outline:Fill out "Borrower Gross Monthly Employment Income" fields using different sets of data
         When I click and enter gross monthly income"<Gross Monthly Income>",monthly overtime "<Monthly Overtime>",monthly bonuses"<Monthly Bonuses>",monthly commissions"<Monthly Commissions>", monthly dividents"<Monthly Dividents>"

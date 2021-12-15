@@ -50,20 +50,15 @@ public class EmploymentAndIncomeStepDef {
     }
 
 
-    @And("Verify that I am on Employment and Income Page")
-    public void verifyThatIAmOnEmploymentAndIncomePage() {
-        Assert.assertEquals("Loan Application",Driver.getDriver().getTitle());
-    }
 
 
-    @Given("Select {string} checkbox.")
-    public void selectCheckbox(String CurerntJob) throws InterruptedException {
+//    @Given("Select {string} checkbox.")
+//    public void selectCheckbox(String CurerntJob) throws InterruptedException {
+//
+//        SeleniumUtils.jsClick(new EmploymentAndIncomePage().currentJob);
+//            Thread.sleep(5000);
 
-            String curerntJob = CurerntJob;
-            SeleniumUtils.jsClick(new EmploymentAndIncomePage().currentJob);
-            Thread.sleep(5000);
-
-    }
+//    }
 
     @Then("Verify that checkbox is selected")
     public void verifyThatCheckboxIsSelected() {
@@ -75,13 +70,14 @@ public class EmploymentAndIncomeStepDef {
     @Given("I enter information from Excel File named {string} for required fields")
     public void iEnterInformationFromExcelFileNamedForRequiredFields(String file) throws Throwable {
 
-        ExcelUtils excelUtils = new ExcelUtils("Employer1.xlsx","Sheet1");
+        ExcelUtils excelUtils = new ExcelUtils(file,"Sheet1");
 
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
 
         EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
+
         Throwable ex = null;
-        Actions actions = new Actions(Driver.getDriver());
+
 
         for (int i = 0; i < dataAsListOfMaps.size(); i++) {
 
@@ -89,10 +85,12 @@ public class EmploymentAndIncomeStepDef {
 
             if(row.get("Execute").equalsIgnoreCase("y")){
 
+
                 try {
                     SeleniumUtils.scroll(0,-300);
-                    Thread.sleep(3000);
-                    //SeleniumUtils.waitForVisibility(employmentAndIncomePage.employer,5);
+
+                   // SeleniumUtils.waitForVisibility(employmentAndIncomePage.employer,10);
+
 
                     employmentAndIncomePage.employer.sendKeys(row.get("Employer Name"));
 
@@ -100,18 +98,25 @@ public class EmploymentAndIncomeStepDef {
                     employmentAndIncomePage.city.sendKeys(row.get("City"));
                     employmentAndIncomePage.state.sendKeys(row.get("State"));
                     employmentAndIncomePage.startDate.sendKeys(row.get("Start Date"));
-
-
                     excelUtils.setCellData("PASS", "Status", i + 1);
+//                    employmentAndIncomePage.employer.clear();
+//                    employmentAndIncomePage.position.clear();
+//                    employmentAndIncomePage.city.clear();
+                  //  employmentAndIncomePage.state.clear();
+                   // employmentAndIncomePage.startDate.clear();
+
+
                 }catch(Throwable e){
                     ex = e;
                     excelUtils.setCellData("FAIL", "Status", i + 1);
                 }
-                Driver.getDriver().navigate().back();
+
+
             }else{
                 excelUtils.setCellData("SKIPPED", "Status", i + 1);
             }
-        }throw ex;
+        }
+
 
 
     }
