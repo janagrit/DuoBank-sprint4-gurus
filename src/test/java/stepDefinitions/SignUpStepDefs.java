@@ -27,6 +27,8 @@ import java.util.Map;
 
 public class SignUpStepDefs {
 
+    LoginPage signuppage = new LoginPage();
+
     @Given("on login page")
     public void onLoginPage() {
         Driver.getDriver().get(ConfigReader.getProperty("url"));
@@ -34,16 +36,16 @@ public class SignUpStepDefs {
 
     @Then("I click on sign up page")
     public void iClickOnSignUpPage() {
-        new LoginPage().signUp.click();
+        signuppage.signUp.click();
     }
 
 
     @When("Register a new user: {string}, {string}, {string}, {string} click sign up button")
     public void registerANewUserClickSignUpButton(String name, String lastName, String email, String password) throws IOException {
 
-        LoginPage signUpPage = new LoginPage();
-        signUpPage.signUpMethod(name, lastName, email, password);
-        signUpPage.registerButton.click();
+
+        signuppage.signUpMethod(name, lastName, email, password);
+        signuppage.registerButton.click();
 
     }
 
@@ -51,23 +53,12 @@ public class SignUpStepDefs {
     @Then("The msg: {string} should appear on the sign up page")
     public void theMsgShouldAppearOnTheSignUpPage(String emailIsAlreadyUsed)  {
 
-        LoginPage signUpPage = new LoginPage();
-
-        Assert.assertTrue(signUpPage.emailUsedError.isDisplayed());
-        Assert.assertTrue(emailIsAlreadyUsed, equals(signUpPage.emailUsedError.getText()));
-
-        System.out.println(signUpPage.emailUsedError.getText());
 
 
+        Assert.assertTrue(signuppage.emailUsedError.isDisplayed());
+        Assert.assertTrue(emailIsAlreadyUsed, equals(signuppage.emailUsedError.getText()));
 
-//        @Then("I should not be able to sign up and I should get an error message")
-//        public void iShouldNotBeAbleToSignUpAndIShouldGetAnErrorMessage() {
-//            SignUpPage signUpPage = new SignUpPage();
-//            WebElement inputEmail = signUpPage.email;
-//
-//            JavascriptExecutor js = (JavascriptExecutor) Driver.getDriver();
-//            boolean requiredEmailAddressErrorMessage = (Boolean) js.executeScript("return arguments[0].required;", inputEmail);
-//            Assert.assertTrue(requiredEmailAddressErrorMessage);
+        System.out.println(signuppage.emailUsedError.getText());
 
 
     }
@@ -75,16 +66,16 @@ public class SignUpStepDefs {
 
     @When("I register a new user with Faker class")
     public void iRegisterANewUserWithFakerClass() {
-        LoginPage signUpPage = new LoginPage();
+
         Faker fake = new Faker();
-        signUpPage.signUpMethod (
+        signuppage.signUpMethod (
 
                 fake.name().firstName(),
                 fake.name().lastName(),
                 fake.internet().emailAddress(),
                 fake.internet().password()      );
 
-        signUpPage.registerButton.click();
+        signuppage.registerButton.click();
 
     }
 
@@ -100,12 +91,13 @@ public class SignUpStepDefs {
 
 
     @When("I register a new user using data from the Excel file {string}")
-    public void iRegisterANewUserUsingDataFromTheExcelFile(String file) {
+    public void iRegisterANewUserUsingDataFromTheExcelFile(String file) throws InterruptedException {
 
         ExcelUtils excelUtils = new ExcelUtils(file, "Sheet2");
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
+        Thread.sleep(2000);
 
-        LoginPage signuppage = new LoginPage();
+
         for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
 
             String cellName = excelUtils.getCellData(i, 0);
@@ -120,9 +112,11 @@ public class SignUpStepDefs {
                 if (signuppage.emailUsedError.isDisplayed()) {
                     System.out.println("This email  " + cellEmail + " is already used");
                     excelUtils.setCellData("Fail", "Status", i);
+                    Driver.getDriver().navigate().refresh();
                 }
 
             } catch (Exception e) {
+                System.out.println("This email  " + cellEmail + " is Passing");
                 excelUtils.setCellData("Pass", "Status", i);
                 Driver.getDriver().navigate().back();
                 Driver.getDriver().navigate().refresh();
