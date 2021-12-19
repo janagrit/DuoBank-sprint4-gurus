@@ -76,13 +76,13 @@ public class PersonalInfoStepDefs {
                     personalInfo.b_lastName.sendKeys(row.get("LastName"));
                     personalInfo.b_email.sendKeys(row.get("Email"));
                     personalInfo.b_ssn.sendKeys(row.get("SSN"));
-                    actions.click(personalInfo.b_marital).sendKeys(Keys.ARROW_UP, row.get("MaterialStatus")).perform();
+                    actions.click(personalInfo.b_marital).sendKeys(Keys.ARROW_UP, row.get("MaterialStatus"),Keys.ENTER).perform();
                     personalInfo.b_cell.sendKeys(row.get("CellPhone"));
-                    //Thread.sleep(2000);
+                    Thread.sleep(5000);
                     //actions.click(personalInfo.buttonnext).sendKeys(Keys.ENTER);
                     SeleniumUtils.jsClick(personalInfo.buttonNext);
-                    //Assert.assertEquals(expected,personalInfo.expensesTitle.getText());
-                    System.out.println(personalInfo.expensesTitle.getText());
+                  //Assert.assertEquals(expected,personalInfo.expensesTitle.getText());
+                    //System.out.println(personalInfo.expensesTitle.getText());
                     excelUtils.setCellData("PASS", "Status", i + 1);
                 } catch (Throwable e) {
                     ex = e;

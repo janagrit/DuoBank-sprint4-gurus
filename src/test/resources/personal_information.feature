@@ -9,8 +9,8 @@ Feature: Personal Details Page verification
 
 
 
-#  Scenario: Verify that even though a customer don't enter their Bday (required filed), she/he is still able to move to the next page
-#   Given The customers is able to move to the next page without providing Bday information
+  Scenario: Verify that even though a customer don't enter their Bday (required filed), she/he is still able to move to the next page
+   Given The customers is able to move to the next page without providing Bday information
 
   Scenario Outline: Verify that even though customer provide incorrect information, she/he is still able to move to the next page
     When I click and put first name "<FirstName>",last name "<LastName>",email "<Email>","<SSN>","<MaterialStatus>","<CellPhone>"

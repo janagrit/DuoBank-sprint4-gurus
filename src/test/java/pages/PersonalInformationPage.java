@@ -29,6 +29,9 @@ public class PersonalInformationPage {
     @FindBy(id="b_email")
     public WebElement b_email;
 
+    @FindBy(id="b_dob")
+    public WebElement b_dob;
+
     @FindBy(id="b_ssn")
     public WebElement b_ssn;
 
@@ -39,10 +42,10 @@ public class PersonalInformationPage {
     public WebElement b_marital;
 
 
-    @FindBy(xpath="//a[@href=\"#next\"]")
+    @FindBy(xpath="//a[.=\"Next\"]")
     public WebElement buttonNext;
 
-    @FindBy(xpath="//fieldset[@id='steps-uid-0-p-2']//h6")
+    @FindBy(xpath="//fieldset[@id ='steps-uid-0-p-2']//h6 [@class=\"py-50\"]")
     public WebElement expensesTitle;
 
     //@FindBy(xpath="//input[@id=\\\"coborrower1\\\"]")
