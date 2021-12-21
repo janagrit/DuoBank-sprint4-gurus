@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.eo.Se;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -14,6 +16,7 @@ import pages.PersonalInformationPage;
 import pages.PreapprovalDetailsPage;
 import utilities.*;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -77,12 +80,11 @@ public class db_PersonalinfoStepDef {
     @Then("I am able move to the next page")
     public void iAmAbleMoveToTheNextPage() throws InterruptedException {
 
-//        String expected = "Current Monthly Housing Expenses";
-//        String pageSource = Driver.getDriver().getPageSource();
-//        Assert.assertTrue(pageSource.contains(expected));
+        String expected = "Current Monthly Housing Expenses";
+        String pageSource = Driver.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.contains(expected));
 //        Assert.assertEquals(expected, new PersonalInformationPage().expensesTitle.getText());
 //        System.out.println(new PersonalInformationPage().expensesTitle.getText());
-
         new PersonalInformationPage().Current_Monthly_Housing_Expenses();
         new PersonalInformationPage().Employment_and_Income();
         new PersonalInformationPage().Credit_Report();
@@ -91,6 +93,38 @@ public class db_PersonalinfoStepDef {
     }
 
     @And("The database should also have the correct info")
-    public void theDatabaseShouldAlsoHaveTheCorrectInfo() {
+    public void theDatabaseShouldAlsoHaveTheCorrectInfo() throws SQLException {
+
+        String expectedFirst= expectedMap.get("FirstName");
+        String expectedLast = expectedMap.get("LastName");
+        String expectedEmail = expectedMap.get("Email");
+        String expectedSSN = expectedMap.get("SSN");
+        String expectedMaterialStatus = expectedMap.get("MaterialStatus");
+        String expectedCellPhone  = expectedMap.get("CellPhone");
+
+        String query  = "select * from tbl_mortagage where b_lastName ='"+expectedLast+"'";
+        List<Map<String, Object>> queryResultListOfMaps = DBUtility.getQueryResultListOfMaps(query);
+        Map<String, Object> actualMap = queryResultListOfMaps.get(0);
+
+        String actualFirst = (String)(actualMap.get("b_firstName"));
+        String actualLast= (String)(actualMap.get("b_lastName"));
+        String actualEmail = (String)(actualMap.get("b_email"));
+        String actualSSN= (String)(actualMap.get("b_ssn"));
+        String actualMaterialStatus = (String)(actualMap.get("b_marital"));
+        String actualCellPhone = (String)(actualMap.get("b_cell"));
+
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(expectedFirst).isEqualTo( actualFirst);
+        softAssertions.assertThat(expectedLast).isEqualTo(actualLast);
+        softAssertions.assertThat(expectedEmail).isEqualTo(actualEmail);
+        softAssertions.assertThat(expectedSSN).isEqualTo( actualSSN);
+        softAssertions.assertThat(expectedMaterialStatus).isEqualTo( actualMaterialStatus);
+        softAssertions.assertThat(expectedCellPhone).isEqualTo( actualCellPhone);
+
+        softAssertions.assertAll();
+
+        DBUtility.updateQuery("delete from tbl_mortagage where b_lastName ='"+expectedLast+"'");
+        DBUtility.close();
+
     }
 }
