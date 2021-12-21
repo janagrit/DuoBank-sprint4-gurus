@@ -32,6 +32,7 @@ public class ExpensesPage {
     @FindBy(xpath="//input[@name='monthly_rental_payment']")
     public WebElement monthlyRentalPayment;
 
+
     @FindBy(xpath="//a[@href='#next']")
     public WebElement buttonNext;
 

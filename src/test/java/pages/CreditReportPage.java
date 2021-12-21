@@ -9,6 +9,10 @@ public class CreditReportPage {
     public CreditReportPage() {PageFactory.initElements(Driver.getDriver(), this);
     }
 
+    @FindBy(xpath="//input[@id='creditreport1']")
+    public WebElement yesButton;
+
+
     @FindBy(xpath="//a[@href=\"#next\"]")
     public WebElement buttonnext;
 }

@@ -7,7 +7,7 @@ Feature: Complete Personal Information page involving DB layer
     Then I am on the main page clicking on Mortgage Applicationn
     Then After I complete the Preapproval Details page I should land on Personal Information Pagee
 
-
+@temp
   Scenario: Verify that even though customer provide incorrect information, she/he is still able to move to the next page
     Given I am on the personal information page and I am connected to the DB
     When I put the following info

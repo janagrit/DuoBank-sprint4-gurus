@@ -1,5 +1,6 @@
 package pages;
 
+import io.cucumber.java.eo.Se;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -84,6 +85,13 @@ public class PersonalInformationPage {
 
 
 
+    @FindBy(xpath="//input[@id='monthlyrentalpayment']")
+    public WebElement monthlyrentalpayment;
+
+    @FindBy(xpath="//input[@id='expense1']")
+    public WebElement rentBox;
+
+
 //    public void clickOnProductLink(String product){
 //        String xpath = "//input[@id=\"coborrower1\"]";
 //        Driver.getDriver().findElement(By.xpath(xpath)).click();
@@ -107,4 +115,44 @@ public class PersonalInformationPage {
         buttonNext.click();
     }
 
+    public void Current_Monthly_Housing_Expenses() throws InterruptedException {
+
+        SeleniumUtils.scroll(200,0);
+        SeleniumUtils.jsClick(rentBox);
+        Thread.sleep(400);
+        monthlyrentalpayment.sendKeys("100");
+        Thread.sleep(400);
+        new ExpensesPage().buttonNext.click();
+    }
+
+
+    public  void Employment_and_Income(){
+
+        new EmploymentAndIncomePage().employer.sendKeys("Bobo");
+        new EmploymentAndIncomePage().grossMonthlyIncome.sendKeys("7000");
+
+        SeleniumUtils.jsClick(new EmploymentAndIncomePage().buttonnext);
+
+    }
+
+    public void Credit_Report(){
+
+        SeleniumUtils.jsClick(new CreditReportPage().yesButton);
+        SeleniumUtils.jsClick(new CreditReportPage().buttonnext);
+    }
+
+    public void EconcentPage(){
+
+        new EconcentPage().e_firstName.sendKeys("Bozen");
+        new EconcentPage().e_lastName.sendKeys("Krzys");
+        new EconcentPage().e_email.sendKeys("BK@gmail.com");
+        SeleniumUtils.scroll(0,500);
+        SeleniumUtils.jsClick(new EconcentPage().clickAgree);
+        SeleniumUtils.jsClick(new EconcentPage().buttonNext);
+    }
+
+    public void Summary(){
+
+        SeleniumUtils.jsClick(new SummaryPage().clickSave);
+    }
 }
