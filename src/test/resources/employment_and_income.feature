@@ -33,10 +33,7 @@ Feature: Employment and Income Related feature
 
 
   Scenario: Verify the customer cannot skip Employment and Income  page
-
     When I will leave required fields empty and go to next page
-
-
     Then message "THIS FIELD IS REQUIRED." should be displayed
 
 

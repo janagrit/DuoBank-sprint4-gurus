@@ -77,7 +77,6 @@ public class LoginPage {
         signUPsurname.sendKeys(lastName);
         signUpEmail.sendKeys(email);
         signUPass.sendKeys(password);
-
     }
 
 

@@ -82,6 +82,7 @@ public class PreapprovalDetailsPage {
     }
 
     public void sourceOfDownPaymentDropdown(){
+
         Select select = new Select(sourceOfDownPayment);
 
         select.selectByIndex(2);

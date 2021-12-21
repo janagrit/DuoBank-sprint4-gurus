@@ -84,6 +84,7 @@ public class EmploymentAndIncomeStepDef {
             Map<String, String> row = dataAsListOfMaps.get(i);
 
             if(row.get("Execute").equalsIgnoreCase("y")){
+                employmentAndIncomePage.employer.sendKeys(row.get("Employer Name"));
 
 
                 try {
@@ -91,13 +92,21 @@ public class EmploymentAndIncomeStepDef {
 
                    // SeleniumUtils.waitForVisibility(employmentAndIncomePage.employer,10);
 
+//
+//                    employmentAndIncomePage.employer.sendKeys(row.get("Employer Name"));
+//
+//                    employmentAndIncomePage.position.sendKeys(row.get("Position"));
+//                    employmentAndIncomePage.city.sendKeys(row.get("City"));
+//                    employmentAndIncomePage.state.sendKeys(row.get("State"));
+//                    employmentAndIncomePage.startDate.sendKeys(row.get("Start Date"));
 
-                    employmentAndIncomePage.employer.sendKeys(row.get("Employer Name"));
+                    Assert.assertEquals(row.get("Employer Name"), employmentAndIncomePage.employer.getText());
+                    Assert.assertEquals(row.get("Position"), employmentAndIncomePage.position.getText());
+                    Assert.assertEquals(row.get("City"), employmentAndIncomePage.city.getText());
+                    Assert.assertEquals(row.get("State"), employmentAndIncomePage.state.getText());
+                    Assert.assertEquals(row.get("Start Date"), employmentAndIncomePage.startDate.getText());
 
-                    employmentAndIncomePage.position.sendKeys(row.get("Position"));
-                    employmentAndIncomePage.city.sendKeys(row.get("City"));
-                    employmentAndIncomePage.state.sendKeys(row.get("State"));
-                    employmentAndIncomePage.startDate.sendKeys(row.get("Start Date"));
+
                     excelUtils.setCellData("PASS", "Status", i + 1);
 //                    employmentAndIncomePage.employer.clear();
 //                    employmentAndIncomePage.position.clear();

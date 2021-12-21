@@ -24,12 +24,12 @@ public class db_PersonalinfoStepDef {
 
     @Given("I am on the homepagee")
     public void iAmOnTheHomepage() {
-
         Driver.getDriver().get(ConfigReader.getProperty("url"));
     }
 
     @When("I enter the username and password and than click on login buttonn")
     public void iEnterTheUsernameAndPasswordAndThanClickOnLoginButton() {
+
         new LoginPage().GurusLoginMethod();
     }
 
