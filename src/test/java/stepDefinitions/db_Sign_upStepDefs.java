@@ -187,21 +187,21 @@ public class db_Sign_upStepDefs {
         DBUtility.close();
     }
 
+//
+//    List<List<Object>> queryResultAsListOfLists;
+//    @When("I send a query to check for duplicate usernames")
+//    public void iSendAQueryToCheckForDuplicateUsernames() {
+//
+//        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select email, count(*) from tbl_user group by email having count(*)>1");
+//
+//    }
 
-    List<List<Object>> queryResultAsListOfLists;
-    @When("I send a query to check for duplicate usernames")
-    public void iSendAQueryToCheckForDuplicateUsernames() {
-
-        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select email, count(*) from tbl_user group by email having count(*)>1");
-
-    }
-
-    @Then("The returned result list should be empty")
-    public void theReturnedResultListShouldBeEmpty() {
-        Assert.assertTrue("The list is not empty and the size is " + queryResultAsListOfLists.size(),
-                queryResultAsListOfLists.isEmpty() );
-
-    }
+//    @Then("The returned result list should be empty")
+//    public void theReturnedResultListShouldBeEmpty() {
+//        Assert.assertTrue("The list is not empty and the size is " + queryResultAsListOfLists.size(),
+//                queryResultAsListOfLists.isEmpty() );
+//
+//    }
 
     String expectedPassword;
     @When("I fill up the fields with the following new user information")
@@ -239,4 +239,5 @@ public class db_Sign_upStepDefs {
         DBUtility.updateQuery("delete from tbl_user where email='"+email+"'");
 
     }
+
 }
