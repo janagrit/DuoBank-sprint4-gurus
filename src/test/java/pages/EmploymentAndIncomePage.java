@@ -106,6 +106,11 @@ public class EmploymentAndIncomePage {
     }
 
     public void Personal_Info(){
+        new PreapprovalDetailsPage().realtorInfo.sendKeys("a&b");
+        new PreapprovalDetailsPage().estimatedPrice.sendKeys("5999");
+        new PreapprovalDetailsPage().downPaymentAmount.sendKeys("599");
+        new PreapprovalDetailsPage().downPaymentPercentage.sendKeys("10");
+        new PreapprovalDetailsPage().buttonNext.click();
 
     }
 }
