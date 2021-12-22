@@ -83,8 +83,8 @@ public class db_PersonalinfoStepDef {
         String expected = "Current Monthly Housing Expenses";
         String pageSource = Driver.getDriver().getPageSource();
         Assert.assertTrue(pageSource.contains(expected));
-//        Assert.assertEquals(expected, new PersonalInformationPage().expensesTitle.getText());
-//        System.out.println(new PersonalInformationPage().expensesTitle.getText());
+
+
         new PersonalInformationPage().Current_Monthly_Housing_Expenses();
         new PersonalInformationPage().Employment_and_Income();
         new PersonalInformationPage().Credit_Report();

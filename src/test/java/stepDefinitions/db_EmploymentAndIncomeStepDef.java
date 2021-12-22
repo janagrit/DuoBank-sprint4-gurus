@@ -106,23 +106,39 @@ public class db_EmploymentAndIncomeStepDef {
         Map<String, Object> actualMap = queryResultListOfMaps.get(0);
 
 
-        String actualRealtorInfo = (String) (actualMap.get("REALTOR INFO"));
-        String actualEstPrice = (String) (actualMap.get("ESTIMATED PURCHASE PRICE"));
-        String actualDownPayment = (String) (actualMap.get("DOWN PAYMENT AMOUNT"));
-        String actualDownPaymentPercentage = (String) (actualMap.get("DOWN PAYMENT PERCENTAGE"));
-        String actualFirstName = (String) (actualMap.get("FIRST NAME"));
-        String actualLastName = (String) (actualMap.get("LAST NAME"));
-        String actualSSN = (String) (actualMap.get("SSN"));
-        String actualMaterialStatus = (String) (actualMap.get("MaterialStatus"));
-        String actualCellPhone = (String) (actualMap.get("CELL PHONE"));
-        String actualMonthlyRentalPayment = (String) (actualMap.get("MONTHLY RENTAL PAYMENT"));
-        String actualEmployerName = (String) (actualMap.get("EMPLOYER NAME"));
-        String actualPosition =(String) (actualMap.get("POSITION"));
-        String actualCity = (String) (actualMap.get("CITY"));
-        String actualState = (String) (actualMap.get("STATE"));
-        String actualStartDate = (String) (actualMap.get("START DATE"));
-        String actualGrossMonthlyIncome = (String) (actualMap.get("GROSS MONTHLY INCOME"));
+//        String actualRealtorInfo = (String) (actualMap.get("REALTOR INFO"));
+//        String actualEstPrice = (String) (actualMap.get("ESTIMATED PURCHASE PRICE"));
+//        String actualDownPayment = (String) (actualMap.get("DOWN PAYMENT AMOUNT"));
+//        String actualDownPaymentPercentage = (String) (actualMap.get("DOWN PAYMENT PERCENTAGE"));
+//        String actualFirstName = (String) (actualMap.get("FIRST NAME"));
+//        String actualLastName = (String) (actualMap.get("LAST NAME"));
+//        String actualSSN = (String) (actualMap.get("SSN"));
+//        String actualMaterialStatus = (String) (actualMap.get("MaterialStatus"));
+//        String actualCellPhone = (String) (actualMap.get("CELL PHONE"));
+//        String actualMonthlyRentalPayment = (String) (actualMap.get("MONTHLY RENTAL PAYMENT"));
+//        String actualEmployerName = (String) (actualMap.get("EMPLOYER NAME"));
+//        String actualPosition =(String) (actualMap.get("POSITION"));
+//        String actualCity = (String) (actualMap.get("CITY"));
+//        String actualState = (String) (actualMap.get("STATE"));
+//        String actualStartDate = (String) (actualMap.get("START DATE"));
+//        String actualGrossMonthlyIncome = (String) (actualMap.get("GROSS MONTHLY INCOME"));
 
+        String actualRealtorInfo = (String) (actualMap.get("realtor_info"));
+        String actualEstPrice = (String) (actualMap.get("est_purchase_price"));
+        String actualDownPayment = (String) (actualMap.get("down_payment"));
+        String actualDownPaymentPercentage = (String) (actualMap.get("down_payment_percent"));
+        String actualFirstName = (String)(actualMap.get("b_firstName"));
+        String actualLastName= (String)(actualMap.get("b_lastName"));
+        String actualSSN= (String)(actualMap.get("b_ssn"));
+        String actualMaterialStatus = (String)(actualMap.get("b_marital"));
+        String actualCellPhone = (String)(actualMap.get("b_cell"));
+        String actualMonthlyRentalPayment = (String) (actualMap.get("monthly_rental_payment"));
+        String actualEmployerName = (String) (actualMap.get("employer_name"));
+        String actualPosition =(String) (actualMap.get("position"));
+        String actualCity = (String) (actualMap.get("city"));
+        String actualState = (String) (actualMap.get("state"));
+        String actualStartDate = (String) (actualMap.get("start_date"));
+        String actualGrossMonthlyIncome = (String) (actualMap.get("gross_monthly_income"));
 
 
 
