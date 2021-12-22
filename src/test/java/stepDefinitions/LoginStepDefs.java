@@ -60,31 +60,34 @@ public class LoginStepDefs  {
     @When("I am on login page using data from the Excel file {string}")
     public void iAmOnLoginPageUsingDataFromTheExcelFile(String ExcelFile) throws InterruptedException, IOException {
 
-        ExcelUtils excelUtils = new ExcelUtils(ExcelFile,"Sheet1");
+
+        ExcelUtils excelUtils = new ExcelUtils(ExcelFile, "Sheet1");
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
 
 
         for (int i = 1; i <= dataAsListOfMaps.size(); i++) {
-            String cellEmail = excelUtils.getCellData( i , 0);
-            String cellPass = excelUtils.getCellData( i , 1);
+            String cellEmail = excelUtils.getCellData(i, 2);
+            String cellPass = excelUtils.getCellData(i, 3);
             loginPage.LoginMethod(cellEmail, cellPass);
+            loginPage.loginButton.click();
 
             try {
-                if(loginPage.text_notification.isDisplayed()){
-                    System.out.println("Sign up with  " +cellEmail+  " Failed");
+                if (loginPage.textLoginFailed.isDisplayed()) {
+                    System.out.println(cellEmail + " Login Failed");
                     excelUtils.setCellData("Fail", "Status", i);
 
                     Driver.getDriver().navigate().refresh();
-                 }
+                }
 
             } catch (Exception e) {
                 excelUtils.setCellData("Pass", "Status", i);
-                System.out.println("Sign up with  " +cellEmail+  " Pass");
+                System.out.println(cellEmail + " Logged in");
                 Driver.getDriver().navigate().back();
                 Driver.getDriver().navigate().refresh();
             }
         }
-        }
+    }
+
 
 
 
