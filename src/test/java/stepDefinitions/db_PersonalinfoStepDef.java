@@ -256,7 +256,6 @@ public class db_PersonalinfoStepDef {
     public void iAmConnectedToTheDB() {
 
         DBUtility.createConnection();
-
     }
 
     List<List<Object>> queryResultAsListOfLists;
