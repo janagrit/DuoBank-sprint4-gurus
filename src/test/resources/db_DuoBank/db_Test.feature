@@ -6,7 +6,6 @@ Feature: Check DB information
     Then The returned result list should be empty
 #    Then The returned result list should be empty but it is not
 
-
   Scenario: Verify the column length for name column of the playlists table
 
     Given I am connected to the DB

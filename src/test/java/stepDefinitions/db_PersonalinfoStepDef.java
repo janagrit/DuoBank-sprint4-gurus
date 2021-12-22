@@ -281,6 +281,7 @@ public class db_PersonalinfoStepDef {
         for (int i = 0; i < length; i++) {
             char ch =  (char)(97 + (int)(Math.random()*26));
             str += ch;
+
         }
         //System.out.println(str);
         try{
