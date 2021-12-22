@@ -30,6 +30,11 @@ Feature: Employment and Income Related features involving DB layer
     Then The returned result list should be empty.
 
 
+  Scenario:Update position in the DB
+    Given I am connected to the DB
+    When I update first name "peppa" position  to  "sister"
+    Then I should see the updated position on the DB
+
 
 
 
