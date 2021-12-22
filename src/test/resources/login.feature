@@ -25,7 +25,7 @@ Background:
     When I login with no email "email" and no password "password" and click login button
     Then I should not be able to login and an error message should be displayed
 
-
+@xml
   Scenario: Login with data from the Excel file
     When I am on login page using data from the Excel file "SignUp_Data.xlsx"
 

@@ -4,7 +4,7 @@ Feature:  As a user I sign Up
     Given on login page
     Then I click on sign up page
 
-#  @xml
+  @t
   Scenario: Verify registration by using the Excel File
     When I register a new user using data from the Excel file "SignUp_Data.xlsx"
 

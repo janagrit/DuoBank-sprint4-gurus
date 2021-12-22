@@ -53,13 +53,9 @@ public class SignUpStepDefs {
     @Then("The msg: {string} should appear on the sign up page")
     public void theMsgShouldAppearOnTheSignUpPage(String emailIsAlreadyUsed)  {
 
-
-
         Assert.assertTrue(signuppage.emailUsedError.isDisplayed());
         Assert.assertTrue(emailIsAlreadyUsed, equals(signuppage.emailUsedError.getText()));
-
         System.out.println(signuppage.emailUsedError.getText());
-
 
     }
 
