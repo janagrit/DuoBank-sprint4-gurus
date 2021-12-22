@@ -68,6 +68,9 @@ public class PersonalInformationPage {
     @FindBy(id="c_email")
     public WebElement c_email;
 
+    @FindBy(id="c_dob")
+    public WebElement c_dob;
+
     @FindBy(id="c_ssn")
     public WebElement c_ssn;
 
@@ -90,6 +93,26 @@ public class PersonalInformationPage {
 
     @FindBy(xpath="//input[@id='expense1']")
     public WebElement rentBox;
+
+
+    @FindBy(xpath="//input[@id='co-employername1']")
+    public WebElement coBorrowerEmpolyer;
+
+    @FindBy(id="co-grossmonthlyincome")
+    public WebElement coGrossMonthlyIncome;
+
+
+    @FindBy(id="eConsentdeclarer")
+    public WebElement eConsentDeclarer;
+
+    @FindBy(id="eConsentdeclarerFirstName")
+    public WebElement eConsentdeclarerFirstName;
+
+    @FindBy(id="eConsentdeclarerLastName")
+    public WebElement eConsentDeclarerLastName;
+
+    @FindBy(id="eConsentdeclarerEmail")
+    public WebElement eConsentDeclarerEmail;
 
 
 //    public void clickOnProductLink(String product){
@@ -151,8 +174,28 @@ public class PersonalInformationPage {
         SeleniumUtils.jsClick(new EconcentPage().buttonNext);
     }
 
+    public void eConsent(){
+
+        eConsentDeclarer.sendKeys("Co-Borrower");
+        eConsentdeclarerFirstName.sendKeys("Barabasz");
+        eConsentDeclarerLastName.sendKeys("Mulate");
+        eConsentDeclarerEmail.sendKeys("mulat@gmail.com");
+        SeleniumUtils.scroll(0,500);
+        SeleniumUtils.jsClick(new EconcentPage().clickAgree);
+        SeleniumUtils.jsClick(new EconcentPage().buttonNext);
+    }
+
     public void Summary(){
 
         SeleniumUtils.jsClick(new SummaryPage().clickSave);
+    }
+
+    public void coBorrower_Employment_Information(){
+
+        coBorrowerEmpolyer.sendKeys("Apex");
+        coGrossMonthlyIncome.sendKeys("800");
+
+        SeleniumUtils.jsClick(new EmploymentAndIncomePage().buttonnext);
+
     }
 }
