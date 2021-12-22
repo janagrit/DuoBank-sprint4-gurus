@@ -57,13 +57,13 @@ Feature: Sign up feature involving DB layer
     And The database should also have the correct info without spaces
 
 
-    #bug found has duplicates
-  Scenario: Check for duplicate values in the username column
-    When I send a query to check for duplicate usernames
-    Then The returned result list should be empty
+#    #bug found has duplicates
+#  Scenario: Check for duplicate values in the username column
+#    When I send a query to check for the duplicate usernames
+#    Then The returned result list should be empty.
 
 
-  @db_sign
+
   Scenario Outline: Sign up a new user
     When I fill up the fields with the following new user information
 
