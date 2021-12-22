@@ -1,3 +1,4 @@
+@dbtest
 Feature: Sign up feature involving DB layer
 
   Background: common steps
@@ -5,7 +6,7 @@ Feature: Sign up feature involving DB layer
     Then I click on sign up page
     Given I am connected to DB
 
-  @db_sign
+#  @db_sign
   Scenario: New User Sign Up from UI to DB flow
     When I sign up with the following info
       | first | last  | email              | password   |

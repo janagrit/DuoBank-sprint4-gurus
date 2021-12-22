@@ -102,7 +102,7 @@ public class db_EmploymentAndIncomeStepDef {
 
 
 
-        String query = "select * from tbl_mortagage where b_firstName ='" + expectedFirstName + "'";
+        String query = "select * from tbl_mortagage where b_firstName ='" + expectedFirstName.trim() + "'";
 
         List<Map<String, Object>> queryResultListOfMaps = DBUtility.getQueryResultListOfMaps(query);
         Map<String, Object> actualMap = queryResultListOfMaps.get(0);
@@ -119,11 +119,12 @@ public class db_EmploymentAndIncomeStepDef {
         String actualMaterialStatus = (String)(actualMap.get("b_marital"));
         String actualCellPhone = (String)(actualMap.get("b_cell"));
         String actualMonthlyRentalPayment = (String) (actualMap.get("monthly_rental_payment"));
+
         String actualEmployerName = (String) (actualMap.get("employer_name"));
         String actualPosition =(String) (actualMap.get("position"));
         String actualCity = (String) (actualMap.get("city"));
-       // String actualState = (String) (actualMap.get("state"));
         String actualStartDate = (String) (actualMap.get("start_date"));
+
         String actualGrossMonthlyIncome = (String) (actualMap.get("gross_monthly_income"));
 
 
@@ -159,4 +160,47 @@ public class db_EmploymentAndIncomeStepDef {
     }
 
 
+
+
+
+
+    List<List<Object>> queryResultAsListOfLists;
+
+    @When("I send a query to check for duplicate SSN")
+    public void iSendAQueryToCheckForDuplicateSSN() {
+
+        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select b_ssn, count(b_ssn) from tbl_mortagage group by b_ssn having count(b_ssn)>1");
+    }
+
+
+    @Then("The returned result list should be empty.")
+    public void theReturnedResultListShouldBeEmpty() {
+        Assert.assertFalse("The list is not empty and the size is " + queryResultAsListOfLists.size(), queryResultAsListOfLists.isEmpty() );
+
+    }
+String updatedPosition;
+    @When("I update first name {string} position  to  {string}")
+    public void iUpdateFirstNamePositionTo(String firstName, String updatedPosition1) throws SQLException {
+
+        updatedPosition = updatedPosition1;
+        DBUtility.updateQuery("update tbl_mortagage set position ='"+updatedPosition1+"' where b_firstName='"+firstName+"'");
+
+
+    }
+
+    @Then("I should see the updated position on the DB")
+    public void iShouldSeeTheUpdatedPositionOnTheDB() {
+
+        Assert.assertTrue("The list is updated "+ DBUtility.getQueryResultAsListOfLists("select * from tbl_mortagage where position ='"+updatedPosition+"'"), queryResultAsListOfLists.contains(updatedPosition) );
+
+
+    }
+
+    @When("I send a query to check for email duplicate")
+    public void iSendAQueryToCheckForEmailDuplicate() {
+
+        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select b_email, count(b_email) from tbl_mortagage group by b_email having count(b_email)>1");
+    }
+
 }
+

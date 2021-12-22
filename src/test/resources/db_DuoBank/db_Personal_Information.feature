@@ -1,3 +1,4 @@
+@dbtest
 Feature: Complete Personal Information page involving DB layer
 
 
@@ -17,7 +18,6 @@ Feature: Complete Personal Information page involving DB layer
     And The database should also have the correct info
 
 
-  @db
   Scenario: Verify that even though borrower and co-borrower provide incorrect information,they are still able to move to the next page
     Given I check "Yes" box.
     Then The Co-Borrower's Information should be displayed.

@@ -1,3 +1,4 @@
+@dbtest
 Feature: Check DB information
 
   Scenario: Check for duplicate values in the username column
