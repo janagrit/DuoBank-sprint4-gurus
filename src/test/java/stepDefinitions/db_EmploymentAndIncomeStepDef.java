@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.assertj.core.api.SoftAssertions;
+import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -33,46 +34,46 @@ public class db_EmploymentAndIncomeStepDef {
         expectedMap = dataTable.get(0);
 
         Actions actions = new Actions(Driver.getDriver());
-        PreapprovalDetailsPage preapprovalDetailsPage = new PreapprovalDetailsPage();
-        PersonalInformationPage personalInformationPage = new PersonalInformationPage();
-        ExpensesPage expensesPage = new ExpensesPage();
-        EmploymentAndIncomePage employmentAndIncomePage = new EmploymentAndIncomePage();
-        CreditReportPage creditReportPage = new CreditReportPage();
-        EconcentPage econcentPage = new EconcentPage();
-        SummaryPage summaryPage = new SummaryPage();
 
-        preapprovalDetailsPage.realtorInfo.sendKeys(expectedMap.get("REALTOR INFO"));
-        preapprovalDetailsPage.estimatedPrice.sendKeys(expectedMap.get("ESTIMATED PURCHASE PRICE"));
-        preapprovalDetailsPage.downPaymentAmount.sendKeys(expectedMap.get("DOWN PAYMENT AMOUNT"));
-        preapprovalDetailsPage.downPaymentPercentage.sendKeys(expectedMap.get("DOWN PAYMENT PERCENTAGE"));
-        preapprovalDetailsPage.buttonNext.click();
-        personalInformationPage.b_firstName.sendKeys(expectedMap.get("FIRST NAME"));
-        personalInformationPage.b_lastName.sendKeys(expectedMap.get("LAST NAME"));
-        personalInformationPage.b_email.sendKeys(expectedMap.get("EMAIL"));
-        personalInformationPage.b_ssn.sendKeys(expectedMap.get("SSN"));
+        new PreapprovalDetailsPage().realtorInfo.sendKeys(expectedMap.get("REALTOR INFO"));
+        new PreapprovalDetailsPage().estimatedPrice.sendKeys(expectedMap.get("ESTIMATED PURCHASE PRICE"));
+        new PreapprovalDetailsPage().downPaymentAmount.sendKeys(expectedMap.get("DOWN PAYMENT AMOUNT"));
+        new PreapprovalDetailsPage().downPaymentPercentage.sendKeys(expectedMap.get("DOWN PAYMENT PERCENTAGE"));
+        new PreapprovalDetailsPage().buttonNext.click();
+        new PersonalInformationPage().b_firstName.sendKeys(expectedMap.get("FIRST NAME"));
+        new PersonalInformationPage().b_lastName.sendKeys(expectedMap.get("LAST NAME"));
+        new PersonalInformationPage().b_email.sendKeys(expectedMap.get("EMAIL"));
+        new PersonalInformationPage().b_ssn.sendKeys(expectedMap.get("SSN"));
         actions.click(new PersonalInformationPage().b_marital).sendKeys(Keys.ARROW_UP, (expectedMap.get("MaterialStatus")), Keys.ENTER).perform();
         SeleniumUtils.scroll(0, 200);
-        personalInformationPage.b_cell.sendKeys(expectedMap.get("CELL PHONE"));
+        new PersonalInformationPage().b_cell.sendKeys(expectedMap.get("CELL PHONE"));
         SeleniumUtils.jsClick(new PersonalInformationPage().buttonNext);
-        expensesPage.monthlyRentalPayment.sendKeys(expectedMap.get("MONTHLY RENTAL PAYMENT"));
-        expensesPage.buttonNext.click();
-        employmentAndIncomePage.employer.sendKeys(expectedMap.get("EMPLOYER NAME"));
-        employmentAndIncomePage.position.sendKeys(expectedMap.get("POSITION"));
-        employmentAndIncomePage.city.sendKeys(expectedMap.get("CITY"));
-        employmentAndIncomePage.state.sendKeys(expectedMap.get("STATE"));
-        employmentAndIncomePage.startDate.sendKeys(expectedMap.get("START DATE"));
-        employmentAndIncomePage.grossMonthlyIncome.sendKeys(expectedMap.get("GROSS MONTHLY INCOME"));
-        employmentAndIncomePage.buttonnext.click();
-        creditReportPage.buttonnext.click();
-        econcentPage.e_firstName.sendKeys(expectedMap.get("e_first Name"));
-        econcentPage.e_lastName.sendKeys(expectedMap.get("e_last Name"));
-        econcentPage.e_email.sendKeys(expectedMap.get("e_email"));
-        SeleniumUtils.jsClick(new EconcentPage().clickAgree);
-        //SeleniumUtils.jsClick(new EconcentPage().buttonnext);
-        econcentPage.buttonNext.click();
-         summaryPage.clickSave.click();
+        new ExpensesPage().monthlyRentalPayment.sendKeys(expectedMap.get("MONTHLY RENTAL PAYMENT"));
+        new ExpensesPage().buttonNext.click();
+        new EmploymentAndIncomePage().employer.sendKeys(expectedMap.get("EMPLOYER NAME"));
+        new EmploymentAndIncomePage().position.sendKeys(expectedMap.get("POSITION"));
+        new EmploymentAndIncomePage().city.sendKeys(expectedMap.get("CITY"));
+        new EmploymentAndIncomePage().state.sendKeys(expectedMap.get("STATE"));
+        new EmploymentAndIncomePage().startDate.sendKeys(expectedMap.get("START DATE"));
+        new EmploymentAndIncomePage().grossMonthlyIncome.sendKeys(expectedMap.get("GROSS MONTHLY INCOME"));
+        new EmploymentAndIncomePage().buttonnext.click();
+        new CreditReportPage().buttonnext.click();
+//        new PersonalInformationPage().Credit_Report();
+//        new PersonalInformationPage().EconcentPage();
+//       new PersonalInformationPage().Summary();
 
 
+    }
+
+    @Then("I am able move to next page")
+    public void iAmAbleMoveToNextPage() {
+        String expected = "PreApproval Inquiry";
+        String pageSource = Driver.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.contains(expected));
+
+       // new PersonalInformationPage().Credit_Report();
+        new PersonalInformationPage().EconcentPage();
+        new PersonalInformationPage().Summary();
     }
 
 
@@ -95,16 +96,15 @@ public class db_EmploymentAndIncomeStepDef {
         String expectedState = expectedMap.get("STATE");
         String expectedStartDate = expectedMap.get("START DATE");
         String expectedGrossMonthlyIncome = expectedMap.get("GROSS MONTHLY INCOME");
-        String expectedE_firstName = expectedMap.get("e_first Name");
-        String expectedE_lastName = expectedMap.get("e_last Name");
-        String expectedE_email = expectedMap.get("e_email");
 
 
 
-        String query = "select * from tbl_mortagage where employer_name ='" + expectedEmployerName + "'";
+
+        String query = "select * from tbl_mortagage where realtor_info ='" + expectedRealtorInfo + "'";
 
         List<Map<String, Object>> queryResultListOfMaps = DBUtility.getQueryResultListOfMaps(query);
         Map<String, Object> actualMap = queryResultListOfMaps.get(0);
+
 
         String actualRealtorInfo = (String) (actualMap.get("REALTOR INFO"));
         String actualEstPrice = (String) (actualMap.get("ESTIMATED PURCHASE PRICE"));
@@ -122,9 +122,7 @@ public class db_EmploymentAndIncomeStepDef {
         String actualState = (String) (actualMap.get("STATE"));
         String actualStartDate = (String) (actualMap.get("START DATE"));
         String actualGrossMonthlyIncome = (String) (actualMap.get("GROSS MONTHLY INCOME"));
-        String actualE_firstName = (String) (actualMap.get("e_first Name"));
-        String actualE_lastName =(String) (actualMap.get("e_last Name"));
-        String actualE_email = (String) (actualMap.get("e_email"));
+
 
 
 
@@ -145,18 +143,18 @@ public class db_EmploymentAndIncomeStepDef {
         softAssertions.assertThat(expectedState).isEqualTo(actualState);
         softAssertions.assertThat(expectedStartDate).isEqualTo(actualStartDate);
         softAssertions.assertThat(expectedGrossMonthlyIncome).isEqualTo(actualGrossMonthlyIncome);
-        softAssertions.assertThat(expectedE_firstName).isEqualTo(actualE_firstName);
-        softAssertions.assertThat(expectedE_lastName).isEqualTo(actualE_lastName);
-        softAssertions.assertThat(expectedE_email).isEqualTo(actualE_email);
+
 
 
 
 
         softAssertions.assertAll();
 
-        DBUtility.updateQuery("delete from tbl_mortagage where employer_name ='" + expectedEmployerName + "'");
+        DBUtility.updateQuery("delete from tbl_mortagage realtor_info ='" + expectedRealtorInfo + "'");
         DBUtility.close();
 
 
     }
+
+
 }

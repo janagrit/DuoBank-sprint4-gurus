@@ -11,21 +11,21 @@ public class EconcentPage {
     }
 
 
-
-    @FindBy(id="eConsentdeclarerFirstName")
+    @FindBy(id = "eConsentdeclarerFirstName")
     public WebElement e_firstName;
 
-    @FindBy(id="eConsentdeclarerLastName")
+    @FindBy(id = "eConsentdeclarerLastName")
     public WebElement e_lastName;
 
-    @FindBy(id="eConsentdeclarerEmail")
+    @FindBy(id = "eConsentdeclarerEmail")
     public WebElement e_email;
 
-    @FindBy (xpath = "//input[@id='agree']")
+    @FindBy(xpath = "//input[@id='agree']")
     public WebElement clickAgree;
 
 
-
-    @FindBy(xpath=" //a[@href='#next'] ")
+    @FindBy(xpath = " //a[@href='#next'] ")
     public WebElement buttonNext;
+
+
 }

@@ -104,4 +104,8 @@ public class EmploymentAndIncomePage {
 
 
     }
+
+    public void Personal_Info(){
+
+    }
 }
