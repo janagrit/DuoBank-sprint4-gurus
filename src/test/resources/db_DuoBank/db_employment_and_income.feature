@@ -1,4 +1,4 @@
-@employment
+@dbtest
 Feature: Employment and Income Related features involving DB layer
 
 
@@ -8,13 +8,37 @@ Feature: Employment and Income Related features involving DB layer
     And Verify that I am on Mortgage Application Page
 
 
-@db
+
   Scenario:Fill out Mortgage Application  from UI to DB flow
     Given I am connected to DB
     When I fill out Mortgage Application page using  following info
-      | REALTOR INFO | ESTIMATED PURCHASE PRICE | DOWN PAYMENT AMOUNT | DOWN PAYMENT PERCENTAGE | FIRST NAME | LAST NAME | EMAIL              | SSN         | MaterialStatus | CELL PHONE   | MONTHLY RENTAL PAYMENT | EMPLOYER NAME | POSITION | CITY    | STATE | START DATE | GROSS MONTHLY INCOME |
-      | abcMouse     | 50000                    | 500                 | 50                      | Peppa      | Pig       | peppapig@gmail.com | 987-65-0987 | Married        | 988-767-5432 | 100                    | Disney        | Pig      | Orlando | FL    | 08/16/1888 | 10000                |
+      | FIRST NAME | LAST NAME | EMAIL              | SSN         | MaterialStatus | CELL PHONE   | MONTHLY RENTAL PAYMENT | EMPLOYER NAME | POSITION | CITY    | START DATE | GROSS MONTHLY INCOME |
+      | Peppa      | Pig       | peppapig@gmail.com | 987-65-0987 | Married        | 988-76-7543 | 100                    | Disco       | hero     | Orlando | 1999-11-11   | 10000                |
   Then I am able move to next page
   And The database should  have the correct info
+
+
+  Scenario: Check for duplicate values in the SSN column
+    Given I am connected to the DB
+    When I send a query to check for duplicate SSN
+    Then The returned result list should be empty.
+
+
+  Scenario: Check for duplicate values in the email column
+    Given I am connected to the DB
+    When I send a query to check for email duplicate
+    Then The returned result list should be empty.
+
+
+  Scenario:Update position in the DB
+    Given I am connected to the DB
+    When I update first name "peppa" position  to  "sister"
+    Then I should see the updated position on the DB
+
+
+
+
+
+
 
 

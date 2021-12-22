@@ -1,3 +1,4 @@
+@dbtest
 Feature: Sign up feature involving DB layer
 
   Background: common steps
