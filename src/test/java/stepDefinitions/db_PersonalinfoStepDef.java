@@ -198,58 +198,58 @@ public class db_PersonalinfoStepDef {
     @And("The database should also contain the correct info.")
     public void theDatabaseShouldAlsoContainTheCorrectInfo() throws SQLException {
 
-//        String expectedFirst= expectedMap.get("FirstName");
-//        String expectedLast = expectedMap.get("LastName");
-//        String expectedEmail = expectedMap.get("Email");
-//        String expectedSSN = expectedMap.get("SSN");
-//        String expectedMaterialStatus = expectedMap.get("MaterialStatus");
-//        String expectedCellPhone  = expectedMap.get("CellPhone");
-//        String expectedFirstB= expectedMap1.get("FirstName1");
-//        String expectedLastB = expectedMap1.get("LastName1");
-//        String expectedEmailB = expectedMap1.get("Email1");
-//        String expectedDOBB = expectedMap1.get("DOB1");
-//        String expectedSSNB = expectedMap1.get("SSN1");
-//        String expectedMaterialStatusB = expectedMap1.get("MaterialStatus1");
-//        String expectedCellPhoneB  = expectedMap1.get("CellPhone1");
-//
-//
-//        String query  = "select * from tbl_mortagage where b_lastName ='"+expectedLast+"'";
-//        List<Map<String, Object>> queryResultListOfMaps = DBUtility.getQueryResultListOfMaps(query);
-//        Map<String, Object> actualMap = queryResultListOfMaps.get(0);
-//
-//        String actualFirst = (String)(actualMap.get("b_firstName"));
-//        String actualLast= (String)(actualMap.get("b_lastName"));
-//        String actualEmail = (String)(actualMap.get("b_email"));
-//        String actualSSN= (String)(actualMap.get("b_ssn"));
-//        String actualMaterialStatus = (String)(actualMap.get("b_marital"));
-//        String actualCellPhone = (String)(actualMap.get("b_cell"));
-//        String actualFirstB = (String)(actualMap.get("c_firstName"));
-//        String actualLastB= (String)(actualMap.get("c_lastName"));
-//        String actualEmailB = (String)(actualMap.get("c_email"));
-//        String actualDOBB = (String)(actualMap.get("c_dob"));
-//        String actualSSNB= (String)(actualMap.get("c_ssn"));
-//        String actualMaterialStatusB = (String)(actualMap.get("c_marital"));
-//        String actualCellPhoneB = (String)(actualMap.get("c_cell"));
-//
-//        SoftAssertions softAssertions = new SoftAssertions();
-//        softAssertions.assertThat(expectedFirst).isEqualTo(actualFirst);
-//        softAssertions.assertThat(expectedLast).isEqualTo(actualLast);
-//        softAssertions.assertThat(expectedEmail).isEqualTo(actualEmail);
-//        softAssertions.assertThat(expectedSSN).isEqualTo(actualSSN);
-//        softAssertions.assertThat(expectedMaterialStatus).isEqualTo(actualMaterialStatus);
-//        softAssertions.assertThat(expectedCellPhone).isEqualTo(actualCellPhone);
-//        softAssertions.assertThat(expectedFirstB).isEqualTo(actualFirstB);
-//        softAssertions.assertThat(expectedLastB).isEqualTo(actualLastB);
-//        softAssertions.assertThat(expectedEmailB).isEqualTo(actualEmailB);
-//        softAssertions.assertThat(expectedDOBB).isEqualTo(actualDOBB);
-//        softAssertions.assertThat(expectedSSNB).isEqualTo(actualSSNB);
-//        softAssertions.assertThat(expectedMaterialStatusB).isEqualTo(actualMaterialStatusB);
-//        softAssertions.assertThat(expectedCellPhoneB).isEqualTo(actualCellPhoneB);
-//
-//        softAssertions.assertAll();
-//
-//        DBUtility.updateQuery("delete from tbl_mortagage where b_lastName ='"+expectedLast+"'");
-//        DBUtility.close();
+        String expectedFirst= expectedMap.get("FirstName");
+        String expectedLast = expectedMap.get("LastName");
+        String expectedEmail = expectedMap.get("Email");
+        String expectedSSN = expectedMap.get("SSN");
+        String expectedMaterialStatus = expectedMap.get("MaterialStatus");
+        String expectedCellPhone  = expectedMap.get("CellPhone");
+        String expectedFirstB= expectedMap1.get("FirstName1");
+        String expectedLastB = expectedMap1.get("LastName1");
+        String expectedEmailB = expectedMap1.get("Email1");
+        String expectedDOBB = expectedMap1.get("DOB1");
+        String expectedSSNB = expectedMap1.get("SSN1");
+        String expectedMaterialStatusB = expectedMap1.get("MaterialStatus1");
+        String expectedCellPhoneB  = expectedMap1.get("CellPhone1");
+
+
+        String query  = "select * from tbl_mortagage where b_lastName ='"+expectedLast+"'";
+        List<Map<String, Object>> queryResultListOfMaps = DBUtility.getQueryResultListOfMaps(query);
+        Map<String, Object> actualMap = queryResultListOfMaps.get(0);
+
+        String actualFirst = (String)(actualMap.get("b_firstName"));
+        String actualLast= (String)(actualMap.get("b_lastName"));
+        String actualEmail = (String)(actualMap.get("b_email"));
+        String actualSSN= (String)(actualMap.get("b_ssn"));
+        String actualMaterialStatus = (String)(actualMap.get("b_marital"));
+        String actualCellPhone = (String)(actualMap.get("b_cell"));
+        String actualFirstB = (String)(actualMap.get("c_firstName"));
+        String actualLastB= (String)(actualMap.get("c_lastName"));
+        String actualEmailB = (String)(actualMap.get("c_email"));
+        String actualDOBB = (String)(actualMap.get("c_dob"));
+        String actualSSNB= (String)(actualMap.get("c_ssn"));
+        String actualMaterialStatusB = (String)(actualMap.get("c_marital"));
+        String actualCellPhoneB = (String)(actualMap.get("c_cell"));
+
+        SoftAssertions softAssertions = new SoftAssertions();
+        softAssertions.assertThat(expectedFirst).isEqualTo(actualFirst);
+        softAssertions.assertThat(expectedLast).isEqualTo(actualLast);
+        softAssertions.assertThat(expectedEmail).isEqualTo(actualEmail);
+        softAssertions.assertThat(expectedSSN).isEqualTo(actualSSN);
+        softAssertions.assertThat(expectedMaterialStatus).isEqualTo(actualMaterialStatus);
+        softAssertions.assertThat(expectedCellPhone).isEqualTo(actualCellPhone);
+        softAssertions.assertThat(expectedFirstB).isEqualTo(actualFirstB);
+        softAssertions.assertThat(expectedLastB).isEqualTo(actualLastB);
+        softAssertions.assertThat(expectedEmailB).isEqualTo(actualEmailB);
+        softAssertions.assertThat(expectedDOBB).isEqualTo(actualDOBB);
+        softAssertions.assertThat(expectedSSNB).isEqualTo(actualSSNB);
+        softAssertions.assertThat(expectedMaterialStatusB).isEqualTo(actualMaterialStatusB);
+        softAssertions.assertThat(expectedCellPhoneB).isEqualTo(actualCellPhoneB);
+
+        softAssertions.assertAll();
+
+        DBUtility.updateQuery("delete from tbl_mortagage where b_lastName ='"+expectedLast+"'");
+        DBUtility.close();
     }
 
     @Given("I am connected to the DB")
