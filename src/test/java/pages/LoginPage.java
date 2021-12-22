@@ -91,7 +91,7 @@ public class LoginPage {
     public void LoginMethod(String email, String password)   {
         emailInput.sendKeys(email);
         passwordlInput.sendKeys(password);
-//        loginButton.click();
+
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         }
             }
