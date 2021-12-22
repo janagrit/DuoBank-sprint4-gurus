@@ -44,6 +44,7 @@ public class LoginStepDefs  {
     @When("I login with invalid email {string} and password {string} and click login button")
     public void iLoginWithInvalidEmailAndPasswordAndClickLoginButton(String email, String pass) {
         loginPage.LoginMethod(email, pass);
+        loginPage.loginButton.click();
         System.out.println("Your email " + email + " has result as " + new LoginPage().textLoginFailed.getText());
     }
 
@@ -95,12 +96,14 @@ public class LoginStepDefs  {
     @When("I login with the correct email {string} and invalid password {string} and click login button")
     public void iLoginWithTheCorrectEmailAndInvalidPasswordAndClickLoginButton(String email, String pass) {
         loginPage.LoginMethod(email, pass);
+        loginPage.loginButton.click();
         System.out.println("your password is incorrect: " + loginPage.textLoginFailed.getText());
     }
 
     @When("I login with no email {string} and no password {string} and click login button")
     public void iLoginWithNoEmailAndNoPasswordAndClickLoginButton(String email, String pass) {
         loginPage.LoginMethod(email, pass);
+        loginPage.loginButton.click();
         System.out.println(Driver.getDriver().getTitle());
     }
 
@@ -108,13 +111,14 @@ public class LoginStepDefs  {
     @When("Login a user with {string}, {string}")
     public void loginAUserWith(String email, String password) {
         loginPage.LoginMethod(email, password);
-
+        loginPage.loginButton.click();
     }
 
 
     @When("The user enters the valid credentials as {string} for username and {string} for password")
     public void theUserEntersTheValidCredentialsAsForUsernameAndForPassword(String email, String password) {
         loginPage.LoginMethod(email, password);
+        loginPage.loginButton.click();
     }
 
     @Then("The user should be able to login and land on the homepage")
