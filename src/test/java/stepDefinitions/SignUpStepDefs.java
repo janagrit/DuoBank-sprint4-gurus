@@ -4,30 +4,19 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.apache.commons.logging.Log;
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ExcelUtils;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class SignUpStepDefs {
 
-    LoginPage signuppage = new LoginPage();
+    LoginPage signPage = new LoginPage();
 
     @Given("on login page")
     public void onLoginPage() {
@@ -36,7 +25,7 @@ public class SignUpStepDefs {
 
     @Then("I click on sign up page")
     public void iClickOnSignUpPage() {
-        signuppage.signUp.click();
+        signPage.signUp.click();
     }
 
 
@@ -44,8 +33,8 @@ public class SignUpStepDefs {
     public void registerANewUserClickSignUpButton(String name, String lastName, String email, String password) throws IOException {
 
 
-        signuppage.signUpMethod(name, lastName, email, password);
-        signuppage.registerButton.click();
+        signPage.signUpMethod(name, lastName, email, password);
+        signPage.registerButton.click();
 
     }
 
@@ -53,9 +42,9 @@ public class SignUpStepDefs {
     @Then("The msg: {string} should appear on the sign up page")
     public void theMsgShouldAppearOnTheSignUpPage(String emailIsAlreadyUsed)  {
 
-        Assert.assertTrue(signuppage.emailUsedError.isDisplayed());
-        Assert.assertTrue(emailIsAlreadyUsed, equals(signuppage.emailUsedError.getText()));
-        System.out.println(signuppage.emailUsedError.getText());
+        Assert.assertTrue(signPage.emailUsedError.isDisplayed());
+        Assert.assertTrue(emailIsAlreadyUsed, equals(signPage.emailUsedError.getText()));
+        System.out.println(signPage.emailUsedError.getText());
 
     }
 
@@ -64,14 +53,14 @@ public class SignUpStepDefs {
     public void iRegisterANewUserWithFakerClass() {
 
         Faker fake = new Faker();
-        signuppage.signUpMethod (
+        signPage.signUpMethod (
 
                 fake.name().firstName(),
                 fake.name().lastName(),
                 fake.internet().emailAddress(),
                 fake.internet().password()      );
 
-        signuppage.registerButton.click();
+        signPage.registerButton.click();
 
     }
 
@@ -101,11 +90,11 @@ public class SignUpStepDefs {
             String cellEmail = excelUtils.getCellData(i, 2);
             String cellPass = excelUtils.getCellData(i, 3);
 
-            signuppage.signUpMethod(cellName, cellLastName, cellEmail, cellPass);
-            signuppage.registerButton.click();
+            signPage.signUpMethod(cellName, cellLastName, cellEmail, cellPass);
+            signPage.registerButton.click();
 
             try {
-                if (signuppage.emailUsedError.isDisplayed()) {
+                if (signPage.emailUsedError.isDisplayed()) {
                     System.out.println("This email  " + cellEmail + " is already used");
                     excelUtils.setCellData("Fail", "Status", i);
                     Driver.getDriver().navigate().refresh();
