@@ -40,6 +40,7 @@ Background:
       | spearman5@t-online.de     | lA3NBBya2    |
 
 
+
 #    bug - a proper error msg is not displaed
   Scenario Outline: Verify login feature with invalid credentials using Outline
     When Login a user with "<Email>", "<Password>"
