@@ -16,22 +16,16 @@ Feature: Sign up feature involving DB layer
     And The database should also have the correct info with a new user
 
 
-#  Scenario: New User Creation from DB to UI flow
-#    When I add a new user to the database with the following info
-#      | first | last    | email             | password  |
-#      | Jesse | Watters | Watters@gmail.com | Watters99 |
-#    Then I should be able to log in with the email "Watters@gmail.com" and password "Watters99" on the UI
-
   Scenario: New User Creation from DB to UI flow
     When I add a new user to the database with the following info
-      | first | last    | email             | password  | phone      | image | type | created_at| modified_at| zone_id | church_id| country_id| active|
-      | Jesse | Watters | Watters@gmail.com | Watters99 | 2129000908 |       | 2    |           |            |    0    |     0    |     0     |  1    |
+      | email             | password  | first | last    | phone      | image | type | created_at| modified_at| zone_id | church_id| country_id| active|
+      | Watters@gmail.com | Watters99 | Jesse | Watters | 2129000908 |       | 2    |           |            |    0    |     0    |     0     |  1    |
     Then I should be able to log in with the email "Watters@gmail.com" and password "Watters99" on the UI
 
 
 
-  Scenario: Verify Songs Table Column Names
-    When I retrieve the column names for the Songs users
+  Scenario: Verify users Column Names - Mapping
+    When I retrieve the column names for the information of the user table
     Then It should be the following
       | id          |
       | email       |
