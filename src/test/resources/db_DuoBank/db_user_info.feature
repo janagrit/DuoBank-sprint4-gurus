@@ -1,3 +1,4 @@
+@dbtest
 Feature: User info feature involving DB layer
 
   Background: common steps

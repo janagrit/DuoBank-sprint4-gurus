@@ -5,7 +5,6 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.LoginPage;
 import utilities.DBUtility;
-import utilities.Driver;
 
 import java.sql.SQLException;
 
