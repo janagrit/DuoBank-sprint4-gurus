@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
 public class EconcentPage {
+
     public EconcentPage() {
         PageFactory.initElements(Driver.getDriver(), this);
     }
