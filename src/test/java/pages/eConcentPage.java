@@ -5,16 +5,11 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-<<<<<<< HEAD:src/test/java/pages/EconcentPage.java
-public class EconcentPage {
 
-    public EconcentPage() {
-=======
+
 public class eConcentPage {
-    public eConcentPage() {
->>>>>>> origin/master:src/test/java/pages/eConcentPage.java
-        PageFactory.initElements(Driver.getDriver(), this);
-    }
+    
+    public eConcentPage() {  PageFactory.initElements(Driver.getDriver(), this);  }
 
 
     @FindBy(id = "eConsentdeclarerFirstName")
