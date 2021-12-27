@@ -1,11 +1,9 @@
 package pages;
 
-import io.cucumber.java.eo.Se;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.SeleniumUtils;
 
@@ -166,12 +164,12 @@ public class PersonalInformationPage {
 
     public void EconcentPage(){
 
-        new EconcentPage().e_firstName.sendKeys("Bozen");
-        new EconcentPage().e_lastName.sendKeys("Krzys");
-        new EconcentPage().e_email.sendKeys("BK@gmail.com");
+        new eConcentPage().e_firstName.sendKeys("Bozen");
+        new eConcentPage().e_lastName.sendKeys("Krzys");
+        new eConcentPage().e_email.sendKeys("BK@gmail.com");
         SeleniumUtils.scroll(0,500);
-        SeleniumUtils.jsClick(new EconcentPage().clickAgree);
-        SeleniumUtils.jsClick(new EconcentPage().buttonNext);
+        SeleniumUtils.jsClick(new eConcentPage().clickAgree);
+        SeleniumUtils.jsClick(new eConcentPage().buttonNext);
     }
 
     public void eConsent(){
@@ -181,8 +179,8 @@ public class PersonalInformationPage {
         eConsentDeclarerLastName.sendKeys("Mulate");
         eConsentDeclarerEmail.sendKeys("mulat@gmail.com");
         SeleniumUtils.scroll(0,500);
-        SeleniumUtils.jsClick(new EconcentPage().clickAgree);
-        SeleniumUtils.jsClick(new EconcentPage().buttonNext);
+        SeleniumUtils.jsClick(new eConcentPage().clickAgree);
+        SeleniumUtils.jsClick(new eConcentPage().buttonNext);
     }
 
     public void Summary(){
