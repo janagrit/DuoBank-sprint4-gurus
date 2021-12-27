@@ -93,6 +93,7 @@ public class db_EmploymentAndIncomeStepDef {
         String expectedCellPhone = expectedMap.get("CELL PHONE");
         String expectedMonthlyRentalPayment = expectedMap.get("MONTHLY RENTAL PAYMENT");
         String expectedEmployerName = expectedMap.get("EMPLOYER NAME");
+
         String expectedPosition = expectedMap.get("POSITION");
         String expectedCity = expectedMap.get("CITY");
         //String expectedState = expectedMap.get("STATE");
@@ -148,7 +149,7 @@ public class db_EmploymentAndIncomeStepDef {
         softAssertions.assertThat(expectedGrossMonthlyIncome).isEqualTo(actualGrossMonthlyIncome);
 
 
-
+        System.out.println(expectedEmployerName);
 
 
         softAssertions.assertAll();

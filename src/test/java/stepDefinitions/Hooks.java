@@ -5,6 +5,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import utilities.DBUtility;
 import utilities.Driver;
 
 import java.time.Duration;
@@ -19,10 +20,14 @@ public class Hooks {
     }
 
 
-//    @Before ("@db")
-//    public void setupScenarioForDb(){
-//        System.out.println("Database Connection established");
+//    @Before ("@db_Sprint_6")
+//    public void setupDb(){
+//        DBUtility.createConnection();
+//    }
 //
+//    @After ("@db_Sprint_6")
+//    public void tearDownDb(){
+//        DBUtility.close();
 //    }
 
     @After

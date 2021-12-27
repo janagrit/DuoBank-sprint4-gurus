@@ -19,7 +19,8 @@ Feature: Complete Personal Information page involving DB layer
 
 
   Scenario: Verify that even though borrower and co-borrower provide incorrect information,they are still able to move to the next page
-    Given I check "Yes" box.
+    Given I am on the personal information page and I am connected to the DB
+    Then I check "Yes" box
     Then The Co-Borrower's Information should be displayed.
     When I put the following info for borrower
       | FirstName | LastName   | Email              | SSN         | MaterialStatus | CellPhone    |
