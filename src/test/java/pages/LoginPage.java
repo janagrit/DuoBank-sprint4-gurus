@@ -27,6 +27,8 @@ public class LoginPage {
     @FindBy(id = "exampleInputEmail1")
     public WebElement emailInput;
 
+
+
     @FindBy(id = "exampleInputPassword1")
     public WebElement passwordlInput;
 
@@ -44,8 +46,8 @@ public class LoginPage {
 
 
 
-    @FindBy(xpath = "//a[@class='dropdown-item']" )
-    public WebElement logOut;
+    @FindBy(xpath = "//span[@class='user-name']" )
+    public WebElement user_name_OnUI;
 
     @FindBy(xpath = "//h4[@class='text-center mb-2']" )
     public WebElement text_notification;
@@ -93,5 +95,5 @@ public class LoginPage {
         passwordlInput.sendKeys(password);
 
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        }
-            }
+    }
+}

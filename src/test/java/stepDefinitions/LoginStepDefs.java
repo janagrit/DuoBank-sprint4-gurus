@@ -123,8 +123,8 @@ public class LoginStepDefs  {
 
     @Then("The user should be able to login and land on the homepage")
     public void theUserShouldBeAbleToLoginAndLandOnTheHomepage() {
-        Assert.assertTrue(Driver.getDriver().getTitle().equals("Loan Application"));
-        //Assert.assertTrue(Driver.getDriver().getCurrentUrl().equals("http://qa-duobank.us-east-2.elasticbeanstalk.com/dashboard.php"));
+        Assert.assertEquals(Driver.getDriver().getTitle(), "Loan Application");
+
     }
 
 

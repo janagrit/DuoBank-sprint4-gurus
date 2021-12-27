@@ -1,4 +1,4 @@
-@dbtest
+@db_Sprint_6
 Feature: Employment and Income Related features involving DB layer
 
 
