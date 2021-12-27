@@ -13,7 +13,7 @@ Feature: Employment and Income Related features involving DB layer
     Given I am connected to DB
     When I fill out Mortgage Application page using  following info
       | FIRST NAME | LAST NAME | EMAIL              | SSN         | MaterialStatus | CELL PHONE   | MONTHLY RENTAL PAYMENT | EMPLOYER NAME | POSITION | CITY    | START DATE | GROSS MONTHLY INCOME |
-      | Peppa      | Pig       | peppapig@gmail.com | 987-65-0987 | Married        | 988-76-7543 | 100                    | Disco       | hero     | Orlando | 1999-11-11   | 10000                |
+      | Peppa      | Pig       | peppapig@gmail.com | 987-65-0987 | Married        | 988-76-7543 | 100                     | Disco       | hero     | Orlando | 1999-11-11   | 10000                |
   Then I am able move to next page
   And The database should  have the correct info
 
