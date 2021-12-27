@@ -1,3 +1,4 @@
+@db_Sprint_6
 Feature: User info feature involving DB layer
 
   Background: common steps

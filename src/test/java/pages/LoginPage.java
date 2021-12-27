@@ -95,5 +95,5 @@ public class LoginPage {
         passwordlInput.sendKeys(password);
 
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        }
-            }
+    }
+}

@@ -1,5 +1,6 @@
 package stepDefinitions;
 
+import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,9 +8,11 @@ import io.cucumber.java.en.When;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
+
 import pages.LoginPage;
 import utilities.DBUtility;
 import utilities.Driver;
+import utilities.ExcelUtils;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -101,6 +104,22 @@ public class db_Sign_upStepDefs {
                 "'"+expectedMap.get("modified_at")+"', '"+expectedMap.get("zone_id")+"', '"+expectedMap.get("church_id")+"', '"+expectedMap.get("country_id")+"', '"+expectedMap.get("active")+"'   ) ";
 
         DBUtility.updateQuery(query);
+
+    }
+
+
+    @Then("I should be able to log in on the UI with {string} and {string}")
+    public void iShouldBeAbleToLogInOnTheUIWithAnd(String email, String pass) throws SQLException {
+        Driver.getDriver().get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
+
+        signPage.LoginMethod(email, pass);
+        signPage.loginButton.click();
+
+        Assert.assertFalse(Driver.getDriver().getTitle().equals("Loan Application"));
+
+        DBUtility.updateQuery("delete from tbl_user where email='"+email+"'");
+        DBUtility.close();
+
     }
 
 
@@ -108,12 +127,9 @@ public class db_Sign_upStepDefs {
     public void iShouldBeAbleToLogInWithTheEmailAndPasswordOnTheUI(String email, String password) throws SQLException {
 
         Driver.getDriver().get("http://qa-duobank.us-east-2.elasticbeanstalk.com/index.php");
-        LoginPage loginPage = new LoginPage();
-        loginPage.LoginMethod(email, password);
-        loginPage.loginButton.click();
-
+        signPage.LoginMethod(email, password);
+        signPage.loginButton.click();
         Assert.assertEquals(Driver.getDriver().getTitle(),"Loan Application");
-
         DBUtility.updateQuery("delete from tbl_user where email='"+email+"'");
         DBUtility.close();
     }
@@ -130,9 +146,7 @@ public class db_Sign_upStepDefs {
     public void itShouldBeTheFollowing(List<String> expected) {
 
         SoftAssertions softAssertions = new SoftAssertions();
-
         softAssertions.assertThat(actualColumnNames).isEqualTo(expected);
-
         DBUtility.close();
         softAssertions.assertAll();
     }
@@ -248,5 +262,69 @@ public class db_Sign_upStepDefs {
     }
 
 
+    @When("I sign up with the following info and the using Faker Class")
+    public void iSignUpWithTheFollowingInfoAndTheUsingFakerClass() {
 
+        Faker faker = new Faker();
+        String faker_email = faker.internet().emailAddress();
+        String faker_first = faker.name().firstName();
+        String faker_last = faker.name().lastName();
+        String faker_pass = faker.internet().password();
+
+
+        first = faker_first;
+        last = faker_last;
+        email = faker_email;
+        pass = faker_pass;
+        expectedPasswordMd5 = DigestUtils.md5Hex(pass);
+
+        signPage.signUpMethod(first, last, email, pass);
+        signPage.registerButton.click();
+
+
+    }
+
+    @And("new user should be added the Excel file {string}")
+    public void newUserShouldBeAddedTheExcelFile(String file) throws Throwable {
+
+        ExcelUtils excelUtils = new ExcelUtils(file, "Sheet3");
+        List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
+
+        Thread.sleep(2000);
+        System.out.println(dataAsListOfMaps.size());
+
+
+        Throwable ex = null;
+        for (int i = 1; i < dataAsListOfMaps.size(); i++) {
+          //  Map<String, String> row = dataAsListOfMaps.get(i);
+
+            String cellName = excelUtils.getCellData(i, 0);
+            String cellLastName = excelUtils.getCellData(i, 1);
+            String cellEmail = excelUtils.getCellData(i, 2);
+            String cellPass = excelUtils.getCellData(i, 3);
+
+
+
+                if (excelUtils.getDataAsListOfMaps().isEmpty()){
+                    System.out.println(excelUtils.getDataAsListOfMaps());
+                    try{
+                        excelUtils.setCellData(first, "first_name", i);
+                        excelUtils.setCellData(last, "last_name", i);
+                        excelUtils.setCellData(email, "email", i);
+                        excelUtils.setCellData(pass, "password", i);
+                        Thread.sleep(2000);
+
+                        System.exit(0);
+
+                    }catch (Throwable e){
+                        ex = e;
+                        excelUtils.setCellData("FAIL", "Status", i + 1);
+
+                    }
+            }
+            throw ex;
+
+        }
+
+    }
 }
