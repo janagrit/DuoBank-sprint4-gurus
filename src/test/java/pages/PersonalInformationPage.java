@@ -112,6 +112,12 @@ public class PersonalInformationPage {
     @FindBy(id="eConsentdeclarerEmail")
     public WebElement eConsentDeclarerEmail;
 
+    @FindBy(xpath = "//span[.='Application List']")
+    public WebElement applicationList;
+
+    @FindBy(xpath = "//td[.=\"名前  Cruz  \"]")
+    public WebElement applicatInfo;
+
 
 //    public void clickOnProductLink(String product){
 //        String xpath = "//input[@id=\"coborrower1\"]";
