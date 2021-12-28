@@ -10,7 +10,6 @@ Feature: E_consent related features
 
 
    Scenario Outline: Sign Econsent using scenario outline
-     Given I am connected to DB
     When I fill up the fields with the following user information
       | First Name  | Last Name  | Email   |
       | <firstName> | <lastName> | <email> |
@@ -23,22 +22,13 @@ Feature: E_consent related features
 
 
 
-   Scenario: Verify information from the database
-     Given I am connected to DB
-  When I send the query to update econsent page first name, last name and email
-  Then The actual output from the query should match the expected one that I sent to query
-
-
-
   Scenario: Verify mortgage table eConcent columns
-    Given I am connected to DB
     When I send a query to database to retrieve the names of columns on the eConcent page table
     Then The retrieved columns should be similar to the expected columns
 
 
 
   Scenario: Verify that the database supports unicode entries
-    Given I am connected to DB
     When I send a query to update realtor info field with unicode value
     Then The database should update the entry
 
