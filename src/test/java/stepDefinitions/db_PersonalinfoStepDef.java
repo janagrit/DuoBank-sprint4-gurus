@@ -253,11 +253,11 @@ public class db_PersonalinfoStepDef {
         DBUtility.close();
     }
 
-    @Given("I am connected to the DB")
-    public void iAmConnectedToTheDB() {
-
-        DBUtility.createConnection();
-    }
+//    @Given("I am connected to the DB")
+//    public void iAmConnectedToTheDB() {
+//
+//        DBUtility.createConnection();
+//    }
 
     List<List<Object>> queryResultAsListOfLists;
     @When("I send a query to check for duplicate usernames")
@@ -303,16 +303,16 @@ public class db_PersonalinfoStepDef {
 
     }
 
-//    @When("I send a query to check for duplicate cell phone")
-//    public void iSendAQueryToCheckForDuplicateCellPhone() {
-//
-//        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select b_cell, count(b_cell) from tbl_mortagage group by b_cell having count(b_cell)>1");
+    @When("I send a query to check for duplicate cell phone")
+    public void iSendAQueryToCheckForDuplicateCellPhone() {
 
-    @Given("I am connected to the DB")
-    public void i_am_connected_to_the_d_b() {
-
-        DBUtility.createConnection();
+        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select b_cell, count(b_cell) from tbl_mortagage group by b_cell having count(b_cell)>1");
     }
+//    @Given("I am connected to the DB")
+//    public void i_am_connected_to_the_d_b() {
+//
+//        DBUtility.createConnection();
+//    }
 
     @When("I send a query to check for duplicate cell phone")
    public void i_send_a_query_to_check_for_duplicate_cell_phone() {
@@ -324,8 +324,8 @@ public class db_PersonalinfoStepDef {
 
     }
 
-    @When("I enter the letter and  as an estimate purchase price and it will still be accepted")
-    public void iEnterTheLetterAndAsAnEstimatePurchasePriceAndItWillStillBeAccepted() throws SQLException {
+    @When("I enter the letter and as an estimate purchase price and it will still be accepted")
+    public void i_enter_the_letter_and_as_an_estimate_purchase_price_and_it_will_still_be_accepted() throws SQLException {
 
       String expected = "abc";
       DBUtility.updateQuery("update tbl_mortagage set est_purchase_price ='"+expected+"' where id=0");
