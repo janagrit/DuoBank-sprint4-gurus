@@ -8,13 +8,13 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 
 @CucumberOptions(
-      tags ="@db_Sprint_6",
+       tags ="@db_Sprint_6",
         features = "src/test/resources",  // the relative path of the folder where the feature files are located
         glue = "stepDefinitions", // the relative path of the folder where step definition methods are located
 
         stepNotifications = true  // shows the detailed step results
-      //,dryRun = true   // dryRun scans the resources folder and generates step definition snippets
-        // used for generating snippets quickly
+//      ,dryRun = true   // dryRun scans the resources folder and generates step definition snippets
+//         used for generating snippets quickly
         ,snippets = CucumberOptions.SnippetType.CAMELCASE  // generates Camel Case Style Snippets
         ,plugin = {
                 "pretty",  // displays more detailed output on the console
