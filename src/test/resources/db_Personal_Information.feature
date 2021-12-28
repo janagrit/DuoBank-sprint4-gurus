@@ -33,6 +33,15 @@ Feature: Complete Personal Information page involving DB layer
 
 
 
+#  Scenario: Test if input field leading and trailing spaces are truncated before committing data to the database
+#    Given I am on the sign up page and I am connected to the DB
+#    When I put the following info
+#      | FirstName | LastName | Email        | SSN          | MaterialStatus | CellPhone    |
+#      | Marta     | Bober    | MB@gmail.com | 890-980-9090 | Married        | 309-908-7890 |
+#    Then I am able move to the next page
+#    And The database should also have the correct info without spaces
+
+
 
 
 

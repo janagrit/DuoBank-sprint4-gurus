@@ -301,4 +301,29 @@ public class db_PersonalinfoStepDef {
 
 
     }
+
+//    @When("I send a query to check for duplicate cell phone")
+//    public void iSendAQueryToCheckForDuplicateCellPhone() {
+//
+//        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select b_cell, count(b_cell) from tbl_mortagage group by b_cell having count(b_cell)>1");
+
+    @Given("I am connected to the DBb")
+    public void i_am_connected_to_the_d_bb() {
+
+        DBUtility.createConnection();
+    }
+
+    @When("I send a query to check for duplicate cell phone")
+   public void i_send_a_query_to_check_for_duplicate_cell_phone() {
+    queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select b_cell, count(b_cell) from tbl_mortagage group by b_cell having count(b_cell)>1");
 }
+    @Then("The returned result list should be empty")
+    public void the_returned_result_list_should_be_empty() {
+        Assert.assertNotEquals(queryResultAsListOfLists.size(),0);
+
+    }
+    }
+
+
+
+
