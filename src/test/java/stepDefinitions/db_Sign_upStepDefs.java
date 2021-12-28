@@ -284,8 +284,8 @@ public class db_Sign_upStepDefs {
 
     }
 
-    @And("new user should be added the Excel file {string}")
-    public void newUserShouldBeAddedTheExcelFile(String file) throws Throwable {
+     @And("new user should be added the Excel file {string}")
+    public void newUserShouldBeAddedTheExcelFile(String file) throws InterruptedException {
 
         ExcelUtils excelUtils = new ExcelUtils(file, "Sheet3");
         List<Map<String, String>> dataAsListOfMaps = excelUtils.getDataAsListOfMaps();
@@ -294,37 +294,26 @@ public class db_Sign_upStepDefs {
         System.out.println(dataAsListOfMaps.size());
 
 
-        Throwable ex = null;
         for (int i = 1; i < dataAsListOfMaps.size(); i++) {
-          //  Map<String, String> row = dataAsListOfMaps.get(i);
+             Map<String, String> row = dataAsListOfMaps.get(i);
 
-            String cellName = excelUtils.getCellData(i, 0);
-            String cellLastName = excelUtils.getCellData(i, 1);
-            String cellEmail = excelUtils.getCellData(i, 2);
-            String cellPass = excelUtils.getCellData(i, 3);
+            String privious_cellEmail = excelUtils.getCellData(i, 2);
 
+           while (privious_cellEmail.equals(email) )
 
+               Thread.sleep(2000);
+                excelUtils.setCellData(first, "first_name", i);
+                excelUtils.setCellData(last, "last_name", i);
+                excelUtils.setCellData(email, "email", i);
+                excelUtils.setCellData(pass, "password", i);
 
-                if (excelUtils.getDataAsListOfMaps().isEmpty()){
-                    System.out.println(excelUtils.getDataAsListOfMaps());
-                    try{
-                        excelUtils.setCellData(first, "first_name", i);
-                        excelUtils.setCellData(last, "last_name", i);
-                        excelUtils.setCellData(email, "email", i);
-                        excelUtils.setCellData(pass, "password", i);
-                        Thread.sleep(2000);
+                Date date = new Date();
+                excelUtils.setCellData(date.toString(), "Status", i);
+                System.out.println(excelUtils.rowCount());
 
-                        System.exit(0);
+                Driver.quitDriver();
 
-                    }catch (Throwable e){
-                        ex = e;
-                        excelUtils.setCellData("FAIL", "Status", i + 1);
-
-                    }
-            }
-            throw ex;
-
-        }
+       }
 
     }
 }
