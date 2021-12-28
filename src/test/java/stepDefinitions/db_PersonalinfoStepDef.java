@@ -11,6 +11,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
+import pages.EmploymentAndIncomePage;
 import pages.LoginPage;
 import pages.PersonalInformationPage;
 
@@ -307,8 +308,8 @@ public class db_PersonalinfoStepDef {
 //
 //        queryResultAsListOfLists = DBUtility.getQueryResultAsListOfLists("select b_cell, count(b_cell) from tbl_mortagage group by b_cell having count(b_cell)>1");
 
-    @Given("I am connected to the DBb")
-    public void i_am_connected_to_the_d_bb() {
+    @Given("I am connected to the DB")
+    public void i_am_connected_to_the_d_b() {
 
         DBUtility.createConnection();
     }
@@ -322,7 +323,50 @@ public class db_PersonalinfoStepDef {
         Assert.assertNotEquals(queryResultAsListOfLists.size(),0);
 
     }
+
+    @When("I enter the letter and  as an estimate purchase price and it will still be accepted")
+    public void iEnterTheLetterAndAsAnEstimatePurchasePriceAndItWillStillBeAccepted() throws SQLException {
+
+      String expected = "abc";
+      DBUtility.updateQuery("update tbl_mortagage set est_purchase_price ='"+expected+"' where id=0");
+
+
+      DBUtility.getQueryResultAsListOfLists("select est_purchase_price from tbl_mortagage where id=0");
+      String actual =  (String)(DBUtility.getQueryResultAsListOfLists("select est_purchase_price from tbl_mortagage where id=0").get(0).get(0));
+      Assert.assertEquals(expected, actual);
+
     }
+
+    String expectedDB;
+    @When("I update the name column with a unicode chars, the update should be successful")
+    public void iUpdateTheNameColumnWithAUnicodeCharsTheUpdateShouldBeSuccessful() throws SQLException {
+
+        expectedDB = "名前";
+        DBUtility.updateQuery("update tbl_mortagage set b_firstName='"+expectedDB+"' where id=33479");
+
+        String actual =  (String)(DBUtility.getQueryResultAsListOfLists("select b_firstName from tbl_mortagage where id=33479").get(0).get(0));
+        Assert.assertEquals(expectedDB, actual);
+    }
+
+    @Then("The update should be also successful on the UI")
+    public void theUpdateShouldBeAlsoSuccessfulOnTheUI() {
+
+
+        Driver.getDriver().get(ConfigReader.getProperty("url"));
+        new LoginPage().GurusLoginMethod();
+        SeleniumUtils.jsClick(new PersonalInformationPage().applicationList);
+
+        String expected = "Application List";
+        String pageSource = Driver.getDriver().getPageSource();
+        Assert.assertTrue(pageSource.contains(expected));
+
+        Driver.getDriver().navigate().refresh();
+
+        String expectedUI = "名前  Cruz";
+        String actualUI = new PersonalInformationPage().applicatInfo.getText();
+        Assert.assertEquals(expectedUI, actualUI);
+    }
+}
 
 
 
