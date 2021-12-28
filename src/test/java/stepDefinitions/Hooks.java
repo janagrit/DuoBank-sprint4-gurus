@@ -20,15 +20,15 @@ public class Hooks {
     }
 
 
-//    @Before ("@db_Sprint_6")
-//    public void setupDb(){
-//        DBUtility.createConnection();
-//    }
-//
-//    @After ("@db_Sprint_6")
-//    public void tearDownDb(){
-//        DBUtility.close();
-//    }
+    @Before ("@db_Sprint_6")
+    public void setupDb(){
+        DBUtility.createConnection();
+    }
+
+    @After ("@db_Sprint_6")
+    public void tearDownDb(){
+        DBUtility.close();
+    }
 
     @After
     public void tearDownScenario(Scenario scenario){

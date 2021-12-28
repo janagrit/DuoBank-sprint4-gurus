@@ -26,14 +26,14 @@ public class db_eConsentStepDefs {
     String expectedFirstName;
     String expectedLastName;
     String expectedEmail;
-    String query;
+
 
     List<String> expectedColumns;
     List<String> actualColumns;
 
     String expectedFirstName2;
     String actualFirstName2;
-
+    String query;
 
 
     @Then("After I complete all required information I should land on Econcent page")
@@ -57,14 +57,6 @@ public class db_eConsentStepDefs {
         lastName = dataTable.get(0).get("Last Name");
         email = dataTable.get(0).get("Email");
 
-//        EconsentPage econsentPage = new EconsentPage();
-//
-//        econsentPage.firsName.sendKeys(firstName);
-//        econsentPage.lastName.sendKeys(lastName);
-//        econsentPage.email.sendKeys(email);
-//        econsentPage.agreeButton.click();
-//        econsentPage.nextButton.click();
-
         String query1 = "update tbl_mortagage set eConsent_declarer_FirstName = '"+firstName+"', eConsent_declarer_LastName = '"+lastName+"', " +
                            "eConsent_declarer_Email = '"+email+"' where id ='528'";
 
@@ -75,7 +67,7 @@ public class db_eConsentStepDefs {
     @Then("This information should be stored properly in the database")
     public void thisInformationShouldBeStoredProperlyInTheDatabase() throws SQLException{
 
-        String query = "select eConsent_declarer_FirstName, eConsent_declarer_LastName, eConsent_declarer_Email from tbl_mortagage where eConsent_declarer_Email = '" +email+"'";
+       String query = "select eConsent_declarer_FirstName, eConsent_declarer_LastName, eConsent_declarer_Email from tbl_mortagage where eConsent_declarer_Email = '" +email+"'";
 
 
         List<Map<String, Object>> queryResultListOfMaps = DBUtility.getQueryResultListOfMaps(query);
@@ -89,32 +81,32 @@ public class db_eConsentStepDefs {
 
     }
 
+//String query2;
+//
+//    @When("I send the query to update econsent page first name, last name and email")
+//    public void iSendTheQueryToUpdateEconsentPageFirstNameLastNameAndEmail() {
+//        //expectedFirstName = "Cameron";
+//        //expectedLastName = "Diaz";
+//        expectedEmail = "cam_diaz@hotmail.com";
+//
+//
+//        query2 = "select * from tbl_mortagage where eConsent_declarer_Email = '" + expectedEmail + "'";
+//
+//    }
 
-
-    @When("I send the query to update econsent page first name, last name and email")
-    public void iSendTheQueryToUpdateEconsentPageFirstNameLastNameAndEmail() {
-        expectedFirstName = "Cameron";
-        expectedLastName = "Diaz";
-        expectedEmail = "cam_diaz@hotmail.com";
-
-
-        query = "select * from tbl_mortagage where eConsent_declarer_Email = '" + expectedEmail + "'";
-
-    }
-
-
-    @Then("The actual output from the query should match the expected one that I sent to query")
-    public void theActualOutputFromTheQueryShouldMatchTheExpectedOneThatISentToQuery() throws SQLException {
-        List<Map<String, Object>> listOfMaps = DBUtility.getQueryResultListOfMaps(query);
-        Map<String, Object> map = listOfMaps.get(0);
-        Assert.assertEquals(map.get("eConsent_declarer_Email"), expectedEmail);
-        Assert.assertEquals(map.get("eConsent_declarer_FirstName"), expectedFirstName);
-        Assert.assertEquals(map.get("eConsent_declarer_LastName"), expectedLastName);
-
-        DBUtility.updateQuery("delete from tbl_mortagage where email='"+email+"'");
-
-
-}
+//
+//    @Then("The actual output from the query should match the expected one that I sent to query")
+//    public void theActualOutputFromTheQueryShouldMatchTheExpectedOneThatISentToQuery() throws SQLException {
+//        List<Map<String, Object>> listOfMaps = DBUtility.getQueryResultListOfMaps(query2);
+//        Map<String, Object> map = listOfMaps.get(0);
+//        Assert.assertEquals(map.get("eConsent_declarer_Email"), expectedEmail);
+//       // Assert.assertEquals(map.get("eConsent_declarer_FirstName"), expectedFirstName);
+//       // Assert.assertEquals(map.get("eConsent_declarer_LastName"), expectedLastName);
+//
+//        DBUtility.updateQuery("delete from tbl_mortagage where email='"+email+"'");
+//
+//
+//}
 
     @When("I send a query to database to retrieve the names of columns on the eConcent page table")
     public void iSendAQueryToDatabaseToRetrieveTheNamesOfColumnsOnTheEConcentPageTable() {
