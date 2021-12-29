@@ -1,4 +1,4 @@
-@db_Sprint_6
+
 Feature: Sign up feature involving DB layer
 
   Background: common steps
@@ -77,20 +77,56 @@ Feature: Sign up feature involving DB layer
 
 
      #bug found - DB is registering a new user with Chinese email address, but login page doesn’t accept this type of email
-
+  @db_Sprint_6
   Scenario: Verify support of Chinese Char from DB to UI flow
     When I add a new user to the database with the following info
       | email       | password | first | last | phone      | image | type | created_at | modified_at | zone_id | church_id | country_id | active |
       | 眼啊@gmail.com | 眼啊112    | 雅哪    | 王    | 2129000908 |       | 2    |            |             | 0       | 0         | 0          | 1      |
     Then I should be able to log in on the UI with "眼啊@gmail.com" and "眼啊112 "
+#    Then I should be able to log in on the UI with "眼啊@gmail.com" and "眼啊112 " but I am not
 
-
-
+  @db_Sprint_6
   Scenario: Verify user registration with Faker class
     When I sign up with the following info and the using Faker Class
     Then The user should be successfully registered and transfer to Login page
     And The database should also have the correct info with a new user
     And new user should be added the Excel file "SignUp_Data.xlsx"
+
+
+  @db_Sprint_6
+  Scenario Outline: Sign up a new user
+    When I fill up the fields with the following new user information
+      | First Name  | Last Name  | Email   | Password |
+      | <firstName> | <lastName> | <email> |<password> |
+    Then This information should be stored in single table correctly
+
+    Examples:
+      | firstName | lastName | email                 | password   |
+      | Hilda     | Johns    | hilda@gmail.com       | hilda1212  |
+      | Nancy     | Evans    | evans@liveinternet.ru | evance2341 |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
