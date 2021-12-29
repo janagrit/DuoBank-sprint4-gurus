@@ -29,7 +29,7 @@ Feature: E_consent related features
 
 
   Scenario: Verify that the database supports unicode entries
-    When I send a query to update realtor info field with unicode value
+    When I send a query to update first name on eConcent page with unicode value
     Then The database should update the entry
 
 

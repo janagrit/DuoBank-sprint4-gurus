@@ -122,19 +122,6 @@ public class db_eConsentStepDefs {
 
     }
 
-    @When("I send a query to update realtor info field with unicode value")
-    public void iSendAQueryToUpdateRealtorInfoFieldWithUnicodeValue() throws SQLException {
-        expectedFirstName2 = "黄 麗";
-        query = "update tbl_mortagage set eConsent_declarer_FirstName ='"+expectedFirstName2+"' where id='315'";
-
-
-        DBUtility.updateQuery(query);
-
-        Map<String, Object> map = DBUtility.getQueryResultListOfMaps("select * from tbl_mortagage where id = '315'").get(0);
-        actualFirstName2 = (String)(map.get("eConsent_declarer_FirstName"));
-
-
-    }
 
     @Then("The database should update the entry")
     public void theDatabaseShouldUpdateTheEntry() {
@@ -160,9 +147,19 @@ public class db_eConsentStepDefs {
     }
 
 
+    @When("I send a query to update first name on eConcent page with unicode value")
+    public void iSendAQueryToUpdateFirstNameOnEConcentPageWithUnicodeValue() throws SQLException {
+
+        expectedFirstName2 = "黄 麗";
+        query = "update tbl_mortagage set eConsent_declarer_FirstName ='"+expectedFirstName2+"' where id='315'";
 
 
+        DBUtility.updateQuery(query);
+
+        Map<String, Object> map = DBUtility.getQueryResultListOfMaps("select * from tbl_mortagage where id = '315'").get(0);
+        actualFirstName2 = (String)(map.get("eConsent_declarer_FirstName"));
 
 
+    }
 }
 
