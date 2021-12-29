@@ -61,7 +61,7 @@ public class db_Sign_upStepDefs {
 
 
     @And("The database should also have the correct info with a new user")
-    public void theDatabaseShouldAlsoHaveTheCorrectInfoWithANewUser() throws SQLException {
+    public void theDatabaseShouldAlsoHaveTheCorrectInfoWithANewUser() throws SQLException, InterruptedException {
 
 
         String query  = "select * from tbl_user where email ='"+email+"'";
@@ -76,14 +76,21 @@ public class db_Sign_upStepDefs {
         String actualPassword = (String)(actualMap.get("password"));
 
         SoftAssertions softAssertions = new SoftAssertions();
-
+        Thread.sleep(2000);
         softAssertions.assertThat(first).isEqualTo(actualFirst);
+        Thread.sleep(2000);
         softAssertions.assertThat(last).isEqualTo( actualLast);
+        Thread.sleep(2000);
         softAssertions.assertThat(email).isEqualTo( actualEmail);
+        Thread.sleep(2000);
         softAssertions.assertThat(expectedPasswordMd5).isEqualTo( actualPassword);
 
+        Thread.sleep(2000);
+
         DBUtility.updateQuery("delete from tbl_user where email='"+email+"'");
+
         softAssertions.assertAll();
+
         DBUtility.close();
     }
 
@@ -263,6 +270,10 @@ public class db_Sign_upStepDefs {
     }
 
 
+
+
+
+
     @When("I sign up with the following info and the using Faker Class")
     public void iSignUpWithTheFollowingInfoAndTheUsingFakerClass() {
 
@@ -317,4 +328,24 @@ public class db_Sign_upStepDefs {
        }
 
     }
+
+
+
+    @Then("This information should be stored in single table correctly")
+    public void thisInformationShouldBeStoredInSingleTableCorrectly() throws SQLException {
+        String query = "select first_name, last_name, email, password from tbl_user where email = '"+email+"'";
+
+        List<Map<String, Object>> queryResultListOfMaps = DBUtility.getQueryResultListOfMaps(query);
+        Map<String, Object> map = queryResultListOfMaps.get(0);
+
+
+        Assert.assertEquals(first, (String)(map.get("first_name")));
+        Assert.assertEquals(last, (String)(map.get("last_name")));
+        Assert.assertEquals(email, ((String)(map.get("email"))).toLowerCase());
+        Assert.assertEquals(expectedPassword, (String)(map.get("password")));
+
+        DBUtility.updateQuery("delete from tbl_user where email='"+email+"'");
+    }
+
+
 }
