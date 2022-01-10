@@ -54,7 +54,6 @@ public class APiTests {
 
         String jsonString = response.asString();
         jwtToken = JsonPath.from(jsonString).get("token");
-        System.out.println(jwtToken);
 
     }
 
