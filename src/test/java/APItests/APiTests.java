@@ -27,10 +27,13 @@ import static org.hamcrest.Matchers.*;
 public class APiTests {
 
     Response response;
+
     String token = ConfigReader.getProperty("token");
+
     String jwtToken;
     String api_adminLoginEmail = ConfigReader.getProperty("api_adminLoginEmail");
     String api_adminLoginPassword = ConfigReader.getProperty("api_adminLoginPass");
+   String token = ConfigReader.getProperty("token");
 
     @BeforeClass
     public static void setupBaseUri() {
@@ -80,7 +83,9 @@ public class APiTests {
                 then().log().all().
                 statusCode(200).
                 body(containsString("single_application"));
+
         // body("eConsent_declarer_LastName", equalTo("Parker"));
+
 
     }
 
