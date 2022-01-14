@@ -1,7 +1,7 @@
 @api
 Feature: API related features
 
-  @api
+  @api @smoke
   Scenario: Create a New User using POJO Class
     Given I add the headers "Content-Type", "application/json" and "Accept", "application/json"
     And I create a fake credentials using POJO class
@@ -11,7 +11,7 @@ Feature: API related features
 
 
 
-  @api @smoke
+  @api
   Scenario: Login with valid credentials using POJO Class and Verify Status
     Given I add the headers "Accept" "application/json"
     When I POST info from POJO class to "/login.php" path
