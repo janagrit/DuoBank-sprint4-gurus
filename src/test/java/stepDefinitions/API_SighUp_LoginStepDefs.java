@@ -64,8 +64,6 @@ public class API_SighUp_LoginStepDefs {
     @Given("I send POST {string} request as an invalid user with email {string} and password {string}")
     public void iSendPOSTRequestAsAnInvalidUserWithEmailAndPassword(String endpointPOST, String user, String pass) {
 
-//        baseURI = "http://qa-duobank.us-east-2.elasticbeanstalk.com/api";
-
         requestSpecification = given().
                 body("{\n" +
                         "\"email\" : \"" + user + "\",\n" +
