@@ -1,4 +1,4 @@
-@api @regression
+@api
 Feature: API related features
 
   @api
@@ -21,7 +21,7 @@ Feature: API related features
 
 
 
-  @api
+  @api @smoke
   Scenario: Test GET request for the mortgage application under valid admin credentials
     Given I am authorized at endpoint "/login.php"
     Given I add the header "Authorization" "token"
@@ -51,7 +51,7 @@ Feature: API related features
     Then The body status should be 401
     Then The body message should be "Unauthorized"
 
-  @api
+  @api @smoke
   Scenario: Test POST request for the application details of the logged in user
     Given I am authorized as a user at endpoint "/login.php"
     When I send a POST request to "/mortagagedetails.php" endpoint
