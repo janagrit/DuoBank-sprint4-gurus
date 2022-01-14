@@ -27,7 +27,9 @@ import static org.hamcrest.Matchers.*;
 public class APiTests {
 
     Response response;
-    //String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2xvYW5cL2FwaSIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbG9hblwvYXBpIiwiaWF0IjoxNjQxNzcxODk2LCJleHAiOjE2NDE3NzU0OTYsImRhdGEiOnsidXNlcl9pZCI6IjM1NjgiLCJ0eXBlIjoiMSJ9fQ.iKiMhW0dSBED_rHC-bA0WyTu2SihvIKoJKmsqd5Ilvc\n";
+
+    String token = ConfigReader.getProperty("token");
+
     String jwtToken;
     String api_adminLoginEmail = ConfigReader.getProperty("api_adminLoginEmail");
     String api_adminLoginPassword = ConfigReader.getProperty("api_adminLoginPass");
@@ -55,7 +57,6 @@ public class APiTests {
 
         String jsonString = response.asString();
         jwtToken = JsonPath.from(jsonString).get("token");
-        System.out.println(jwtToken);
 
     }
 
@@ -73,9 +74,7 @@ public class APiTests {
 
     @Test
     public void PostRequestForTheApplicationDetailsOfTheLoggedInUser() {
-        //   String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2xvYW5cL2FwaSIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbG9hblwvYXBpIiwiaWF0IjoxNjQxNTc0NDExLCJleHAiOjE2NDE1NzgwMTEsImRhdGEiOnsidXNlcl9pZCI6IjM1NjYiLCJ0eXBlIjoiMiJ9fQ.JtiKZs6VXyN005QjnSSB7DcRXpqqcORDrTfQUPZj1B4";
 
-        //String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2xvYW5cL2FwaSIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbG9hblwvYXBpIiwiaWF0IjoxNjQxNTc0NDExLCJleHAiOjE2NDE1NzgwMTEsImRhdGEiOnsidXNlcl9pZCI6IjM1NjYiLCJ0eXBlIjoiMiJ9fQ.JtiKZs6VXyN005QjnSSB7DcRXpqqcORDrTfQUPZj1B4";
         given().
                 header("Authorization", token).
                 body("{\n" + " \"id\": \"582\"" + "}").
@@ -85,7 +84,25 @@ public class APiTests {
                 statusCode(200).
                 body(containsString("single_application"));
 
+        // body("eConsent_declarer_LastName", equalTo("Parker"));
+
 
     }
+
+    @Test
+    public void PostRequestForTheApplicationDetailsOfTheNonExistingUser() {
+
+        given().
+                header("Authorization", token).
+                body("{\n" + " \"id\": \"2\"" + "}").
+                when().log().all().
+                post("/mortagagedetails.php").
+                then().log().all().
+                statusCode(200).
+                body("single_application", equalTo(null));
+
+
+    }
+
 
 }
