@@ -26,10 +26,11 @@ import static org.hamcrest.Matchers.*;
 public class APITest {
 
     Response response;
-    String Token;
+   String Token;
 
     String Login_User = "BozenaNovak@gmail.com";
     String Login_Password = "Marcel";
+    String token = ConfigReader.getProperty("token");
 
 
     @BeforeClass
@@ -75,11 +76,12 @@ public class APITest {
     @Test
     public void testGETPlaces() {
         given().
-                queryParam("Authorization", Token).
+                queryParam("Authorization", token).
                 when().log().all().
                 get("/getmortagage.php").
                 then().log().all().
                 statusCode(200);
+
 
     }
 

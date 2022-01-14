@@ -27,10 +27,11 @@ import static org.hamcrest.Matchers.*;
 public class APiTests {
 
     Response response;
-    String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2xvYW5cL2FwaSIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbG9hblwvYXBpIiwiaWF0IjoxNjQxNzcxODk2LCJleHAiOjE2NDE3NzU0OTYsImRhdGEiOnsidXNlcl9pZCI6IjM1NjgiLCJ0eXBlIjoiMSJ9fQ.iKiMhW0dSBED_rHC-bA0WyTu2SihvIKoJKmsqd5Ilvc\n";
+    //String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2xvYW5cL2FwaSIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbG9hblwvYXBpIiwiaWF0IjoxNjQxNzcxODk2LCJleHAiOjE2NDE3NzU0OTYsImRhdGEiOnsidXNlcl9pZCI6IjM1NjgiLCJ0eXBlIjoiMSJ9fQ.iKiMhW0dSBED_rHC-bA0WyTu2SihvIKoJKmsqd5Ilvc\n";
     String jwtToken;
     String api_adminLoginEmail = ConfigReader.getProperty("api_adminLoginEmail");
     String api_adminLoginPassword = ConfigReader.getProperty("api_adminLoginPass");
+   String token = ConfigReader.getProperty("token");
 
     @BeforeClass
     public static void setupBaseUri() {
@@ -82,8 +83,8 @@ public class APiTests {
                 post("/mortagagedetails.php").
                 then().log().all().
                 statusCode(200).
-                body(containsString("single_application")).
-        // body("eConsent_declarer_LastName", equalTo("Parker"));
+                body(containsString("single_application"));
+
 
     }
 
