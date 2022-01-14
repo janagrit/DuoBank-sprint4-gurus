@@ -30,11 +30,11 @@ public class APITestCases {
 
     String email = new Faker().internet().emailAddress();
     String password = "tom2022";
-    //String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2xvYW5cL2FwaSIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbG9hblwvYXBpIiwiaWF0IjoxNjQxNzQ5ODI2LCJleHAiOjE2NDE3NTM0MjYsImRhdGEiOnsidXNlcl9pZCI6IjM1NjYiLCJ0eXBlIjoiMiJ9fQ.bz4DbO3e189tqPjoYd6XC3EC9aVqsv0APaz5GMfemr8";
+    String token ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3RcL2xvYW5cL2FwaSIsImF1ZCI6Imh0dHA6XC9cL2xvY2FsaG9zdFwvbG9hblwvYXBpIiwiaWF0IjoxNjQxODU4MDQ3LCJleHAiOjE2NDE4NjE2NDcsImRhdGEiOnsidXNlcl9pZCI6IjM1NjYiLCJ0eXBlIjoiMiJ9fQ.27hSkZdywak1qKWDUkiDKUGcppQpT_tdNT1k7eH1XD8";
     String jwtToken;
     String api_loginEmail = ConfigReader.getProperty("api_loginEmail");
     String api_loginPassword = ConfigReader.getProperty("api_loginPass");
-    String token = ConfigReader.getProperty("token");
+    //String token = ConfigReader.getProperty("token");
 
     @BeforeClass
     public static void setupBaseUri() {
@@ -44,7 +44,7 @@ public class APITestCases {
 
 
     @Test
-    public void resisterWithValidCredentialsUsingPOJOClass() {
+    public void registerWithValidCredentialsUsingPOJOClass() {
 
         UserInfo userInfo = new UserInfo("Tom", "Simpson", email, password);
 

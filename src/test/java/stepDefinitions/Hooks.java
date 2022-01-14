@@ -3,12 +3,15 @@ package stepDefinitions;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import org.junit.BeforeClass;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import utilities.DBUtility;
 import utilities.Driver;
 
 import java.time.Duration;
+
+import static io.restassured.RestAssured.baseURI;
 
 public class Hooks {
 
@@ -17,6 +20,12 @@ public class Hooks {
     public void setupScenario(){
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10)) ;
         Driver.getDriver().manage().window().maximize();
+    }
+
+    @Before ("@api")
+    public static void setupBaseUri() {
+        baseURI = "http://qa-duobank.us-east-2.elasticbeanstalk.com/api";
+
     }
 
 
