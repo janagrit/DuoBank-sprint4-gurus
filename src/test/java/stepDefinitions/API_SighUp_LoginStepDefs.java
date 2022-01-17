@@ -78,7 +78,7 @@ public class API_SighUp_LoginStepDefs {
     @And("The response body should contain the informative message {string}")
     public void theResponseBodyShouldContainTheInformativeMessage(String msg2) {
         response.then().
-                body("status", equalTo(42)).
+                body("status", equalTo(422)).
                 body("message", equalTo(msg2)).extract().response();
     }
 
