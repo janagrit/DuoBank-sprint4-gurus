@@ -42,7 +42,7 @@ Feature: API related features
     When  I send a GET request to "/getmortagage.php" endpoint with user token
     Then The response status code should be 200
     Then The id should be 636
-    Then The name should be "Barbie"
+    Then The name should be "Minnie"
 
   @api
   Scenario: Test GET request for the mortgage application under admin credentials without valid token
