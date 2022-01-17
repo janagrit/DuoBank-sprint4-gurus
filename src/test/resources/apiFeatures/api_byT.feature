@@ -18,9 +18,6 @@ Feature: API related features
     Then The response status code should be 200
 
 
-
-
-
   @api @smoke
   Scenario: Test GET request for the mortgage application under valid admin credentials
     Given I am authorized at endpoint "/login.php"
@@ -57,4 +54,13 @@ Feature: API related features
     When I send a POST request to "/mortagagedetails.php" endpoint
     Then The response status code should be 200
     Then The body should contain "single_application"
+
+  @api
+  Scenario:Verify successful POST /login.php endpoint
+    Given I am authorized as a user at endpoint "/login.php"
+    When  I send a GET request to "/getmortagage.php" endpoint with user token
+    Then The response status code should be 200
+    Then The id should be 636
+    Then The name should be "Minnie"
+
 

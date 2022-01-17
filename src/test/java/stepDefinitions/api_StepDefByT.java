@@ -1,6 +1,7 @@
 package stepDefinitions;
 
 import com.github.javafaker.Faker;
+import com.google.gson.JsonObject;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -32,6 +33,7 @@ public class api_StepDefByT {
     Response response;
     String api_loginEmail = ConfigReader.getProperty("api_loginEmail");
     String api_loginPass = ConfigReader.getProperty("api_loginPass");
+    Map<String, Object> map;
 
 
     String jwtToken;
@@ -283,4 +285,7 @@ public class api_StepDefByT {
         response.then().log().all().
                 body(message, is(successMessage));
     }
+
+
+
 }
